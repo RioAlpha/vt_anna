@@ -7,7 +7,11 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Special+Elite&family=Caveat:wght@400;700&display=swap');
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         :root {
             --tartan-red: #c8102e;
@@ -30,7 +34,9 @@
         /* ── Music Banner ── */
         .music-banner {
             position: fixed;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             z-index: 1002;
             background: linear-gradient(90deg, var(--tartan-red), var(--puffin-orange), var(--tartan-red));
             background-size: 200% 100%;
@@ -43,44 +49,61 @@
             gap: 1rem;
             cursor: pointer;
             transition: transform 0.4s ease, opacity 0.4s ease;
-            box-shadow: 0 4px 20px rgba(200,16,46,0.5);
+            box-shadow: 0 4px 20px rgba(200, 16, 46, 0.5);
         }
+
         @keyframes bannerShimmer {
-            0%, 100% { background-position: 0% 50%; }
-            50%      { background-position: 100% 50%; }
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
         }
+
         .music-banner:hover {
-            box-shadow: 0 6px 30px rgba(200,16,46,0.7);
+            box-shadow: 0 6px 30px rgba(200, 16, 46, 0.7);
             transform: scale(1.01);
         }
+
         .music-banner.hidden {
             transform: translateY(-100%);
             opacity: 0;
             pointer-events: none;
         }
+
         .music-banner-text {
             font-family: 'Caveat', cursive;
             font-size: 1.4rem;
             color: #fff;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
         }
+
         .music-banner-icon {
             font-size: 1.5rem;
             animation: bannerBounce 1s ease-in-out infinite;
         }
+
         @keyframes bannerBounce {
-            0%, 100% { transform: translateY(0); }
-            50%      { transform: translateY(-4px); }
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-4px);
+            }
         }
 
         /* ── Falling Marshmallows ── */
         .marshmallow-container {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
             z-index: 999;
         }
+
         .marshmallow {
             position: absolute;
             top: -40px;
@@ -88,9 +111,16 @@
             opacity: 0.7;
             animation: fall linear infinite;
         }
+
         @keyframes fall {
-            0%   { transform: translateY(0) rotate(0deg); opacity: 0.7; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         /* ── Cursor Puffin ── */
@@ -100,7 +130,7 @@
             pointer-events: none;
             z-index: 998;
             transition: left 0.15s ease-out, top 0.15s ease-out;
-            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
         }
 
         /* ── Hero / Landing ── */
@@ -111,9 +141,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background:
-                radial-gradient(ellipse at 50% 120%, rgba(200,16,46,0.25) 0%, transparent 60%),
-                linear-gradient(180deg, #0d0d2b 0%, #1a1a3e 50%, #2a1a3e 100%);
+            background: radial-gradient(ellipse at 50% 120%, rgba(200, 16, 46, 0.25) 0%, transparent 60%),
+            linear-gradient(180deg, #0d0d2b 0%, #1a1a3e 50%, #2a1a3e 100%);
             position: relative;
             padding: 2rem;
         }
@@ -121,10 +150,16 @@
         /* Scottish hills silhouette */
         .hills {
             position: absolute;
-            bottom: 0; left: 0; width: 100%;
+            bottom: 0;
+            left: 0;
+            width: 100%;
             height: 220px;
         }
-        .hills svg { width: 100%; height: 100%; }
+
+        .hills svg {
+            width: 100%;
+            height: 100%;
+        }
 
         /* ── Hidden Caves ── */
         .cave {
@@ -133,14 +168,17 @@
             transition: filter 0.3s ease;
             z-index: 2;
         }
+
         .cave:hover {
-            filter: brightness(1.4) drop-shadow(0 0 8px rgba(232,101,42,0.6));
+            filter: brightness(1.4) drop-shadow(0 0 8px rgba(232, 101, 42, 0.6));
         }
+
         .cave svg {
             width: 100%;
             height: 100%;
             display: block;
         }
+
         .cave-msg {
             position: absolute;
             top: -50px;
@@ -155,18 +193,34 @@
             white-space: nowrap;
             pointer-events: none;
             opacity: 0;
-            box-shadow: 0 4px 20px rgba(200,16,46,0.5);
+            box-shadow: 0 4px 20px rgba(200, 16, 46, 0.5);
             z-index: 10;
         }
+
         .cave-msg.show {
             animation: cavePop 2s ease forwards;
         }
+
         @keyframes cavePop {
-            0%   { opacity: 0; transform: translateX(-50%) scale(0); }
-            15%  { opacity: 1; transform: translateX(-50%) scale(1.1); }
-            25%  { transform: translateX(-50%) scale(1); }
-            75%  { opacity: 1; transform: translateX(-50%) scale(1) translateY(0); }
-            100% { opacity: 0; transform: translateX(-50%) scale(0.8) translateY(-20px); }
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) scale(0);
+            }
+            15% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1.1);
+            }
+            25% {
+                transform: translateX(-50%) scale(1);
+            }
+            75% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1) translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) scale(0.8) translateY(-20px);
+            }
         }
 
         .hero h1 {
@@ -175,10 +229,11 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--gold);
-            text-shadow: 0 0 30px rgba(212,168,67,0.4);
+            text-shadow: 0 0 30px rgba(212, 168, 67, 0.4);
             margin-bottom: 0.5rem;
             animation: fadeInDown 1s ease-out;
         }
+
         .hero .subtitle {
             font-family: 'Caveat', cursive;
             font-size: clamp(1.2rem, 3vw, 2rem);
@@ -194,22 +249,26 @@
             margin-bottom: 2rem;
             animation: fadeInDown 1.4s ease-out;
         }
+
         .countdown-unit {
             text-align: center;
         }
+
         .countdown-num {
             font-family: 'Special Elite', cursive;
             font-size: clamp(1.8rem, 4vw, 2.8rem);
             color: var(--puffin-orange);
-            text-shadow: 0 0 15px rgba(232,101,42,0.4);
+            text-shadow: 0 0 15px rgba(232, 101, 42, 0.4);
             line-height: 1;
         }
+
         .countdown-label {
             font-family: 'Caveat', cursive;
             font-size: 0.9rem;
             color: var(--soft-pink);
             opacity: 0.7;
         }
+
         .countdown-sep {
             font-family: 'Special Elite', cursive;
             font-size: clamp(1.8rem, 4vw, 2.8rem);
@@ -221,12 +280,18 @@
         .hero .puffin-hero {
             font-size: clamp(5rem, 12vw, 9rem);
             animation: puffinBounce 2s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px rgba(232,101,42,0.4));
+            filter: drop-shadow(0 0 20px rgba(232, 101, 42, 0.4));
         }
+
         @keyframes puffinBounce {
-            0%, 100% { transform: translateY(0) rotate(-3deg); }
-            50%      { transform: translateY(-15px) rotate(3deg); }
+            0%, 100% {
+                transform: translateY(0) rotate(-3deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(3deg);
+            }
         }
+
         .scroll-hint {
             position: absolute;
             bottom: 240px;
@@ -235,9 +300,16 @@
             color: var(--gold);
             animation: pulse 2s ease-in-out infinite;
         }
+
         @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: translateY(0); }
-            50%      { opacity: 1;   transform: translateY(8px); }
+            0%, 100% {
+                opacity: 0.5;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(8px);
+            }
         }
 
         /* ── Task Cards ── */
@@ -246,6 +318,7 @@
             max-width: 800px;
             margin: 0 auto;
         }
+
         .section-title {
             font-family: 'Special Elite', cursive;
             font-size: clamp(1.4rem, 4vw, 2.2rem);
@@ -257,8 +330,8 @@
         }
 
         .task-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%);
-            border: 1px solid rgba(212,168,67,0.25);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(212, 168, 67, 0.25);
             border-radius: 12px;
             padding: 2rem;
             margin-bottom: 2rem;
@@ -268,22 +341,28 @@
             opacity: 0;
             transform: translateY(30px);
         }
+
         .task-card.visible {
             opacity: 1;
             transform: translateY(0);
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
+
         .task-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(212,168,67,0.15);
+            box-shadow: 0 12px 40px rgba(212, 168, 67, 0.15);
         }
+
         .task-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 4px; height: 100%;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
             background: var(--puffin-orange);
         }
+
         .task-number {
             font-family: 'Special Elite', cursive;
             font-size: 0.85rem;
@@ -292,20 +371,24 @@
             letter-spacing: 3px;
             margin-bottom: 0.5rem;
         }
+
         .task-card h3 {
             font-size: 1.4rem;
             margin-bottom: 0.5rem;
             color: var(--marshmallow);
         }
+
         .task-card p {
             font-family: 'Caveat', cursive;
             font-size: 1.25rem;
-            color: rgba(255,255,255,0.75);
+            color: rgba(255, 255, 255, 0.75);
             line-height: 1.5;
         }
+
         .task-emoji {
             position: absolute;
-            top: 1.5rem; right: 1.5rem;
+            top: 1.5rem;
+            right: 1.5rem;
             font-size: 2.5rem;
             opacity: 0.8;
         }
@@ -317,31 +400,37 @@
             align-items: center;
             gap: 0.5rem;
         }
+
         .task-scoring label {
             font-family: 'Special Elite', cursive;
             font-size: 0.8rem;
             color: var(--gold);
             letter-spacing: 1px;
         }
+
         .star-rating {
             display: flex;
             gap: 2px;
             direction: rtl;
         }
+
         .star-rating input {
             display: none;
         }
+
         .star-rating label {
             font-size: 1.5rem;
             cursor: pointer;
-            color: rgba(255,255,255,0.2);
+            color: rgba(255, 255, 255, 0.2);
             transition: color 0.2s ease, transform 0.15s ease;
         }
+
         .star-rating label:hover,
         .star-rating label:hover ~ label,
         .star-rating input:checked ~ label {
             color: var(--gold);
         }
+
         .star-rating label:hover {
             transform: scale(1.2);
         }
@@ -353,8 +442,9 @@
             margin: 0 auto;
             text-align: center;
         }
+
         .score-display {
-            background: linear-gradient(135deg, rgba(212,168,67,0.15) 0%, rgba(232,101,42,0.1) 100%);
+            background: linear-gradient(135deg, rgba(212, 168, 67, 0.15) 0%, rgba(232, 101, 42, 0.1) 100%);
             border: 2px solid var(--gold);
             border-radius: 16px;
             padding: 2rem;
@@ -363,11 +453,13 @@
             opacity: 0;
             transform: translateY(20px);
         }
+
         .score-display.visible {
             opacity: 1;
             transform: translateY(0);
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
+
         .score-label {
             font-family: 'Special Elite', cursive;
             font-size: 0.9rem;
@@ -376,6 +468,7 @@
             text-transform: uppercase;
             margin-bottom: 0.5rem;
         }
+
         .score-value {
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
@@ -383,11 +476,13 @@
             color: var(--gold);
             line-height: 1;
         }
+
         .score-out-of {
             font-family: 'Caveat', cursive;
             font-size: 1.2rem;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
         }
+
         .score-verdict {
             font-family: 'Caveat', cursive;
             font-size: 1.4rem;
@@ -404,21 +499,24 @@
             width: 352px;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease;
         }
+
         .spotify-float.minimized .spotify-embed {
             max-height: 0;
             overflow: hidden;
         }
+
         .spotify-float .spotify-embed {
             max-height: 352px;
             transition: max-height 0.3s ease;
         }
+
         .spotify-toggle {
             height: 48px;
-            background: linear-gradient(135deg, rgba(26,26,62,0.95) 0%, rgba(42,26,62,0.95) 100%);
-            border: 1px solid rgba(212,168,67,0.3);
+            background: linear-gradient(135deg, rgba(26, 26, 62, 0.95) 0%, rgba(42, 26, 62, 0.95) 100%);
+            border: 1px solid rgba(212, 168, 67, 0.3);
             border-radius: 16px 16px 0 0;
             display: flex;
             align-items: center;
@@ -427,6 +525,7 @@
             cursor: pointer;
             z-index: 2;
         }
+
         .spotify-toggle-label {
             font-family: 'Special Elite', cursive;
             font-size: 0.75rem;
@@ -434,14 +533,17 @@
             letter-spacing: 2px;
             text-transform: uppercase;
         }
+
         .spotify-toggle-icon {
             font-size: 1.2rem;
             color: var(--gold);
             transition: transform 0.3s ease;
         }
+
         .spotify-float.minimized .spotify-toggle-icon {
             transform: rotate(180deg);
         }
+
         .spotify-float.minimized .spotify-toggle {
             border-radius: 16px;
         }
@@ -455,27 +557,30 @@
             width: 340px;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease;
         }
+
         .quiz-float.minimized .quiz-body {
             max-height: 0;
             overflow: hidden;
             padding: 0 1.5rem;
         }
+
         .quiz-float .quiz-body {
             max-height: 500px;
             transition: max-height 0.3s ease, padding 0.3s ease;
-            background: linear-gradient(135deg, rgba(26,26,62,0.97) 0%, rgba(42,26,62,0.97) 100%);
-            border: 1px solid rgba(212,168,67,0.3);
+            background: linear-gradient(135deg, rgba(26, 26, 62, 0.97) 0%, rgba(42, 26, 62, 0.97) 100%);
+            border: 1px solid rgba(212, 168, 67, 0.3);
             border-top: none;
             border-radius: 0 0 16px 16px;
             padding: 1.2rem 1.5rem;
         }
+
         .quiz-toggle {
             height: 48px;
-            background: linear-gradient(135deg, rgba(26,26,62,0.95) 0%, rgba(42,26,62,0.95) 100%);
-            border: 1px solid rgba(212,168,67,0.3);
+            background: linear-gradient(135deg, rgba(26, 26, 62, 0.95) 0%, rgba(42, 26, 62, 0.95) 100%);
+            border: 1px solid rgba(212, 168, 67, 0.3);
             border-radius: 16px 16px 0 0;
             display: flex;
             align-items: center;
@@ -483,9 +588,11 @@
             padding: 0 1rem;
             cursor: pointer;
         }
+
         .quiz-float.minimized .quiz-toggle {
             border-radius: 16px;
         }
+
         .quiz-question {
             font-family: 'Caveat', cursive;
             font-size: 1.25rem;
@@ -493,11 +600,12 @@
             margin-bottom: 1rem;
             line-height: 1.4;
         }
+
         .quiz-option {
             display: block;
             width: 100%;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(212,168,67,0.2);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(212, 168, 67, 0.2);
             border-radius: 8px;
             padding: 0.6rem 1rem;
             margin-bottom: 0.5rem;
@@ -508,24 +616,29 @@
             text-align: left;
             transition: all 0.2s ease;
         }
+
         .quiz-option:hover {
-            background: rgba(212,168,67,0.15);
+            background: rgba(212, 168, 67, 0.15);
             border-color: var(--gold);
         }
+
         .quiz-option.correct {
-            background: rgba(0,103,71,0.4);
+            background: rgba(0, 103, 71, 0.4);
             border-color: var(--tartan-green);
             color: #8f8;
         }
+
         .quiz-option.wrong {
-            background: rgba(200,16,46,0.3);
+            background: rgba(200, 16, 46, 0.3);
             border-color: var(--tartan-red);
             color: #f88;
         }
+
         .quiz-option:disabled {
             cursor: default;
             opacity: 0.7;
         }
+
         .quiz-feedback {
             font-family: 'Caveat', cursive;
             font-size: 1.1rem;
@@ -533,6 +646,7 @@
             margin-top: 0.5rem;
             min-height: 1.5rem;
         }
+
         .quiz-next {
             background: var(--puffin-orange);
             color: #fff;
@@ -547,11 +661,15 @@
             transition: all 0.2s ease;
             display: none;
         }
-        .quiz-next:hover { background: var(--tartan-red); }
+
+        .quiz-next:hover {
+            background: var(--tartan-red);
+        }
+
         .quiz-score-line {
             font-family: 'Special Elite', cursive;
             font-size: 0.75rem;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             letter-spacing: 1px;
             margin-bottom: 0.8rem;
         }
@@ -562,25 +680,28 @@
             max-width: 900px;
             margin: 0 auto;
         }
+
         /* ── Random Facts Toast ── */
         .fact-toast {
             position: fixed;
             z-index: 996;
             max-width: 300px;
             padding: 1rem 1.2rem;
-            background: linear-gradient(135deg, rgba(26,26,62,0.97) 0%, rgba(42,26,62,0.97) 100%);
-            border: 1px solid rgba(212,168,67,0.3);
+            background: linear-gradient(135deg, rgba(26, 26, 62, 0.97) 0%, rgba(42, 26, 62, 0.97) 100%);
+            border: 1px solid rgba(212, 168, 67, 0.3);
             border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
             opacity: 0;
             transform: translateX(var(--slide-from));
             transition: opacity 0.5s ease, transform 0.5s ease;
             pointer-events: none;
         }
+
         .fact-toast.show {
             opacity: 1;
             transform: translateX(0);
         }
+
         .fact-toast-label {
             font-family: 'Special Elite', cursive;
             font-size: 0.65rem;
@@ -589,6 +710,7 @@
             text-transform: uppercase;
             margin-bottom: 0.4rem;
         }
+
         .fact-toast-text {
             font-family: 'Caveat', cursive;
             font-size: 1.1rem;
@@ -604,6 +726,7 @@
             align-items: center;
             text-align: center;
         }
+
         .ticket {
             background: var(--marshmallow);
             color: var(--tartan-navy);
@@ -612,26 +735,35 @@
             max-width: 500px;
             width: 100%;
             position: relative;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
             opacity: 0;
             transform: scale(0.9);
         }
+
         .ticket.visible {
             opacity: 1;
             transform: scale(1);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
+
         .ticket::before, .ticket::after {
             content: '';
             position: absolute;
-            width: 28px; height: 28px;
+            width: 28px;
+            height: 28px;
             background: var(--tartan-navy);
             border-radius: 50%;
             top: 50%;
             transform: translateY(-50%);
         }
-        .ticket::before { left: -14px; }
-        .ticket::after  { right: -14px; }
+
+        .ticket::before {
+            left: -14px;
+        }
+
+        .ticket::after {
+            right: -14px;
+        }
 
         .ticket-header {
             font-family: 'Special Elite', cursive;
@@ -641,22 +773,26 @@
             color: var(--puffin-orange);
             margin-bottom: 0.5rem;
         }
+
         .ticket h2 {
             font-size: clamp(1.6rem, 4vw, 2.2rem);
             color: var(--tartan-red);
             margin-bottom: 0.3rem;
         }
+
         .ticket .ticket-date {
             font-family: 'Caveat', cursive;
             font-size: 1.5rem;
             color: var(--tartan-navy);
             margin-bottom: 1.5rem;
         }
+
         .ticket .divider {
             border: none;
-            border-top: 2px dashed rgba(26,26,62,0.2);
+            border-top: 2px dashed rgba(26, 26, 62, 0.2);
             margin: 1rem 0;
         }
+
         .ticket .ticket-details {
             font-family: 'Caveat', cursive;
             font-size: 1.2rem;
@@ -678,12 +814,13 @@
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(200,16,46,0.4);
+            box-shadow: 0 4px 20px rgba(200, 16, 46, 0.4);
         }
+
         .rsvp-btn:hover {
             background: var(--puffin-orange);
             transform: scale(1.05);
-            box-shadow: 0 6px 30px rgba(232,101,42,0.5);
+            box-shadow: 0 6px 30px rgba(232, 101, 42, 0.5);
         }
 
         /* ── Celebration overlay ── */
@@ -691,7 +828,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(13,13,43,0.95);
+            background: rgba(13, 13, 43, 0.95);
             z-index: 1000;
             flex-direction: column;
             align-items: center;
@@ -699,20 +836,24 @@
             text-align: center;
             padding: 2rem;
         }
+
         .celebration.active {
             display: flex;
             animation: fadeIn 0.5s ease;
         }
+
         .celebration .big-puffin {
             font-size: 6rem;
             animation: puffinBounce 1.5s ease-in-out infinite;
         }
+
         .celebration h2 {
             font-family: 'Caveat', cursive;
             font-size: clamp(2rem, 6vw, 3.5rem);
             color: var(--soft-pink);
             margin: 1rem 0;
         }
+
         .celebration p {
             font-family: 'Caveat', cursive;
             font-size: 1.5rem;
@@ -724,14 +865,22 @@
             pointer-events: none;
             z-index: 1001;
         }
+
         .heart-particle {
             position: absolute;
             font-size: 1.5rem;
             animation: burstOut 1.5s ease-out forwards;
         }
+
         @keyframes burstOut {
-            0%   { opacity: 1; transform: translate(0,0) scale(0.5); }
-            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.2); }
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(0.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--dx), var(--dy)) scale(1.2);
+            }
         }
 
         /* ── Tartan ribbon accent ── */
@@ -739,11 +888,11 @@
             width: 100%;
             height: 8px;
             background: repeating-linear-gradient(
-                90deg,
-                var(--tartan-red) 0px, var(--tartan-red) 12px,
-                var(--tartan-navy) 12px, var(--tartan-navy) 16px,
-                var(--tartan-green) 16px, var(--tartan-green) 28px,
-                var(--tartan-navy) 28px, var(--tartan-navy) 32px
+                    90deg,
+                    var(--tartan-red) 0px, var(--tartan-red) 12px,
+                    var(--tartan-navy) 12px, var(--tartan-navy) 16px,
+                    var(--tartan-green) 16px, var(--tartan-green) 28px,
+                    var(--tartan-navy) 28px, var(--tartan-navy) 32px
             );
         }
 
@@ -753,28 +902,66 @@
             padding: 2rem;
             font-family: 'Caveat', cursive;
             font-size: 1.1rem;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255, 255, 255, 0.3);
         }
 
         /* ── Animations ── */
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to   { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         /* ── Responsive ── */
         @media (max-width: 600px) {
-            .task-card { padding: 1.5rem 1.2rem; }
-            .ticket { padding: 2rem 1.5rem; }
-            .task-emoji { font-size: 2rem; top: 1rem; right: 1rem; }
-            .countdown { gap: 0.5rem; }
-            .countdown-num { font-size: 1.5rem; }
-            .spotify-float { width: calc(100% - 20px); right: 10px; top: 10px; }
-            .quiz-float { width: calc(100% - 20px); left: 10px; top: auto; bottom: 10px; }
+            .task-card {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .ticket {
+                padding: 2rem 1.5rem;
+            }
+
+            .task-emoji {
+                font-size: 2rem;
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .countdown {
+                gap: 0.5rem;
+            }
+
+            .countdown-num {
+                font-size: 1.5rem;
+            }
+
+            .spotify-float {
+                width: calc(100% - 20px);
+                right: 10px;
+                top: 10px;
+            }
+
+            .quiz-float {
+                width: calc(100% - 20px);
+                left: 10px;
+                top: auto;
+                bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -826,28 +1013,43 @@
     <div class="hills">
         <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
             <!-- Back hills -->
-            <path d="M0,220 L0,140 Q180,40 360,110 Q480,160 600,90 Q720,20 840,80 Q960,140 1080,70 Q1200,10 1320,100 Q1380,130 1440,120 L1440,220 Z" fill="#0f1a0f" opacity="0.7"/>
+            <path d="M0,220 L0,140 Q180,40 360,110 Q480,160 600,90 Q720,20 840,80 Q960,140 1080,70 Q1200,10 1320,100 Q1380,130 1440,120 L1440,220 Z"
+                  fill="#0f1a0f" opacity="0.7"/>
             <!-- Mid hills -->
-            <path d="M0,220 L0,160 Q200,80 400,140 Q550,180 700,120 Q850,60 1000,110 Q1150,160 1300,100 L1440,130 L1440,220 Z" fill="#142014" opacity="0.8"/>
+            <path d="M0,220 L0,160 Q200,80 400,140 Q550,180 700,120 Q850,60 1000,110 Q1150,160 1300,100 L1440,130 L1440,220 Z"
+                  fill="#142014" opacity="0.8"/>
             <!-- Front hills with caves -->
-            <path d="M0,220 L0,180 Q240,130 480,170 Q650,190 800,160 Q950,130 1100,165 Q1250,190 1440,155 L1440,220 Z" fill="#1a2a1a"/>
+            <path d="M0,220 L0,180 Q240,130 480,170 Q650,190 800,160 Q950,130 1100,165 Q1250,190 1440,155 L1440,220 Z"
+                  fill="#1a2a1a"/>
         </svg>
 
         <!-- Hidden Caves -->
         <div class="cave" style="bottom: 12px; left: 8%; width: 40px; height: 30px;" onclick="revealCave(this)">
-            <svg viewBox="0 0 40 30"><ellipse cx="20" cy="22" rx="16" ry="10" fill="#0d150d"/><path d="M4,22 Q20,8 36,22" fill="#111a11"/></svg>
+            <svg viewBox="0 0 40 30">
+                <ellipse cx="20" cy="22" rx="16" ry="10" fill="#0d150d"/>
+                <path d="M4,22 Q20,8 36,22" fill="#111a11"/>
+            </svg>
             <div class="cave-msg">Hellooo Booty! 🐧</div>
         </div>
         <div class="cave" style="bottom: 28px; left: 35%; width: 35px; height: 25px;" onclick="revealCave(this)">
-            <svg viewBox="0 0 35 25"><ellipse cx="17" cy="18" rx="13" ry="8" fill="#0d150d"/><path d="M4,18 Q17,7 30,18" fill="#111a11"/></svg>
+            <svg viewBox="0 0 35 25">
+                <ellipse cx="17" cy="18" rx="13" ry="8" fill="#0d150d"/>
+                <path d="M4,18 Q17,7 30,18" fill="#111a11"/>
+            </svg>
             <div class="cave-msg">You're my favourite human! ❤️</div>
         </div>
         <div class="cave" style="bottom: 18px; left: 62%; width: 38px; height: 28px;" onclick="revealCave(this)">
-            <svg viewBox="0 0 38 28"><ellipse cx="19" cy="20" rx="15" ry="9" fill="#0d150d"/><path d="M4,20 Q19,8 34,20" fill="#111a11"/></svg>
+            <svg viewBox="0 0 38 28">
+                <ellipse cx="19" cy="20" rx="15" ry="9" fill="#0d150d"/>
+                <path d="M4,20 Q19,8 34,20" fill="#111a11"/>
+            </svg>
             <div class="cave-msg">Cutiepie! 🐧❤️</div>
         </div>
         <div class="cave" style="bottom: 8px; left: 85%; width: 36px; height: 26px;" onclick="revealCave(this)">
-            <svg viewBox="0 0 36 26"><ellipse cx="18" cy="19" rx="14" ry="8" fill="#0d150d"/><path d="M4,19 Q18,8 32,19" fill="#111a11"/></svg>
+            <svg viewBox="0 0 36 26">
+                <ellipse cx="18" cy="19" rx="14" ry="8" fill="#0d150d"/>
+                <path d="M4,19 Q18,8 32,19" fill="#111a11"/>
+            </svg>
             <div class="cave-msg">I Love You Pineapple! 💕</div>
         </div>
     </div>
@@ -862,18 +1064,23 @@
     <div class="task-card" data-reveal data-task="1">
         <span class="task-emoji">🐧</span>
         <div class="task-number">Task No. 1</div>
-        <h3>Locate Your Puffin Partner</h3>
-        <p>Puffins mate for life, and this particular puffin has chosen you.
-        Your task: show up looking absolutely magnificent.
-        You have the rest of the day. Your time starts now.</p>
+        <h3>Look Puffin Beautiful</h3>
+        <p>This particular puffin has chosen you.
+            Your task: dress up looking absolutely magnificent.
+            You have till 14th February. Your time starts now.</p>
         <div class="task-scoring">
             <label>Your Score:</label>
             <div class="star-rating">
-                <input type="radio" name="task1" id="t1s5" value="5" autocomplete="off" onchange="updateScore()"><label for="t1s5">&#9733;</label>
-                <input type="radio" name="task1" id="t1s4" value="4" autocomplete="off" onchange="updateScore()"><label for="t1s4">&#9733;</label>
-                <input type="radio" name="task1" id="t1s3" value="3" autocomplete="off" onchange="updateScore()"><label for="t1s3">&#9733;</label>
-                <input type="radio" name="task1" id="t1s2" value="2" autocomplete="off" onchange="updateScore()"><label for="t1s2">&#9733;</label>
-                <input type="radio" name="task1" id="t1s1" value="1" autocomplete="off" onchange="updateScore()"><label for="t1s1">&#9733;</label>
+                <input type="radio" name="task1" id="t1s5" value="5" autocomplete="off" onchange="updateScore()"><label
+                    for="t1s5">&#9733;</label>
+                <input type="radio" name="task1" id="t1s4" value="4" autocomplete="off" onchange="updateScore()"><label
+                    for="t1s4">&#9733;</label>
+                <input type="radio" name="task1" id="t1s3" value="3" autocomplete="off" onchange="updateScore()"><label
+                    for="t1s3">&#9733;</label>
+                <input type="radio" name="task1" id="t1s2" value="2" autocomplete="off" onchange="updateScore()"><label
+                    for="t1s2">&#9733;</label>
+                <input type="radio" name="task1" id="t1s1" value="1" autocomplete="off" onchange="updateScore()"><label
+                    for="t1s1">&#9733;</label>
             </div>
         </div>
     </div>
@@ -881,18 +1088,22 @@
     <div class="task-card" data-reveal data-task="2">
         <span class="task-emoji">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span>
         <div class="task-number">Task No. 2</div>
-        <h3>Navigate the Scottish Highlands (of My Heart)</h3>
+        <h3>Navigate the Highlands (of My Heart)</h3>
         <p>You must traverse the wild, untamed terrain of a valentine's
-        evening without getting distracted by whisky or shortbread.
-        Bonus points if you wear tartan.</p>
+            evening without getting distracted by whisky or shortbread.</p>
         <div class="task-scoring">
             <label>Your Score:</label>
             <div class="star-rating">
-                <input type="radio" name="task2" id="t2s5" value="5" autocomplete="off" onchange="updateScore()"><label for="t2s5">&#9733;</label>
-                <input type="radio" name="task2" id="t2s4" value="4" autocomplete="off" onchange="updateScore()"><label for="t2s4">&#9733;</label>
-                <input type="radio" name="task2" id="t2s3" value="3" autocomplete="off" onchange="updateScore()"><label for="t2s3">&#9733;</label>
-                <input type="radio" name="task2" id="t2s2" value="2" autocomplete="off" onchange="updateScore()"><label for="t2s2">&#9733;</label>
-                <input type="radio" name="task2" id="t2s1" value="1" autocomplete="off" onchange="updateScore()"><label for="t2s1">&#9733;</label>
+                <input type="radio" name="task2" id="t2s5" value="5" autocomplete="off" onchange="updateScore()"><label
+                    for="t2s5">&#9733;</label>
+                <input type="radio" name="task2" id="t2s4" value="4" autocomplete="off" onchange="updateScore()"><label
+                    for="t2s4">&#9733;</label>
+                <input type="radio" name="task2" id="t2s3" value="3" autocomplete="off" onchange="updateScore()"><label
+                    for="t2s3">&#9733;</label>
+                <input type="radio" name="task2" id="t2s2" value="2" autocomplete="off" onchange="updateScore()"><label
+                    for="t2s2">&#9733;</label>
+                <input type="radio" name="task2" id="t2s1" value="1" autocomplete="off" onchange="updateScore()"><label
+                    for="t2s1">&#9733;</label>
             </div>
         </div>
     </div>
@@ -902,16 +1113,21 @@
         <div class="task-number">Task No. 3</div>
         <h3>Survive the Encore</h3>
         <p>Like any great gig, this evening will have an encore you
-        didn't expect. You must stay for the whole set — including dessert.
-        No early exits. No excuses.</p>
+            didn't expect. You must stay for the whole set — including dessert.
+            No early exits. No excuses.</p>
         <div class="task-scoring">
             <label>Your Score:</label>
             <div class="star-rating">
-                <input type="radio" name="task3" id="t3s5" value="5" autocomplete="off" onchange="updateScore()"><label for="t3s5">&#9733;</label>
-                <input type="radio" name="task3" id="t3s4" value="4" autocomplete="off" onchange="updateScore()"><label for="t3s4">&#9733;</label>
-                <input type="radio" name="task3" id="t3s3" value="3" autocomplete="off" onchange="updateScore()"><label for="t3s3">&#9733;</label>
-                <input type="radio" name="task3" id="t3s2" value="2" autocomplete="off" onchange="updateScore()"><label for="t3s2">&#9733;</label>
-                <input type="radio" name="task3" id="t3s1" value="1" autocomplete="off" onchange="updateScore()"><label for="t3s1">&#9733;</label>
+                <input type="radio" name="task3" id="t3s5" value="5" autocomplete="off" onchange="updateScore()"><label
+                    for="t3s5">&#9733;</label>
+                <input type="radio" name="task3" id="t3s4" value="4" autocomplete="off" onchange="updateScore()"><label
+                    for="t3s4">&#9733;</label>
+                <input type="radio" name="task3" id="t3s3" value="3" autocomplete="off" onchange="updateScore()"><label
+                    for="t3s3">&#9733;</label>
+                <input type="radio" name="task3" id="t3s2" value="2" autocomplete="off" onchange="updateScore()"><label
+                    for="t3s2">&#9733;</label>
+                <input type="radio" name="task3" id="t3s1" value="1" autocomplete="off" onchange="updateScore()"><label
+                    for="t3s1">&#9733;</label>
             </div>
         </div>
     </div>
@@ -921,16 +1137,21 @@
         <div class="task-number">Task No. 4</div>
         <h3>The Marshmallow Challenge</h3>
         <p>Toast a marshmallow to absolute perfection — golden on the outside,
-        gooey on the inside. Much like the ideal valentine.
-        Much like you, actually.</p>
+            gooey on the inside. Much like the ideal valentine.
+            Much like you, actually.</p>
         <div class="task-scoring">
             <label>Your Score:</label>
             <div class="star-rating">
-                <input type="radio" name="task4" id="t4s5" value="5" autocomplete="off" onchange="updateScore()"><label for="t4s5">&#9733;</label>
-                <input type="radio" name="task4" id="t4s4" value="4" autocomplete="off" onchange="updateScore()"><label for="t4s4">&#9733;</label>
-                <input type="radio" name="task4" id="t4s3" value="3" autocomplete="off" onchange="updateScore()"><label for="t4s3">&#9733;</label>
-                <input type="radio" name="task4" id="t4s2" value="2" autocomplete="off" onchange="updateScore()"><label for="t4s2">&#9733;</label>
-                <input type="radio" name="task4" id="t4s1" value="1" autocomplete="off" onchange="updateScore()"><label for="t4s1">&#9733;</label>
+                <input type="radio" name="task4" id="t4s5" value="5" autocomplete="off" onchange="updateScore()"><label
+                    for="t4s5">&#9733;</label>
+                <input type="radio" name="task4" id="t4s4" value="4" autocomplete="off" onchange="updateScore()"><label
+                    for="t4s4">&#9733;</label>
+                <input type="radio" name="task4" id="t4s3" value="3" autocomplete="off" onchange="updateScore()"><label
+                    for="t4s3">&#9733;</label>
+                <input type="radio" name="task4" id="t4s2" value="2" autocomplete="off" onchange="updateScore()"><label
+                    for="t4s2">&#9733;</label>
+                <input type="radio" name="task4" id="t4s1" value="1" autocomplete="off" onchange="updateScore()"><label
+                    for="t4s1">&#9733;</label>
             </div>
         </div>
     </div>
@@ -940,16 +1161,21 @@
         <div class="task-number">Task No. 5 — The Final Task</div>
         <h3>Be My Valentine</h3>
         <p>This is the most important task of the series.
-        All other tasks are void if this one is not completed.
-        No time limit. Just say yes.</p>
+            All other tasks are void if this one is not completed.
+            No time limit. Just say yes.</p>
         <div class="task-scoring">
             <label>Your Score:</label>
             <div class="star-rating">
-                <input type="radio" name="task5" id="t5s5" value="5" autocomplete="off" onchange="updateScore()"><label for="t5s5">&#9733;</label>
-                <input type="radio" name="task5" id="t5s4" value="4" autocomplete="off" onchange="updateScore()"><label for="t5s4">&#9733;</label>
-                <input type="radio" name="task5" id="t5s3" value="3" autocomplete="off" onchange="updateScore()"><label for="t5s3">&#9733;</label>
-                <input type="radio" name="task5" id="t5s2" value="2" autocomplete="off" onchange="updateScore()"><label for="t5s2">&#9733;</label>
-                <input type="radio" name="task5" id="t5s1" value="1" autocomplete="off" onchange="updateScore()"><label for="t5s1">&#9733;</label>
+                <input type="radio" name="task5" id="t5s5" value="5" autocomplete="off" onchange="updateScore()"><label
+                    for="t5s5">&#9733;</label>
+                <input type="radio" name="task5" id="t5s4" value="4" autocomplete="off" onchange="updateScore()"><label
+                    for="t5s4">&#9733;</label>
+                <input type="radio" name="task5" id="t5s3" value="3" autocomplete="off" onchange="updateScore()"><label
+                    for="t5s3">&#9733;</label>
+                <input type="radio" name="task5" id="t5s2" value="2" autocomplete="off" onchange="updateScore()"><label
+                    for="t5s2">&#9733;</label>
+                <input type="radio" name="task5" id="t5s1" value="1" autocomplete="off" onchange="updateScore()"><label
+                    for="t5s1">&#9733;</label>
             </div>
         </div>
     </div>
@@ -970,8 +1196,10 @@
 <!-- ═══ ADVENTURES LINK ═══ -->
 <section class="gallery-section" style="text-align: center; padding: 3rem 1.5rem;">
     <h2 class="section-title">Our Adventures</h2>
-    <p style="font-family: 'Caveat', cursive; font-size: 1.3rem; color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">Photos, trips, maps & more...</p>
-    <a href="adventures.html" class="rsvp-btn" style="text-decoration: none; background: var(--tartan-green);">Explore Our Adventures 🗺️</a>
+    <p style="font-family: 'Caveat', cursive; font-size: 1.3rem; color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
+        Photos, trips, maps & more...</p>
+    <a href="adventures.html" class="rsvp-btn" style="text-decoration: none; background: var(--tartan-green);">Explore
+        Our Adventures 🗺️</a>
 </section>
 
 <div class="tartan-ribbon"></div>
@@ -1032,12 +1260,15 @@
 </div>
 
 <footer>
-    <p>Made with ❤️ by one Scottish puffin — <a href="https://commons.wikimedia.org/wiki/File:Atlantic_Puffins,_Scotland.jpg" target="_blank" style="color: var(--gold); text-decoration: none;">see the real ones</a></p>
+    <p>Made with ❤️ by one Scottish puffin — <a
+            href="https://commons.wikimedia.org/wiki/File:Atlantic_Puffins,_Scotland.jpg" target="_blank"
+            style="color: var(--gold); text-decoration: none;">see the real ones</a></p>
 </footer>
 
 <script>
     // ═══ COUNTDOWN TIMER ═══
     const valentinesDay = new Date('2026-02-14T19:00:00');
+
     function updateCountdown() {
         const now = new Date();
         const diff = valentinesDay - now;
@@ -1057,6 +1288,7 @@
         document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
         document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
     }
+
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
@@ -1083,6 +1315,7 @@
         }
         requestAnimationFrame(animatePuffin);
     }
+
     animatePuffin();
 
     // Hide on touch devices
@@ -1097,7 +1330,7 @@
         msg.classList.add('show');
         // burst some hearts from cave
         const rect = caveEl.getBoundingClientRect();
-        burstHeartsAt(rect.left + rect.width/2, rect.top);
+        burstHeartsAt(rect.left + rect.width / 2, rect.top);
         setTimeout(() => msg.classList.remove('show'), 2200);
     }
 
@@ -1123,8 +1356,8 @@
 
     // ═══ TASKMASTER SCORING ═══
     const verdicts = [
-        [0,  "Rate the tasks above!"],
-        [5,  "Hmmm... the Taskmaster is not impressed."],
+        [0, "Rate the tasks above!"],
+        [5, "Hmmm... the Taskmaster is not impressed."],
         [10, "A respectable effort. Greg nods slowly."],
         [15, "Solid performance! Little Alex Horne is taking notes."],
         [20, "Outstanding! You're leading the series!"],
@@ -1180,6 +1413,7 @@
         mContainer.appendChild(el);
         setTimeout(() => el.remove(), 12000);
     }
+
     setInterval(spawnMarshmallow, 400);
 
     // ═══ SCROLL REVEAL ═══
@@ -1191,7 +1425,7 @@
                 observer.unobserve(e.target);
             }
         });
-    }, { threshold: 0.15 });
+    }, {threshold: 0.15});
     revealEls.forEach(el => observer.observe(el));
 
     // ═══ ACCEPT VALENTINE ═══
@@ -1233,34 +1467,174 @@
     }
 
     const allQuizQuestions = [
-        { q: "How long can puffins live?", opts: ["5-10 years", "10-15 years", "20+ years", "50+ years"], ans: 2, fact: "Puffins can live over 30 years! The oldest recorded was 36." },
-        { q: "What is a group of puffins called?", opts: ["A flock", "A colony", "A parliament", "A waddle"], ans: 1, fact: "A group of puffins is called a colony (or sometimes a circus!)." },
-        { q: "How many eggs does a puffin lay per year?", opts: ["1", "2-3", "4-5", "6+"], ans: 0, fact: "Puffins lay just one egg per year and both parents share incubation duties." },
-        { q: "What are baby puffins called?", opts: ["Chicks", "Pufflings", "Cubs", "Fledglings"], ans: 1, fact: "Baby puffins are adorably called pufflings!" },
-        { q: "How fast can puffins fly?", opts: ["20 mph", "40 mph", "55 mph", "80 mph"], ans: 2, fact: "Puffins can fly up to 55 mph by flapping their wings 400 times per minute!" },
-        { q: "How deep can puffins dive?", opts: ["5 metres", "20 metres", "60 metres", "100 metres"], ans: 2, fact: "Puffins can dive up to 60 metres deep to catch fish." },
-        { q: "What colour are puffin beaks in winter?", opts: ["Still bright orange", "Dull grey", "White", "Black"], ans: 1, fact: "Puffin beaks fade to dull grey in winter and become colourful again in spring for mating season." },
-        { q: "Where do puffins nest?", opts: ["In trees", "On cliff edges", "In underground burrows", "On the water"], ans: 2, fact: "Puffins dig burrows in the ground using their beaks and feet, sometimes reusing the same burrow for years." },
-        { q: "How many fish can a puffin carry in its beak at once?", opts: ["1-2", "5-6", "10-12", "20+"], ans: 2, fact: "Puffins can carry 10-12 fish at once thanks to special spines on their tongue and upper beak." },
-        { q: "Do puffins mate for life?", opts: ["Yes, always", "No, never", "Usually yes", "Only in Scotland"], ans: 2, fact: "Puffins usually mate for life, returning to the same partner and burrow each year. Just like us!" },
-        { q: "What species is the Atlantic puffin?", opts: ["Fratercula arctica", "Puffinus puffinus", "Alca torda", "Uria aalge"], ans: 0, fact: "The Atlantic puffin's scientific name is Fratercula arctica, meaning 'little brother of the north'." },
-        { q: "How many times per minute do puffins flap their wings?", opts: ["50", "150", "400", "600"], ans: 2, fact: "Puffins flap their wings around 400 times per minute to stay airborne!" },
-        { q: "Which Scottish island is famous for its puffin colony?", opts: ["Skye", "Staffa", "Arran", "Mull"], ans: 1, fact: "The Isle of Staffa is famous for its puffin colony, as well as Fingal's Cave." },
-        { q: "What do puffins mainly eat?", opts: ["Seaweed", "Shrimp", "Sand eels", "Plankton"], ans: 2, fact: "Sand eels are the puffin's favourite food, though they also eat herring and capelin." },
-        { q: "How do puffins drink water?", opts: ["They don't need to", "From rock pools", "They can drink seawater", "Only from rain"], ans: 2, fact: "Puffins have special glands above their eyes that filter salt from seawater!" },
-        { q: "What is the puffin's closest relative?", opts: ["Penguin", "Razorbill", "Seagull", "Albatross"], ans: 1, fact: "The razorbill is the puffin's closest living relative. Both are members of the auk family." },
-        { q: "How long does a puffin egg take to hatch?", opts: ["2 weeks", "4 weeks", "6 weeks", "8 weeks"], ans: 2, fact: "Puffin eggs take about 36-45 days (roughly 6 weeks) to hatch." },
-        { q: "Where do puffins spend most of the winter?", opts: ["On land", "At sea", "In their burrows", "Migrating south"], ans: 1, fact: "Puffins spend autumn and winter out at sea, bobbing on the waves far from land." },
-        { q: "What is special about a puffin's feet?", opts: ["They're webbed", "They glow in the dark", "They change colour", "Both A and C"], ans: 3, fact: "Puffin feet are webbed for swimming AND change colour — bright orange in summer, pale in winter!" },
-        { q: "How do pufflings leave the nest?", opts: ["Parents carry them", "They walk", "They go at night alone", "They fly immediately"], ans: 2, fact: "Pufflings leave the burrow alone at night, guided by moonlight to the sea. So brave!" },
-        { q: "What is a puffin's main predator?", opts: ["Sharks", "Great skuas", "Eagles", "Foxes"], ans: 1, fact: "Great skuas (bonxies) are the puffin's main predator, often stealing their fish mid-flight." },
-        { q: "How much does an adult puffin weigh?", opts: ["100g", "300-500g", "1-2 kg", "3+ kg"], ans: 1, fact: "Adult puffins weigh around 300-500g — about the same as a tin of beans!" },
-        { q: "Can puffins swim underwater?", opts: ["No", "Yes, using wings", "Yes, using feet only", "Only in shallow water"], ans: 1, fact: "Puffins 'fly' underwater using their wings for propulsion and feet for steering." },
-        { q: "What makes puffin beaks glow?", opts: ["Bioluminescence", "UV fluorescence", "Bacteria", "Nothing, they don't glow"], ans: 1, fact: "Puffin beaks are UV fluorescent! They glow under ultraviolet light, possibly to attract mates." },
-        { q: "How many puffin species exist worldwide?", opts: ["1", "2", "3", "4"], ans: 3, fact: "There are 4 puffin species: Atlantic, Horned, Tufted, and Rhinoceros Auklet (honorary puffin)." },
-        { q: "What is Scotland's national animal?", opts: ["Puffin", "Red deer", "Unicorn", "Highland cow"], ans: 2, fact: "Scotland's national animal is the unicorn! It has been a Scottish symbol since the 12th century." },
-        { q: "Which is the highest mountain in Scotland?", opts: ["Ben Nevis", "Ben Arthur", "Cairn Gorm", "Ben Lomond"], ans: 0, fact: "Ben Nevis is the highest at 1,345m. It's also the highest peak in the British Isles!" },
-        { q: "What is a 'Munro' in Scotland?", opts: ["A type of whisky", "A mountain over 3,000ft", "A Scottish dance", "A loch monster"], ans: 1, fact: "A Munro is any Scottish mountain over 3,000ft (914m). There are 282 of them to bag!" },
+        {
+            q: "How long can puffins live?",
+            opts: ["5-10 years", "10-15 years", "20+ years", "50+ years"],
+            ans: 2,
+            fact: "Puffins can live over 30 years! The oldest recorded was 36."
+        },
+        {
+            q: "What is a group of puffins called?",
+            opts: ["A flock", "A colony", "A parliament", "A waddle"],
+            ans: 1,
+            fact: "A group of puffins is called a colony (or sometimes a circus!)."
+        },
+        {
+            q: "How many eggs does a puffin lay per year?",
+            opts: ["1", "2-3", "4-5", "6+"],
+            ans: 0,
+            fact: "Puffins lay just one egg per year and both parents share incubation duties."
+        },
+        {
+            q: "What are baby puffins called?",
+            opts: ["Chicks", "Pufflings", "Cubs", "Fledglings"],
+            ans: 1,
+            fact: "Baby puffins are adorably called pufflings!"
+        },
+        {
+            q: "How fast can puffins fly?",
+            opts: ["20 mph", "40 mph", "55 mph", "80 mph"],
+            ans: 2,
+            fact: "Puffins can fly up to 55 mph by flapping their wings 400 times per minute!"
+        },
+        {
+            q: "How deep can puffins dive?",
+            opts: ["5 metres", "20 metres", "60 metres", "100 metres"],
+            ans: 2,
+            fact: "Puffins can dive up to 60 metres deep to catch fish."
+        },
+        {
+            q: "What colour are puffin beaks in winter?",
+            opts: ["Still bright orange", "Dull grey", "White", "Black"],
+            ans: 1,
+            fact: "Puffin beaks fade to dull grey in winter and become colourful again in spring for mating season."
+        },
+        {
+            q: "Where do puffins nest?",
+            opts: ["In trees", "On cliff edges", "In underground burrows", "On the water"],
+            ans: 2,
+            fact: "Puffins dig burrows in the ground using their beaks and feet, sometimes reusing the same burrow for years."
+        },
+        {
+            q: "How many fish can a puffin carry in its beak at once?",
+            opts: ["1-2", "5-6", "10-12", "20+"],
+            ans: 2,
+            fact: "Puffins can carry 10-12 fish at once thanks to special spines on their tongue and upper beak."
+        },
+        {
+            q: "Do puffins mate for life?",
+            opts: ["Yes, always", "No, never", "Usually yes", "Only in Scotland"],
+            ans: 2,
+            fact: "Puffins usually mate for life, returning to the same partner and burrow each year. Just like us!"
+        },
+        {
+            q: "What species is the Atlantic puffin?",
+            opts: ["Fratercula arctica", "Puffinus puffinus", "Alca torda", "Uria aalge"],
+            ans: 0,
+            fact: "The Atlantic puffin's scientific name is Fratercula arctica, meaning 'little brother of the north'."
+        },
+        {
+            q: "How many times per minute do puffins flap their wings?",
+            opts: ["50", "150", "400", "600"],
+            ans: 2,
+            fact: "Puffins flap their wings around 400 times per minute to stay airborne!"
+        },
+        {
+            q: "Which Scottish island is famous for its puffin colony?",
+            opts: ["Skye", "Staffa", "Arran", "Mull"],
+            ans: 1,
+            fact: "The Isle of Staffa is famous for its puffin colony, as well as Fingal's Cave."
+        },
+        {
+            q: "What do puffins mainly eat?",
+            opts: ["Seaweed", "Shrimp", "Sand eels", "Plankton"],
+            ans: 2,
+            fact: "Sand eels are the puffin's favourite food, though they also eat herring and capelin."
+        },
+        {
+            q: "How do puffins drink water?",
+            opts: ["They don't need to", "From rock pools", "They can drink seawater", "Only from rain"],
+            ans: 2,
+            fact: "Puffins have special glands above their eyes that filter salt from seawater!"
+        },
+        {
+            q: "What is the puffin's closest relative?",
+            opts: ["Penguin", "Razorbill", "Seagull", "Albatross"],
+            ans: 1,
+            fact: "The razorbill is the puffin's closest living relative. Both are members of the auk family."
+        },
+        {
+            q: "How long does a puffin egg take to hatch?",
+            opts: ["2 weeks", "4 weeks", "6 weeks", "8 weeks"],
+            ans: 2,
+            fact: "Puffin eggs take about 36-45 days (roughly 6 weeks) to hatch."
+        },
+        {
+            q: "Where do puffins spend most of the winter?",
+            opts: ["On land", "At sea", "In their burrows", "Migrating south"],
+            ans: 1,
+            fact: "Puffins spend autumn and winter out at sea, bobbing on the waves far from land."
+        },
+        {
+            q: "What is special about a puffin's feet?",
+            opts: ["They're webbed", "They glow in the dark", "They change colour", "Both A and C"],
+            ans: 3,
+            fact: "Puffin feet are webbed for swimming AND change colour — bright orange in summer, pale in winter!"
+        },
+        {
+            q: "How do pufflings leave the nest?",
+            opts: ["Parents carry them", "They walk", "They go at night alone", "They fly immediately"],
+            ans: 2,
+            fact: "Pufflings leave the burrow alone at night, guided by moonlight to the sea. So brave!"
+        },
+        {
+            q: "What is a puffin's main predator?",
+            opts: ["Sharks", "Great skuas", "Eagles", "Foxes"],
+            ans: 1,
+            fact: "Great skuas (bonxies) are the puffin's main predator, often stealing their fish mid-flight."
+        },
+        {
+            q: "How much does an adult puffin weigh?",
+            opts: ["100g", "300-500g", "1-2 kg", "3+ kg"],
+            ans: 1,
+            fact: "Adult puffins weigh around 300-500g — about the same as a tin of beans!"
+        },
+        {
+            q: "Can puffins swim underwater?",
+            opts: ["No", "Yes, using wings", "Yes, using feet only", "Only in shallow water"],
+            ans: 1,
+            fact: "Puffins 'fly' underwater using their wings for propulsion and feet for steering."
+        },
+        {
+            q: "What makes puffin beaks glow?",
+            opts: ["Bioluminescence", "UV fluorescence", "Bacteria", "Nothing, they don't glow"],
+            ans: 1,
+            fact: "Puffin beaks are UV fluorescent! They glow under ultraviolet light, possibly to attract mates."
+        },
+        {
+            q: "How many puffin species exist worldwide?",
+            opts: ["1", "2", "3", "4"],
+            ans: 3,
+            fact: "There are 4 puffin species: Atlantic, Horned, Tufted, and Rhinoceros Auklet (honorary puffin)."
+        },
+        {
+            q: "What is Scotland's national animal?",
+            opts: ["Puffin", "Red deer", "Unicorn", "Highland cow"],
+            ans: 2,
+            fact: "Scotland's national animal is the unicorn! It has been a Scottish symbol since the 12th century."
+        },
+        {
+            q: "Which is the highest mountain in Scotland?",
+            opts: ["Ben Nevis", "Ben Arthur", "Cairn Gorm", "Ben Lomond"],
+            ans: 0,
+            fact: "Ben Nevis is the highest at 1,345m. It's also the highest peak in the British Isles!"
+        },
+        {
+            q: "What is a 'Munro' in Scotland?",
+            opts: ["A type of whisky", "A mountain over 3,000ft", "A Scottish dance", "A loch monster"],
+            ans: 1,
+            fact: "A Munro is any Scottish mountain over 3,000ft (914m). There are 282 of them to bag!"
+        },
     ];
     shuffleArray(allQuizQuestions);
     const quizQuestions = allQuizQuestions.slice(0, 10);
@@ -1319,18 +1693,180 @@
 
     // ═══ RANDOM FACTS TOAST ═══
     const funFacts = [
-        { label: "🐧 Puffin Fact", text: "Puffins spend most of their lives at sea, only coming to land to breed." },
-        { label: "🐧 Puffin Fact", text: "Puffin beaks glow under UV light! Scientists only discovered this in 2018." },
-        { label: "🐧 Puffin Fact", text: "Puffins flap their wings up to 400 times per minute during flight." },
-        { label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Fact", text: "Scotland has over 790 islands, but only about 130 are inhabited." },
-        { label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Fact", text: "Scotland's national animal is the unicorn." },
-        { label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Fact", text: "Ben Nevis is the highest mountain in the British Isles at 1,345 metres." },
-        { label: "🐧 Puffin Fact", text: "Puffins are excellent swimmers, using their wings to 'fly' underwater." },
-        { label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Fact", text: "Scotland has around 30,000 freshwater lochs." },
-        { label: "🐧 Puffin Fact", text: "There are about 580,000 puffins in the UK, mostly in Scotland." },
-        { label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Fact", text: "Edinburgh was the first city in the world to have its own fire brigade in 1824." },
-        { label: "🐧 Puffin Fact", text: "Puffin chicks leave their burrow at night to avoid predators — guided by moonlight to the sea." },
-        { label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Fact", text: "Loch Lomond is the largest freshwater lake in Great Britain by surface area." },
+        {label: "🐧 Puffin Fact", text: "Puffins spend most of their lives at sea, only coming to land to breed."},
+        {label: "🐧 Puffin Fact", text: "Puffin beaks glow under UV light! Scientists only discovered this in 2018."},
+        {label: "🐧 Puffin Fact", text: "Puffins flap their wings up to 400 times per minute during flight."},
+        {label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Fact", text: "Scotland has over 790 islands, but only about 130 are inhabited."},
+        {label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Fact", text: "Scotland's national animal is the unicorn."},
+        {
+            label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Fact",
+            text: "Ben Nevis is the highest mountain in the British Isles at 1,345 metres."
+        },
+        {label: "🐧 Puffin Fact", text: "Puffins are excellent swimmers, using their wings to 'fly' underwater."},
+        {label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Fact", text: "Scotland has around 30,000 freshwater lochs."},
+        {label: "🐧 Puffin Fact", text: "There are about 580,000 puffins in the UK, mostly in Scotland."},
+        {
+            label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Fact",
+            text: "Edinburgh was the first city in the world to have its own fire brigade in 1824."
+        },
+        {
+            label: "🐧 Puffin Fact",
+            text: "Puffin chicks leave their burrow at night to avoid predators — guided by moonlight to the sea."
+        },
+        {
+            label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland Fact",
+            text: "Loch Lomond is the largest freshwater lake in Great Britain by surface area."
+        },
+
+        // Hamburg Facts
+        {
+            label: "🇩🇪 Hamburg Fact",
+            text: "Hamburg has more bridges than Venice, Amsterdam, and London combined — over 2,500!"
+        },
+        {
+            label: "🇩🇪 Hamburg Fact",
+            text: "The Beatles performed over 250 times in Hamburg's clubs before becoming famous."
+        },
+        {label: "🇩🇪 Hamburg Fact", text: "Hamburg's port is the largest in Germany and the third-largest in Europe."},
+        {label: "🇩🇪 Hamburg Fact", text: "The Elbphilharmonie concert hall took 10 years to build and opened in 2017."},
+        {label: "🇩🇪 Hamburg Fact", text: "Hamburg is home to over 50 museums and 100 music venues."},
+        {
+            label: "🇩🇪 Hamburg Fact",
+            text: "The Miniatur Wunderland in Hamburg is the world's largest model railway exhibition."
+        },
+        {
+            label: "🇩🇪 Hamburg Fact",
+            text: "Hamburg has been a free city-state since 1189, making it one of Europe's oldest republics."
+        },
+        {
+            label: "🇩🇪 Hamburg Fact",
+            text: "The St. Pauli district is famous for the Reeperbahn, Europe's largest entertainment district."
+        },
+        {
+            label: "🇩🇪 Hamburg Fact",
+            text: "Hamburg's Alster Lake was created in the 13th century by damming the Alster River."
+        },
+        {label: "🇩🇪 Hamburg Fact", text: "Over 120,000 people commute to Hamburg daily from neighboring regions."},
+
+        // Helsinki Facts
+        {label: "🇫🇮 Helsinki Fact", text: "Helsinki is called the 'Daughter of the Baltic' and was founded in 1550."},
+        {label: "🇫🇮 Helsinki Fact", text: "The city has over 300 islands within its boundaries."},
+        {
+            label: "🇫🇮 Helsinki Fact",
+            text: "Helsinki Cathedral's distinctive green dome can be seen from far out at sea."
+        },
+        {
+            label: "🇫🇮 Helsinki Fact",
+            text: "Finland's sauna culture is so strong that Helsinki has public saunas throughout the city."
+        },
+        {
+            label: "🇫🇮 Helsinki Fact",
+            text: "The Temppeliaukio Church is built directly into solid rock and has amazing acoustics."
+        },
+        {label: "🇫🇮 Helsinki Fact", text: "Helsinki was named World Design Capital in 2012."},
+        {
+            label: "🇫🇮 Helsinki Fact",
+            text: "The fortress of Suomenlinna is a UNESCO World Heritage Site built across six islands."
+        },
+        {label: "🇫🇮 Helsinki Fact", text: "Helsinki's public transport runs on 100% renewable energy."},
+        {label: "🇫🇮 Helsinki Fact", text: "The city hosts over 3,000 events and festivals annually."},
+        {label: "🇫🇮 Helsinki Fact", text: "Helsinki consistently ranks among the world's most liveable cities."},
+
+        // Malaga Facts
+        {label: "🇪🇸 Malaga Fact", text: "Malaga is the birthplace of Pablo Picasso, born here in 1881."},
+        {label: "🇪🇸 Malaga Fact", text: "The city enjoys over 300 days of sunshine per year."},
+        {label: "🇪🇸 Malaga Fact", text: "Malaga's Alcazaba is one of the best-preserved Moorish fortresses in Spain."},
+        {label: "🇪🇸 Malaga Fact", text: "The sweet Malaga wine has been produced in the region for over 3,000 years."},
+        {label: "🇪🇸 Malaga Fact", text: "Malaga's Holy Week processions are among the most famous in Spain."},
+        {
+            label: "🇪🇸 Malaga Fact",
+            text: "The city's Roman Theatre dates back to the 1st century BC and is still used today."
+        },
+        {label: "🇪🇸 Malaga Fact", text: "Malaga has over 15 kilometres of beaches along the Costa del Sol."},
+        {label: "🇪🇸 Malaga Fact", text: "The Caminito del Rey, a famous cliffside walkway, is located near Malaga."},
+        {
+            label: "🇪🇸 Malaga Fact",
+            text: "Malaga's Cathedral is nicknamed 'La Manquita' (the one-armed lady) because one tower was never completed."
+        },
+        {
+            label: "🇪🇸 Malaga Fact",
+            text: "The city has over 40 museums, including the Picasso Museum with 285 of his works."
+        },
+
+        // Edinburgh Facts
+        {
+            label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Edinburgh Fact",
+            text: "Edinburgh Castle sits atop an extinct volcano that last erupted 350 million years ago."
+        },
+        {
+            label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Edinburgh Fact",
+            text: "The Royal Mile connects Edinburgh Castle to Holyrood Palace and is exactly one Scots mile long."
+        },
+        {label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Edinburgh Fact", text: "Edinburgh's Old and New Towns are a UNESCO World Heritage Site."},
+        {
+            label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Edinburgh Fact",
+            text: "The city hosts the world's largest arts festival every August — the Edinburgh Festival Fringe."
+        },
+        {label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Edinburgh Fact", text: "J.K. Rowling wrote much of Harry Potter in Edinburgh's cafés."},
+        {
+            label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Edinburgh Fact",
+            text: "The city has a network of underground vaults and tunnels beneath the Royal Mile."
+        },
+        {
+            label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Edinburgh Fact",
+            text: "Edinburgh was the first UNESCO City of Literature, designated in 2004."
+        },
+        {
+            label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Edinburgh Fact",
+            text: "Greyfriars Bobby, a Skye Terrier, famously guarded his owner's grave for 14 years."
+        },
+        {
+            label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Edinburgh Fact",
+            text: "The One O'Clock Gun has been fired from Edinburgh Castle every day (except Sundays) since 1861."
+        },
+        {
+            label: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Edinburgh Fact",
+            text: "Arthur's Seat offers panoramic views and is an easy hike right in the city centre."
+        },
+
+        // Netherlands Facts
+        {
+            label: "🇳🇱 Netherlands Fact",
+            text: "The Netherlands has over 1,000 traditional windmills, with 19 at Kinderdijk alone."
+        },
+        {
+            label: "🇳🇱 Netherlands Fact",
+            text: "About 26% of the Netherlands is below sea level, protected by an extensive system of dikes."
+        },
+        {
+            label: "🇳🇱 Netherlands Fact",
+            text: "There are more bicycles than people in the Netherlands — over 23 million bikes!"
+        },
+        {
+            label: "🇳🇱 Netherlands Fact",
+            text: "The Netherlands is the world's second-largest exporter of agricultural products after the US."
+        },
+        {label: "🇳🇱 Netherlands Fact", text: "Amsterdam has over 165 canals and more than 1,200 bridges."},
+        {
+            label: "🇳🇱 Netherlands Fact",
+            text: "The Dutch invented the stock market — the Amsterdam Stock Exchange opened in 1602."
+        },
+        {
+            label: "🇳🇱 Netherlands Fact",
+            text: "Orange carrots were developed in the Netherlands in the 17th century to honor the royal family."
+        },
+        {
+            label: "🇳🇱 Netherlands Fact",
+            text: "The Netherlands has over 7 million tulip bulbs planted annually, though tulips originally came from Turkey."
+        },
+        {
+            label: "🇳🇱 Netherlands Fact",
+            text: "Dutch people are the tallest in the world, with an average height of 183cm for men."
+        },
+        {
+            label: "🇳🇱 Netherlands Fact",
+            text: "The country has more museums per square kilometer than any other country in the world."
+        },
     ];
 
     let factIndex = 0;
