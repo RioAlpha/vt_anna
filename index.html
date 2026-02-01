@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You've Been Summoned...</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Special+Elite&family=Caveat:wght@400;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --tartan-red: #c8102e;
+            --tartan-green: #006747;
+            --tartan-navy: #1a1a3e;
+            --gold: #d4a843;
+            --marshmallow: #fdf0e2;
+            --puffin-orange: #e8652a;
+            --soft-pink: #f7d1d5;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background: var(--tartan-navy);
+            color: #fff;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        /* ── Falling Marshmallows ── */
+        .marshmallow-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+        .marshmallow {
+            position: absolute;
+            top: -40px;
+            font-size: 1.4rem;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0%   { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* ── Hero / Landing ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background:
+                radial-gradient(ellipse at 50% 120%, rgba(200,16,46,0.25) 0%, transparent 60%),
+                linear-gradient(180deg, #0d0d2b 0%, #1a1a3e 50%, #2a1a3e 100%);
+            position: relative;
+            padding: 2rem;
+        }
+
+        /* Scottish hills silhouette */
+        .hills {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            height: 220px;
+        }
+        .hills svg { width: 100%; height: 100%; }
+
+        .hero h1 {
+            font-family: 'Special Elite', cursive;
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,168,67,0.4);
+            margin-bottom: 0.5rem;
+            animation: fadeInDown 1s ease-out;
+        }
+        .hero .subtitle {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--soft-pink);
+            margin-bottom: 2rem;
+            animation: fadeInDown 1.2s ease-out;
+        }
+        .hero .puffin-hero {
+            font-size: clamp(5rem, 12vw, 9rem);
+            animation: puffinBounce 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(232,101,42,0.4));
+        }
+        @keyframes puffinBounce {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50%      { transform: translateY(-15px) rotate(3deg); }
+        }
+        .scroll-hint {
+            position: absolute;
+            bottom: 240px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.3rem;
+            color: var(--gold);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: translateY(0); }
+            50%      { opacity: 1;   transform: translateY(8px); }
+        }
+
+        /* ── Task Cards ── */
+        .tasks-section {
+            padding: 5rem 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-family: 'Special Elite', cursive;
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .task-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%);
+            border: 1px solid rgba(212,168,67,0.25);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .task-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .task-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(212,168,67,0.15);
+        }
+        .task-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: var(--puffin-orange);
+        }
+        .task-number {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.85rem;
+            color: var(--puffin-orange);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+        }
+        .task-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--marshmallow);
+        }
+        .task-card p {
+            font-family: 'Caveat', cursive;
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.5;
+        }
+        .task-emoji {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            font-size: 2.5rem;
+            opacity: 0.8;
+        }
+
+        /* ── Concert Ticket Finale ── */
+        .finale {
+            padding: 4rem 1.5rem 6rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .ticket {
+            background: var(--marshmallow);
+            color: var(--tartan-navy);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        .ticket.visible {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        /* ticket notches */
+        .ticket::before, .ticket::after {
+            content: '';
+            position: absolute;
+            width: 28px; height: 28px;
+            background: var(--tartan-navy);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .ticket::before { left: -14px; }
+        .ticket::after  { right: -14px; }
+
+        .ticket-header {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--puffin-orange);
+            margin-bottom: 0.5rem;
+        }
+        .ticket h2 {
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            color: var(--tartan-red);
+            margin-bottom: 0.3rem;
+        }
+        .ticket .ticket-date {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            color: var(--tartan-navy);
+            margin-bottom: 1.5rem;
+        }
+        .ticket .divider {
+            border: none;
+            border-top: 2px dashed rgba(26,26,62,0.2);
+            margin: 1rem 0;
+        }
+        .ticket .ticket-details {
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .rsvp-btn {
+            margin-top: 2rem;
+            display: inline-block;
+            background: var(--tartan-red);
+            color: #fff;
+            font-family: 'Special Elite', cursive;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(200,16,46,0.4);
+        }
+        .rsvp-btn:hover {
+            background: var(--puffin-orange);
+            transform: scale(1.05);
+            box-shadow: 0 6px 30px rgba(232,101,42,0.5);
+        }
+
+        /* ── Celebration overlay ── */
+        .celebration {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(13,13,43,0.95);
+            z-index: 1000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        .celebration.active {
+            display: flex;
+            animation: fadeIn 0.5s ease;
+        }
+        .celebration .big-puffin {
+            font-size: 6rem;
+            animation: puffinBounce 1.5s ease-in-out infinite;
+        }
+        .celebration h2 {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: var(--soft-pink);
+            margin: 1rem 0;
+        }
+        .celebration p {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        .hearts-burst {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1001;
+        }
+        .heart-particle {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: burstOut 1.5s ease-out forwards;
+        }
+        @keyframes burstOut {
+            0%   { opacity: 1; transform: translate(0,0) scale(0.5); }
+            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.2); }
+        }
+
+        /* ── Tartan ribbon accent ── */
+        .tartan-ribbon {
+            width: 100%;
+            height: 8px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--tartan-red) 0px, var(--tartan-red) 12px,
+                var(--tartan-navy) 12px, var(--tartan-navy) 16px,
+                var(--tartan-green) 16px, var(--tartan-green) 28px,
+                var(--tartan-navy) 28px, var(--tartan-navy) 32px
+            );
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .task-card { padding: 1.5rem 1.2rem; }
+            .ticket { padding: 2rem 1.5rem; }
+            .task-emoji { font-size: 2rem; top: 1rem; right: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="marshmallow-container" id="marshmallows"></div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+    <div class="puffin-hero">🐧</div>
+    <h1>Your Presence is Requested</h1>
+    <p class="subtitle">The Taskmaster has a very important assignment for you...</p>
+    <div class="scroll-hint">↓ scroll to accept your task ↓</div>
+    <div class="hills">
+        <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
+            <path d="M0,220 L0,140 Q180,40 360,110 Q480,160 600,90 Q720,20 840,80 Q960,140 1080,70 Q1200,10 1320,100 Q1380,130 1440,120 L1440,220 Z" fill="#0f1a0f" opacity="0.7"/>
+            <path d="M0,220 L0,160 Q200,80 400,140 Q550,180 700,120 Q850,60 1000,110 Q1150,160 1300,100 L1440,130 L1440,220 Z" fill="#142014" opacity="0.8"/>
+            <path d="M0,220 L0,180 Q240,130 480,170 Q650,190 800,160 Q950,130 1100,165 Q1250,190 1440,155 L1440,220 Z" fill="#1a2a1a"/>
+        </svg>
+    </div>
+</section>
+
+<div class="tartan-ribbon"></div>
+
+<!-- ═══ TASKS ═══ -->
+<section class="tasks-section">
+    <h2 class="section-title">Your Tasks for the Evening</h2>
+
+    <div class="task-card" data-reveal>
+        <span class="task-emoji">🐧</span>
+        <div class="task-number">Task No. 1</div>
+        <h3>Locate Your Puffin Partner</h3>
+        <p>Puffins mate for life, and this particular puffin has chosen you.
+        Your task: show up looking absolutely magnificent.
+        You have the rest of the day. Your time starts now.</p>
+    </div>
+
+    <div class="task-card" data-reveal>
+        <span class="task-emoji">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span>
+        <div class="task-number">Task No. 2</div>
+        <h3>Navigate the Scottish Highlands (of My Heart)</h3>
+        <p>You must traverse the wild, untamed terrain of a valentine's
+        evening without getting distracted by whisky or shortbread.
+        Bonus points if you wear tartan.</p>
+    </div>
+
+    <div class="task-card" data-reveal>
+        <span class="task-emoji">🎵</span>
+        <div class="task-number">Task No. 3</div>
+        <h3>Survive the Encore</h3>
+        <p>Like any great gig, this evening will have an encore you
+        didn't expect. You must stay for the whole set — including dessert.
+        No early exits. No excuses.</p>
+    </div>
+
+    <div class="task-card" data-reveal>
+        <span class="task-emoji">🍡</span>
+        <div class="task-number">Task No. 4</div>
+        <h3>The Marshmallow Challenge</h3>
+        <p>Toast a marshmallow to absolute perfection — golden on the outside,
+        gooey on the inside. Much like the ideal valentine.
+        Much like you, actually.</p>
+    </div>
+
+    <div class="task-card" data-reveal>
+        <span class="task-emoji">❤️</span>
+        <div class="task-number">Task No. 5 — The Final Task</div>
+        <h3>Be My Valentine</h3>
+        <p>This is the most important task of the series.
+        All other tasks are void if this one is not completed.
+        No time limit. Just say yes.</p>
+    </div>
+</section>
+
+<div class="tartan-ribbon"></div>
+
+<!-- ═══ FINALE TICKET ═══ -->
+<section class="finale">
+    <div class="ticket" data-reveal>
+        <div class="ticket-header">Admit One — VIP</div>
+        <h2>Valentine's Evening</h2>
+        <p class="ticket-date">14th February 2026</p>
+        <hr class="divider">
+        <div class="ticket-details">
+            <p>🐧 Performer: Your Favourite Puffin</p>
+            <p>🎵 Support Act: Good Food & Even Better Company</p>
+            <p>🏴󠁧󠁢󠁳󠁣󠁴󠁿 Venue: TBD (Somewhere Special)</p>
+            <p>🍡 Refreshments: Marshmallows Included</p>
+        </div>
+        <hr class="divider">
+        <button class="rsvp-btn" onclick="acceptValentine()">Accept Task ❤️</button>
+    </div>
+</section>
+
+<!-- ═══ CELEBRATION ═══ -->
+<div class="celebration" id="celebration">
+    <div class="big-puffin">🐧</div>
+    <h2>Task Complete!</h2>
+    <p>The Taskmaster awards you 5 points and one very happy puffin.</p>
+</div>
+
+<footer>
+    <p>Made with ❤️ by one smitten puffin</p>
+</footer>
+
+<script>
+    // ── Falling marshmallows ──
+    const marshmallowEmojis = ['☁️', '🤍', '⬜'];
+    const container = document.getElementById('marshmallows');
+
+    function spawnMarshmallow() {
+        const el = document.createElement('div');
+        el.className = 'marshmallow';
+        el.textContent = marshmallowEmojis[Math.floor(Math.random() * marshmallowEmojis.length)];
+        el.style.left = Math.random() * 100 + '%';
+        el.style.animationDuration = (4 + Math.random() * 6) + 's';
+        el.style.fontSize = (0.8 + Math.random() * 0.8) + 'rem';
+        container.appendChild(el);
+        setTimeout(() => el.remove(), 12000);
+    }
+    setInterval(spawnMarshmallow, 400);
+
+    // ── Scroll reveal ──
+    const revealEls = document.querySelectorAll('[data-reveal]');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                observer.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── Accept valentine ──
+    function acceptValentine() {
+        const cel = document.getElementById('celebration');
+        cel.classList.add('active');
+        burstHearts();
+        // Continuous hearts
+        const interval = setInterval(burstHearts, 800);
+        setTimeout(() => clearInterval(interval), 5000);
+    }
+
+    function burstHearts() {
+        const symbols = ['❤️', '🧡', '💛', '🐧', '🎵', '🏴󠁧󠁢󠁳󠁣󠁴󠁿', '☁️'];
+        const burstContainer = document.createElement('div');
+        burstContainer.className = 'hearts-burst';
+        burstContainer.style.left = (30 + Math.random() * 40) + '%';
+        burstContainer.style.top = (30 + Math.random() * 40) + '%';
+        document.body.appendChild(burstContainer);
+
+        for (let i = 0; i < 12; i++) {
+            const heart = document.createElement('span');
+            heart.className = 'heart-particle';
+            heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            const angle = (Math.PI * 2 / 12) * i;
+            const dist = 80 + Math.random() * 120;
+            heart.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+            heart.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+            burstContainer.appendChild(heart);
+        }
+        setTimeout(() => burstContainer.remove(), 2000);
+    }
+</script>
+
+</body>
+</html>
