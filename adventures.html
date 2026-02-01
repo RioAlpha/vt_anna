@@ -260,23 +260,22 @@
         .map-pin.active svg path { fill: var(--gold); }
         .map-pin svg { width: 100%; height: 100%; }
         .map-pin-label {
-            position: absolute;
-            bottom: 100%; left: 50%;
-            transform: translateX(-50%);
-            background: var(--tartan-red);
-            color: #fff;
-            font-family: 'Caveat', cursive;
-            font-size: 0.85rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 10px;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease;
-            margin-bottom: 4px;
+            display: none;
         }
-        .map-pin:hover .map-pin-label,
-        .map-pin.active .map-pin-label { opacity: 1; }
+        /* Floating pin name shown above the map */
+        .pin-name-tooltip {
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            font-size: 1.15rem;
+            color: var(--gold);
+            min-height: 2rem;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .pin-name-tooltip.visible {
+            opacity: 1;
+        }
 
         /* Middle Panel — Info */
         .panel-info {
@@ -404,6 +403,146 @@
             filter: blur(1px);
         }
 
+        /* ── Music Banner ── */
+        .music-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1002;
+            background: linear-gradient(90deg, var(--tartan-red), var(--puffin-orange), var(--tartan-red));
+            background-size: 200% 100%;
+            animation: bannerShimmer 3s ease-in-out infinite;
+            border-top: 2px solid var(--gold);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            box-shadow: 0 -4px 20px rgba(200, 16, 46, 0.5);
+        }
+        @keyframes bannerShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .music-banner:hover {
+            box-shadow: 0 6px 30px rgba(200, 16, 46, 0.7);
+            transform: scale(1.01);
+        }
+        .music-banner.hidden {
+            transform: translateY(100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .music-banner-text {
+            font-family: 'Caveat', cursive;
+            font-size: 1.4rem;
+            color: #fff;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        }
+        .music-banner-icon {
+            font-size: 1.5rem;
+            animation: bannerBounce 1s ease-in-out infinite;
+        }
+        @keyframes bannerBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+        /* ── Floating Spotify Player ── */
+        .spotify-float {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 997;
+            width: 352px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        .spotify-float.minimized .spotify-embed {
+            max-height: 0;
+            overflow: hidden;
+        }
+        .spotify-float .spotify-embed {
+            max-height: 352px;
+            transition: max-height 0.3s ease;
+        }
+        .spotify-toggle {
+            height: 48px;
+            background: linear-gradient(135deg, rgba(26, 26, 62, 0.95) 0%, rgba(42, 26, 62, 0.95) 100%);
+            border: 1px solid rgba(212, 168, 67, 0.3);
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+            cursor: pointer;
+        }
+        .spotify-toggle-label {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .spotify-toggle-icon {
+            font-size: 1.2rem;
+            color: var(--gold);
+            transition: transform 0.3s ease;
+        }
+        .spotify-float.minimized .spotify-toggle-icon {
+            transform: rotate(180deg);
+        }
+        .spotify-float.minimized .spotify-toggle {
+            border-radius: 16px;
+        }
+        @media (max-width: 700px) {
+            .spotify-float {
+                width: calc(100% - 20px);
+                right: 10px;
+                top: 10px;
+            }
+        }
+
+        /* ── Easter Egg Counter ── */
+        .egg-counter {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            z-index: 996;
+            background: linear-gradient(135deg, rgba(26,26,62,0.95), rgba(42,26,62,0.95));
+            border: 1px solid rgba(212,168,67,0.3);
+            border-radius: 30px;
+            padding: 0.4rem 1rem;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 1px;
+            cursor: default;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .egg-counter .egg-found {
+            color: var(--puffin-orange);
+            font-weight: bold;
+        }
+
+        /* ── Hidden Puffin Easter Egg ── */
+        .hidden-puffin-egg {
+            position: absolute;
+            font-size: 8px;
+            cursor: pointer;
+            opacity: 0.15;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 4;
+        }
+        .hidden-puffin-egg:hover {
+            opacity: 1;
+            transform: scale(2);
+        }
+
         /* ── Footer ── */
         footer {
             text-align: center;
@@ -437,6 +576,22 @@
 </head>
 <body>
 
+<!-- ── Music Banner ── -->
+<div class="music-banner" id="musicBanner" onclick="startMusic()">
+    <span class="music-banner-icon">🎵</span>
+    <span class="music-banner-text">Tap here to start the music for a cosy vibe</span>
+    <span class="music-banner-icon">🐧</span>
+</div>
+
+<!-- ═══ FLOATING SPOTIFY PLAYER ═══ -->
+<div class="spotify-float" id="spotifyFloat">
+    <div class="spotify-toggle" onclick="toggleSpotify()">
+        <span class="spotify-toggle-label">🎵 Music</span>
+        <span class="spotify-toggle-icon" id="spotifyIcon">&#9660;</span>
+    </div>
+    <div class="spotify-embed" id="spotifyEmbed"></div>
+</div>
+
 <nav class="back-nav">
     <a href="index.html">← Back to the invite</a>
 </nav>
@@ -458,6 +613,7 @@
     </div>
     <p class="trip-subtitle">Exploring the harbour city together</p>
 
+    <div class="pin-name-tooltip" id="hamburg-tooltip"></div>
     <div class="trip-layout" data-reveal data-trip="hamburg">
         <div class="side-photo" id="hamburg-photo-left">
             <div class="photo-prompt">Select a pin</div>
@@ -495,6 +651,7 @@
     </div>
     <p class="trip-subtitle">Design, saunas, and Nordic vibes</p>
 
+    <div class="pin-name-tooltip" id="helsinki-tooltip"></div>
     <div class="trip-layout" data-reveal data-trip="helsinki">
         <div class="side-photo" id="helsinki-photo-left">
             <div class="photo-prompt">Select a pin</div>
@@ -538,6 +695,7 @@
     </div>
     <p class="trip-subtitle">Lochs, hills, and where the puffins live</p>
 
+    <div class="pin-name-tooltip" id="scotland-tooltip"></div>
     <div class="trip-layout" data-reveal data-trip="scotland">
         <div class="side-photo" id="scotland-photo-left">
             <div class="photo-prompt">Select a pin</div>
@@ -618,9 +776,11 @@
 
 <div class="tartan-ribbon"></div>
 
+<!-- ═══ EASTER EGG COUNTER ═══ -->
+<div class="egg-counter" id="eggCounter" title="Hidden easter eggs found!">🥚 <span class="egg-found" id="eggFound">0</span> / 5</div>
+
 <footer>
     <p>Made with love by one Scottish puffin — <a href="https://commons.wikimedia.org/wiki/File:Atlantic_Puffins,_Scotland.jpg" target="_blank">see the real ones</a></p>
-    <p style="margin-top: 0.8rem;"><a href="contribute.html" style="color: var(--puffin-orange); font-size: 1rem;">Contribute</a></p>
 </footer>
 
 <script>
@@ -1075,6 +1235,7 @@ Object.keys(tripData).forEach(tripKey => {
     const infoEl = document.getElementById(tripKey + '-info');
     const leftPanel = document.getElementById(tripKey + '-photo-left');
     const rightPanel = document.getElementById(tripKey + '-photo-right');
+    const tooltip = document.getElementById(tripKey + '-tooltip');
     const locations = tripData[tripKey];
 
     // Build all photo elements per location
@@ -1089,6 +1250,23 @@ Object.keys(tripData).forEach(tripKey => {
         pin.innerHTML = pinSVG + `<span class="map-pin-label">${loc.name}</span>`;
         pin.dataset.index = i;
         mapEl.appendChild(pin);
+
+        // Show name in tooltip above map on hover
+        pin.addEventListener('mouseenter', () => {
+            tooltip.textContent = loc.name;
+            tooltip.classList.add('visible');
+        });
+        pin.addEventListener('mouseleave', () => {
+            if (!pin.classList.contains('active')) {
+                // Revert to active pin name or hide
+                const activePin = mapEl.querySelector('.map-pin.active');
+                if (activePin) {
+                    tooltip.textContent = locations[activePin.dataset.index].name;
+                } else {
+                    tooltip.classList.remove('visible');
+                }
+            }
+        });
 
         // Create info content
         const infoDiv = document.createElement('div');
@@ -1118,6 +1296,10 @@ Object.keys(tripData).forEach(tripKey => {
             // Deactivate all pins in this map
             mapEl.querySelectorAll('.map-pin').forEach(p => p.classList.remove('active'));
             pin.classList.add('active');
+
+            // Update tooltip
+            tooltip.textContent = loc.name;
+            tooltip.classList.add('visible');
 
             // Hide prompt, show selected info
             const prompt = infoEl.querySelector('.info-prompt');
@@ -1172,6 +1354,98 @@ function updateMalagaCountdown() {
 }
 updateMalagaCountdown();
 setInterval(updateMalagaCountdown, 60000);
+
+// ═══ FLOATING SPOTIFY PLAYER ═══
+const spotifyFloat = document.getElementById('spotifyFloat');
+const spotifyEmbed = document.getElementById('spotifyEmbed');
+const musicBanner = document.getElementById('musicBanner');
+
+function toggleSpotify() {
+    spotifyFloat.classList.toggle('minimized');
+}
+
+function startMusic() {
+    spotifyEmbed.innerHTML = '<iframe style="border-radius:0 0 12px 12px" src="https://open.spotify.com/embed/playlist/17hRRnzMgkQlt8vnLqNCfB?utm_source=generator&theme=0&autoplay=1" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>';
+    musicBanner.classList.add('hidden');
+    spotifyFloat.classList.remove('minimized');
+    try { localStorage.setItem('puffin_music', '1'); } catch(e) {}
+}
+
+spotifyFloat.classList.add('minimized');
+
+// Auto-start if music was previously started
+if (localStorage.getItem('puffin_music') === '1') {
+    startMusic();
+}
+
+// ═══ EASTER EGG COUNTER (shared with index.html) ═══
+const eggKeys = ['egg_puffin_click', 'egg_cave', 'egg_reject', 'egg_taskmaster', 'egg_adventure_secret'];
+function getEggCount() {
+    let count = 0;
+    eggKeys.forEach(k => { if (localStorage.getItem(k)) count++; });
+    return count;
+}
+function updateEggCounter() {
+    const el = document.getElementById('eggFound');
+    if (el) el.textContent = getEggCount();
+}
+function discoverEgg(key) {
+    if (!localStorage.getItem(key)) {
+        localStorage.setItem(key, '1');
+        updateEggCounter();
+        const counter = document.getElementById('eggCounter');
+        counter.style.transform = 'scale(1.3)';
+        counter.style.transition = 'transform 0.3s ease';
+        setTimeout(() => { counter.style.transform = ''; }, 400);
+    }
+}
+updateEggCounter();
+
+// ═══ ADVENTURE EASTER EGG 1: Triple-click page title → Taskmaster Store ═══
+(function() {
+    const title = document.querySelector('.page-hero h1');
+    let clickCount = 0;
+    let clickTimer = null;
+    title.style.cursor = 'default';
+    title.addEventListener('click', function() {
+        clickCount++;
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
+        if (clickCount >= 3) {
+            clickCount = 0;
+            discoverEgg('egg_taskmaster');
+            title.style.transition = 'color 0.3s';
+            title.style.color = 'var(--puffin-orange)';
+            setTimeout(() => { title.style.color = ''; }, 500);
+            window.open('https://taskmasterstore.com/', '_blank');
+        }
+    });
+})();
+
+// ═══ ADVENTURE EASTER EGG 2: Hidden puffin in Helsinki map ═══
+(function() {
+    const helsinkiMap = document.getElementById('helsinki-map');
+    if (!helsinkiMap) return;
+    const puffin = document.createElement('div');
+    puffin.className = 'hidden-puffin-egg';
+    puffin.textContent = '🐧';
+    puffin.style.top = '38%';
+    puffin.style.left = '72%';
+    puffin.title = 'You found me!';
+    helsinkiMap.appendChild(puffin);
+
+    puffin.addEventListener('click', function(e) {
+        e.stopPropagation();
+        discoverEgg('egg_adventure_secret');
+        // Show a fun popup
+        const msg = document.createElement('div');
+        msg.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--tartan-red);color:#fff;font-family:Caveat,cursive;font-size:1.8rem;padding:1.5rem 2.5rem;border-radius:20px;z-index:9999;box-shadow:0 8px 40px rgba(0,0,0,0.5);text-align:center;animation:fadeSlideIn 0.4s ease;';
+        msg.innerHTML = 'A wild puffin appeared!<br>🐧 "I was hiding in Helsinki all along!" 🐧';
+        document.body.appendChild(msg);
+        setTimeout(() => { msg.style.opacity = '0'; msg.style.transition = 'opacity 0.5s'; }, 3000);
+        setTimeout(() => msg.remove(), 3500);
+    });
+})();
 </script>
 
 </body>
