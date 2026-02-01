@@ -80,71 +80,47 @@
             font-size: clamp(1.4rem, 4vw, 2.2rem);
             color: var(--gold);
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        /* ── Trip Cards ── */
-        .trips-section {
-            padding: 4rem 1.5rem;
-            max-width: 1000px;
+        /* ── Trip Section ── */
+        .trip-section {
+            padding: 3rem 1.5rem 2rem;
+            max-width: 1200px;
             margin: 0 auto;
         }
-        .trip-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%);
-            border: 1px solid rgba(212,168,67,0.25);
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 3rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .trip-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .trip-header {
+
+        .trip-header-bar {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 0.3rem;
         }
-        .trip-flag {
-            font-size: 3rem;
-            flex-shrink: 0;
+        .trip-header-bar .trip-flag { font-size: 2rem; }
+        .trip-header-bar .trip-title {
+            font-family: 'Special Elite', cursive;
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        .trip-info { flex: 1; }
-        .trip-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--marshmallow);
-            margin-bottom: 0.2rem;
-        }
-        .trip-date {
+        .trip-subtitle {
+            text-align: center;
             font-family: 'Caveat', cursive;
-            font-size: 1.1rem;
-            color: var(--puffin-orange);
+            font-size: 1.15rem;
+            color: var(--soft-pink);
+            margin-bottom: 2rem;
         }
-        .trip-desc {
-            font-family: 'Caveat', cursive;
-            font-size: 1rem;
-            color: rgba(255,255,255,0.5);
-        }
-        .trip-status {
+        .trip-status-badge {
             font-family: 'Special Elite', cursive;
             font-size: 0.7rem;
             letter-spacing: 2px;
             text-transform: uppercase;
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
-            position: absolute;
-            top: 1.2rem;
-            right: 1.2rem;
         }
         .status-visited {
             background: rgba(0,103,71,0.3);
@@ -167,65 +143,205 @@
             color: var(--gold);
         }
 
-        /* Trip highlights */
-        .trip-highlights {
-            padding: 0 2rem 1.5rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+        /* ── Three-Panel Layout ── */
+        .explorer {
+            display: grid;
+            grid-template-columns: 300px 1fr 280px;
+            gap: 1.5rem;
+            min-height: 420px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(212,168,67,0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
-        .highlight-tag {
-            font-family: 'Caveat', cursive;
-            font-size: 0.95rem;
-            padding: 0.3rem 0.8rem;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            color: rgba(255,255,255,0.6);
+        .explorer.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* Trip photos */
-        .trip-photos {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 0;
-        }
-        .trip-photo {
-            aspect-ratio: 4/3;
-            background: #222;
+        /* Left Panel — Map */
+        .panel-map {
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+        }
+        .panel-map svg.country-outline {
+            width: 100%;
+            max-height: 400px;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+        }
+        .map-pin {
+            position: absolute;
+            width: 22px; height: 22px;
+            transform: translate(-50%, -100%);
+            cursor: pointer;
+            transition: transform 0.2s ease, filter 0.2s ease;
+            z-index: 3;
+        }
+        .map-pin:hover, .map-pin.active {
+            transform: translate(-50%, -100%) scale(1.35);
+            filter: drop-shadow(0 0 6px rgba(200,16,46,0.7));
+        }
+        .map-pin.active svg path { fill: var(--gold); }
+        .map-pin svg { width: 100%; height: 100%; }
+        .map-pin-label {
+            position: absolute;
+            bottom: 100%; left: 50%;
+            transform: translateX(-50%);
+            background: var(--tartan-red);
+            color: #fff;
+            font-family: 'Caveat', cursive;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            margin-bottom: 4px;
+        }
+        .map-pin:hover .map-pin-label,
+        .map-pin.active .map-pin-label { opacity: 1; }
+
+        /* Middle Panel — Info */
+        .panel-info {
+            padding: 1rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        .panel-info .info-prompt {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.35);
+            padding: 2rem;
+        }
+        .panel-info .info-content {
+            display: none;
+            animation: fadeSlideIn 0.4s ease;
+        }
+        .panel-info .info-content.active { display: block; }
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .info-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--marshmallow);
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(212,168,67,0.3);
+            padding-bottom: 0.5rem;
+        }
+        .info-desc {
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            color: var(--soft-pink);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .info-facts {
+            list-style: none;
+            padding: 0;
+        }
+        .info-facts li {
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            gap: 0.5rem;
+            align-items: baseline;
+        }
+        .info-facts li::before {
+            content: '>';
+            color: var(--gold);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Right Panel — Photos */
+        .panel-photos {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .panel-photos .photo-prompt {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.25);
+        }
+        .panel-photos .photo-slot {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            animation: fadeSlideIn 0.4s ease;
+        }
+        .panel-photos .photo-slot.active {
+            display: flex;
+            flex: 1;
+        }
+        .photo-frame {
+            flex: 1;
+            min-height: 160px;
+            background: #222;
+            border-radius: 10px;
+            border: 2px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
             color: #555;
             overflow: hidden;
             position: relative;
         }
-        .trip-photo img {
+        .photo-frame img {
             width: 100%; height: 100%;
             object-fit: cover;
         }
-        .trip-photo-label {
+        .photo-frame-label {
             position: absolute;
             bottom: 0; left: 0; right: 0;
             background: linear-gradient(transparent, rgba(0,0,0,0.7));
-            padding: 1.5rem 0.8rem 0.5rem;
             font-family: 'Caveat', cursive;
             font-size: 0.9rem;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.7);
+            padding: 1.5rem 0.8rem 0.5rem;
+            text-align: center;
         }
 
         /* ── Upcoming Trip Special ── */
-        .trip-card.upcoming {
-            border-color: var(--gold);
+        .upcoming-banner {
+            background: linear-gradient(135deg, rgba(212,168,67,0.15), rgba(232,101,42,0.1));
+            border: 1px solid rgba(212,168,67,0.3);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
             position: relative;
-            overflow: visible;
+            overflow: hidden;
         }
-        .trip-card.upcoming::before {
+        .upcoming-banner::before {
             content: '';
             position: absolute;
             inset: -2px;
-            border-radius: 18px;
+            border-radius: 14px;
             background: linear-gradient(135deg, var(--gold), var(--puffin-orange), var(--tartan-red), var(--gold));
             background-size: 300% 300%;
             animation: borderGlow 4s ease-in-out infinite;
@@ -235,17 +351,11 @@
             0%, 100% { background-position: 0% 50%; }
             50%      { background-position: 100% 50%; }
         }
-        .upcoming-countdown {
-            padding: 0 2rem 1.5rem;
-            text-align: center;
-        }
-        .upcoming-countdown-label {
-            font-family: 'Special Elite', cursive;
-            font-size: 0.75rem;
-            color: var(--puffin-orange);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
+        .upcoming-banner p {
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            color: var(--soft-pink);
+            margin-bottom: 0.8rem;
         }
         .upcoming-countdown-timer {
             display: flex;
@@ -269,170 +379,10 @@
             color: var(--gold);
             opacity: 0.4;
         }
-        .upcoming-teaser {
-            padding: 0 2rem 2rem;
-            text-align: center;
-        }
-        .upcoming-teaser p {
-            font-family: 'Caveat', cursive;
-            font-size: 1.2rem;
-            color: var(--soft-pink);
-            line-height: 1.5;
-        }
-        .upcoming-items {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-        .upcoming-item {
-            background: linear-gradient(135deg, rgba(212,168,67,0.15), rgba(232,101,42,0.1));
-            border: 1px solid rgba(212,168,67,0.3);
-            border-radius: 12px;
-            padding: 0.8rem 1.2rem;
-            text-align: center;
-        }
-        .upcoming-item-icon { font-size: 1.5rem; margin-bottom: 0.3rem; }
-        .upcoming-item-text {
-            font-family: 'Caveat', cursive;
-            font-size: 0.95rem;
-            color: var(--marshmallow);
-        }
 
-        /* ── Polaroid Gallery ── */
-        .gallery-section {
-            padding: 4rem 1.5rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .polaroid-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 2rem;
-            justify-items: center;
-        }
-        .polaroid {
-            background: #fff;
-            padding: 12px 12px 40px 12px;
-            border-radius: 4px;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.35);
-            transform: rotate(var(--rot, -2deg));
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            opacity: 0;
-            max-width: 260px;
-        }
-        .polaroid.visible {
-            opacity: 1;
-            transition: opacity 0.6s ease, transform 0.3s ease;
-        }
-        .polaroid:hover {
-            transform: rotate(0deg) scale(1.05);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-            z-index: 5;
-        }
-        .polaroid-img {
-            width: 100%;
-            aspect-ratio: 4/3;
-            background: #ddd;
-            border-radius: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: #aaa;
-            overflow: hidden;
-        }
-        .polaroid-img img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-        }
-        .polaroid-caption {
-            font-family: 'Caveat', cursive;
-            font-size: 1rem;
-            color: #333;
-            text-align: center;
-            margin-top: 8px;
-        }
-
-        /* ── Scotland Map ── */
-        .map-section {
-            padding: 4rem 1.5rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .map-container {
-            display: flex;
-            gap: 2rem;
-            align-items: flex-start;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        .map-container.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .scotland-map {
-            flex-shrink: 0;
-            width: 320px;
-            position: relative;
-        }
-        .scotland-map svg {
-            width: 100%;
-            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-        }
-        .map-pin {
-            position: absolute;
-            width: 20px; height: 20px;
-            transform: translate(-50%, -100%);
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            z-index: 3;
-        }
-        .map-pin:hover { transform: translate(-50%, -100%) scale(1.3); }
-        .map-pin svg { width: 100%; height: 100%; }
-        .map-pin-tooltip {
-            position: absolute;
-            bottom: 100%; left: 50%;
-            transform: translateX(-50%);
-            background: var(--tartan-red);
-            color: #fff;
-            font-family: 'Caveat', cursive;
-            font-size: 0.95rem;
-            padding: 0.3rem 0.8rem;
-            border-radius: 12px;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease;
-            margin-bottom: 4px;
-        }
-        .map-pin:hover .map-pin-tooltip { opacity: 1; }
-        .map-locations { flex: 1; }
-        .map-location-item {
-            background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%);
-            border: 1px solid rgba(212,168,67,0.2);
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: border-color 0.2s ease;
-        }
-        .map-location-item:hover { border-color: var(--gold); }
-        .loc-icon { font-size: 1.5rem; }
-        .loc-info { flex: 1; }
-        .loc-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            color: var(--marshmallow);
-        }
-        .loc-desc {
-            font-family: 'Caveat', cursive;
-            font-size: 0.95rem;
-            color: rgba(255,255,255,0.5);
+        .upcoming-explorer .photo-frame {
+            opacity: 0.45;
+            filter: blur(1px);
         }
 
         /* ── Footer ── */
@@ -449,14 +399,23 @@
         }
 
         /* ── Responsive ── */
-        @media (max-width: 600px) {
-            .trip-header { flex-direction: column; text-align: center; padding: 1.5rem; }
-            .trip-status { position: static; margin-bottom: 0.5rem; display: inline-block; }
-            .trip-photos { grid-template-columns: repeat(2, 1fr); }
-            .map-container { flex-direction: column; align-items: center; }
-            .scotland-map { width: 100%; max-width: 320px; }
-            .polaroid-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
-            .upcoming-items { flex-direction: column; align-items: center; }
+        @media (max-width: 900px) {
+            .explorer {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+            }
+            .panel-map {
+                max-height: 350px;
+            }
+            .panel-photos .photo-slot.active {
+                flex-direction: row;
+            }
+            .photo-frame { min-height: 140px; }
+        }
+        @media (max-width: 500px) {
+            .panel-photos .photo-slot.active {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -468,156 +427,97 @@
 
 <!-- ═══ HERO ═══ -->
 <section class="page-hero">
-    <h1>🐧 Our Adventures</h1>
+    <h1>Our Adventures</h1>
     <p>Where two puffins have wandered together</p>
 </section>
 
 <div class="tartan-ribbon"></div>
 
-<!-- ═══ TRIPS ═══ -->
-<section class="trips-section">
-    <h2 class="section-title">Travel Log</h2>
-
-    <!-- Hamburg -->
-    <div class="trip-card" data-reveal>
-        <div class="trip-header">
-            <span class="trip-flag">🇩🇪</span>
-            <div class="trip-info">
-                <div class="trip-name">Hamburg</div>
-                <div class="trip-date">Germany</div>
-                <div class="trip-desc">Exploring the harbour city together</div>
-            </div>
-            <span class="trip-status status-visited">Visited</span>
-        </div>
-        <div class="trip-highlights">
-            <span class="highlight-tag">Speicherstadt</span>
-            <span class="highlight-tag">Miniatur Wunderland</span>
-            <span class="highlight-tag">Elbphilharmonie</span>
-            <span class="highlight-tag">Harbour Cruise</span>
-        </div>
-        <div class="trip-photos">
-            <div class="trip-photo">📷<div class="trip-photo-label">Add photo</div></div>
-            <div class="trip-photo">📷<div class="trip-photo-label">Add photo</div></div>
-            <div class="trip-photo">📷<div class="trip-photo-label">Add photo</div></div>
-            <div class="trip-photo">📷<div class="trip-photo-label">Add photo</div></div>
-        </div>
+<!-- ═══════════════ HAMBURG ═══════════════ -->
+<section class="trip-section">
+    <div class="trip-header-bar">
+        <span class="trip-flag">🇩🇪</span>
+        <span class="trip-title">Hamburg</span>
+        <span class="trip-status-badge status-visited">Visited</span>
     </div>
+    <p class="trip-subtitle">Exploring the harbour city together</p>
 
-    <!-- Finland -->
-    <div class="trip-card" data-reveal>
-        <div class="trip-header">
-            <span class="trip-flag">🇫🇮</span>
-            <div class="trip-info">
-                <div class="trip-name">Finland</div>
-                <div class="trip-date">Land of a Thousand Lakes</div>
-                <div class="trip-desc">Northern lights and cosy vibes</div>
-            </div>
-            <span class="trip-status status-visited">Visited</span>
+    <div class="explorer" data-reveal data-trip="hamburg">
+        <!-- Left: Map -->
+        <div class="panel-map" id="hamburg-map">
+            <svg class="country-outline" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Simplified Hamburg/Northern Germany outline -->
+                <path d="M50,120 L90,100 L130,105 L160,90 L200,95 L230,80 L270,85 L310,90 L350,100
+                         L355,140 L360,180 L350,220 L340,260 L320,290 L290,310 L260,320 L220,325
+                         L180,320 L140,310 L110,290 L80,260 L60,220 L50,180 Z"
+                      fill="#2a3a2a" stroke="var(--gold)" stroke-width="1.5" opacity="0.6"/>
+                <!-- Elbe river -->
+                <path d="M50,180 Q120,195 200,185 Q280,175 360,190" fill="none" stroke="#0d2040" stroke-width="6" opacity="0.5"/>
+                <!-- Alster lakes -->
+                <ellipse cx="210" cy="160" rx="18" ry="12" fill="#0d2040" opacity="0.5"/>
+                <ellipse cx="205" cy="140" rx="10" ry="8" fill="#0d2040" opacity="0.4"/>
+            </svg>
         </div>
-        <div class="trip-highlights">
-            <span class="highlight-tag">Northern Lights</span>
-            <span class="highlight-tag">Sauna</span>
-            <span class="highlight-tag">Frozen Lakes</span>
-            <span class="highlight-tag">Reindeer</span>
+        <!-- Middle: Info -->
+        <div class="panel-info" id="hamburg-info">
+            <div class="info-prompt">Click a pin on the map to explore Hamburg</div>
         </div>
-        <div class="trip-photos">
-            <div class="trip-photo">📷<div class="trip-photo-label">Add photo</div></div>
-            <div class="trip-photo">📷<div class="trip-photo-label">Add photo</div></div>
-            <div class="trip-photo">📷<div class="trip-photo-label">Add photo</div></div>
-            <div class="trip-photo">📷<div class="trip-photo-label">Add photo</div></div>
-        </div>
-    </div>
-
-    <!-- Scotland -->
-    <div class="trip-card" data-reveal>
-        <div class="trip-header">
-            <span class="trip-flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span>
-            <div class="trip-info">
-                <div class="trip-name">Scotland</div>
-                <div class="trip-date">Our home away from home</div>
-                <div class="trip-desc">Lochs, hills, and where the puffins live</div>
-            </div>
-            <span class="trip-status status-current">Currently Here</span>
-        </div>
-        <div class="trip-highlights">
-            <span class="highlight-tag">Loch Lomond</span>
-            <span class="highlight-tag">Edinburgh</span>
-            <span class="highlight-tag">Steall Waterfall</span>
-            <span class="highlight-tag">The Cobbler</span>
-            <span class="highlight-tag">Loch Etive</span>
-            <span class="highlight-tag">Hidden Glen</span>
-        </div>
-        <div class="trip-photos">
-            <div class="trip-photo">📷<div class="trip-photo-label">Add photo</div></div>
-            <div class="trip-photo">📷<div class="trip-photo-label">Add photo</div></div>
-            <div class="trip-photo">📷<div class="trip-photo-label">Add photo</div></div>
-            <div class="trip-photo">📷<div class="trip-photo-label">Add photo</div></div>
-        </div>
-    </div>
-
-    <!-- Malaga — Upcoming -->
-    <div class="trip-card upcoming" data-reveal>
-        <div class="trip-header">
-            <span class="trip-flag">🇪🇸</span>
-            <div class="trip-info">
-                <div class="trip-name">Malaga</div>
-                <div class="trip-date">Spain — Coming Soon!</div>
-                <div class="trip-desc">Sun, tapas, and new adventures await</div>
-            </div>
-            <span class="trip-status status-upcoming">Upcoming</span>
-        </div>
-        <div class="upcoming-countdown">
-            <div class="upcoming-countdown-label">Countdown to Malaga</div>
-            <div class="upcoming-countdown-timer" id="malagaCountdown">
-                <div class="uc-unit"><div class="uc-num" id="ml-days">--</div><div class="uc-label">Days</div></div>
-                <div class="uc-sep">:</div>
-                <div class="uc-unit"><div class="uc-num" id="ml-hours">--</div><div class="uc-label">Hours</div></div>
-                <div class="uc-sep">:</div>
-                <div class="uc-unit"><div class="uc-num" id="ml-mins">--</div><div class="uc-label">Mins</div></div>
-            </div>
-        </div>
-        <div class="upcoming-teaser">
-            <p>Two puffins venture south for the first time... can they handle the heat? 🌞</p>
-            <div class="upcoming-items">
-                <div class="upcoming-item">
-                    <div class="upcoming-item-icon">🏖️</div>
-                    <div class="upcoming-item-text">Beach Days</div>
-                </div>
-                <div class="upcoming-item">
-                    <div class="upcoming-item-icon">🍷</div>
-                    <div class="upcoming-item-text">Tapas & Wine</div>
-                </div>
-                <div class="upcoming-item">
-                    <div class="upcoming-item-icon">🏰</div>
-                    <div class="upcoming-item-text">Alcazaba</div>
-                </div>
-                <div class="upcoming-item">
-                    <div class="upcoming-item-icon">🎨</div>
-                    <div class="upcoming-item-text">Picasso Museum</div>
-                </div>
-                <div class="upcoming-item">
-                    <div class="upcoming-item-icon">🌅</div>
-                    <div class="upcoming-item-text">Sunset Walks</div>
-                </div>
-            </div>
-        </div>
-        <div class="trip-photos" style="opacity: 0.4; filter: blur(1px);">
-            <div class="trip-photo">🌅<div class="trip-photo-label">Photos coming soon...</div></div>
-            <div class="trip-photo">🏖️<div class="trip-photo-label">Photos coming soon...</div></div>
-            <div class="trip-photo">🍷<div class="trip-photo-label">Photos coming soon...</div></div>
-            <div class="trip-photo">🇪🇸<div class="trip-photo-label">Photos coming soon...</div></div>
+        <!-- Right: Photos -->
+        <div class="panel-photos" id="hamburg-photos">
+            <div class="photo-prompt">Select a location to see photos</div>
         </div>
     </div>
 </section>
 
 <div class="tartan-ribbon"></div>
 
-<!-- ═══ SCOTLAND MAP ═══ -->
-<section class="map-section">
-    <h2 class="section-title">Our Scottish Adventures</h2>
-    <div class="map-container" data-reveal>
-        <div class="scotland-map">
-            <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+<!-- ═══════════════ FINLAND ═══════════════ -->
+<section class="trip-section">
+    <div class="trip-header-bar">
+        <span class="trip-flag">🇫🇮</span>
+        <span class="trip-title">Finland</span>
+        <span class="trip-status-badge status-visited">Visited</span>
+    </div>
+    <p class="trip-subtitle">Northern lights and cosy vibes</p>
+
+    <div class="explorer" data-reveal data-trip="finland">
+        <div class="panel-map" id="finland-map">
+            <svg class="country-outline" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
+                <!-- Simplified Finland outline -->
+                <path d="M120,30 L155,25 L180,35 L210,30 L230,50 L245,80 L255,120 L260,160
+                         L265,200 L260,240 L255,280 L245,320 L230,350 L210,370 L195,400
+                         L175,420 L155,440 L130,450 L110,440 L90,420 L75,390 L65,360
+                         L55,320 L50,280 L48,240 L50,200 L55,160 L60,120 L70,80 L85,50 Z"
+                      fill="#1a3a3a" stroke="var(--gold)" stroke-width="1.5" opacity="0.6"/>
+                <!-- Lakes -->
+                <ellipse cx="150" cy="340" rx="20" ry="15" fill="#0d2040" opacity="0.5"/>
+                <ellipse cx="180" cy="290" rx="12" ry="18" fill="#0d2040" opacity="0.4"/>
+                <ellipse cx="120" cy="380" rx="15" ry="10" fill="#0d2040" opacity="0.4"/>
+            </svg>
+        </div>
+        <div class="panel-info" id="finland-info">
+            <div class="info-prompt">Click a pin on the map to explore Finland</div>
+        </div>
+        <div class="panel-photos" id="finland-photos">
+            <div class="photo-prompt">Select a location to see photos</div>
+        </div>
+    </div>
+</section>
+
+<div class="tartan-ribbon"></div>
+
+<!-- ═══════════════ SCOTLAND ═══════════════ -->
+<section class="trip-section">
+    <div class="trip-header-bar">
+        <span class="trip-flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span>
+        <span class="trip-title">Scotland</span>
+        <span class="trip-status-badge status-current">Currently Here</span>
+    </div>
+    <p class="trip-subtitle">Lochs, hills, and where the puffins live</p>
+
+    <div class="explorer" data-reveal data-trip="scotland">
+        <div class="panel-map" id="scotland-map">
+            <svg class="country-outline" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
                 <path d="M200,20 L240,40 L280,30 L300,50 L320,45 L340,70 L330,100 L350,120 L340,150
                          L360,170 L350,200 L330,210 L340,240 L320,260 L300,250 L280,270 L290,300
                          L270,320 L280,350 L260,370 L240,360 L220,380 L200,390 L180,400 L160,420
@@ -628,77 +528,565 @@
                 <ellipse cx="160" cy="320" rx="15" ry="40" fill="#0d2040" opacity="0.5" transform="rotate(-10,160,320)"/>
                 <ellipse cx="200" cy="200" rx="8" ry="20" fill="#0d2040" opacity="0.4"/>
             </svg>
-            <div class="map-pin" style="top: 72%; left: 42%;"><svg viewBox="0 0 24 24"><path d="M12 0C7 0 3 4 3 9c0 7 9 15 9 15s9-8 9-15c0-5-4-9-9-9z" fill="var(--tartan-red)"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg><div class="map-pin-tooltip">Loch Lomond & The Trossachs</div></div>
-            <div class="map-pin" style="top: 65%; left: 58%;"><svg viewBox="0 0 24 24"><path d="M12 0C7 0 3 4 3 9c0 7 9 15 9 15s9-8 9-15c0-5-4-9-9-9z" fill="var(--tartan-red)"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg><div class="map-pin-tooltip">Edinburgh</div></div>
-            <div class="map-pin" style="top: 55%; left: 38%;"><svg viewBox="0 0 24 24"><path d="M12 0C7 0 3 4 3 9c0 7 9 15 9 15s9-8 9-15c0-5-4-9-9-9z" fill="var(--tartan-red)"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg><div class="map-pin-tooltip">Steall Waterfall</div></div>
-            <div class="map-pin" style="top: 68%; left: 35%;"><svg viewBox="0 0 24 24"><path d="M12 0C7 0 3 4 3 9c0 7 9 15 9 15s9-8 9-15c0-5-4-9-9-9z" fill="var(--tartan-red)"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg><div class="map-pin-tooltip">Hidden Glen</div></div>
-            <div class="map-pin" style="top: 70%; left: 30%;"><svg viewBox="0 0 24 24"><path d="M12 0C7 0 3 4 3 9c0 7 9 15 9 15s9-8 9-15c0-5-4-9-9-9z" fill="var(--tartan-red)"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg><div class="map-pin-tooltip">Ben Arthur (The Cobbler)</div></div>
-            <div class="map-pin" style="top: 58%; left: 30%;"><svg viewBox="0 0 24 24"><path d="M12 0C7 0 3 4 3 9c0 7 9 15 9 15s9-8 9-15c0-5-4-9-9-9z" fill="var(--tartan-red)"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg><div class="map-pin-tooltip">Loch Etive</div></div>
         </div>
-        <div class="map-locations">
-            <div class="map-location-item"><span class="loc-icon">🏔️</span><div class="loc-info"><div class="loc-name">Loch Lomond & The Trossachs</div><div class="loc-desc">Scotland's first national park</div></div></div>
-            <div class="map-location-item"><span class="loc-icon">🏰</span><div class="loc-info"><div class="loc-name">Edinburgh</div><div class="loc-desc">The capital city</div></div></div>
-            <div class="map-location-item"><span class="loc-icon">💧</span><div class="loc-info"><div class="loc-name">Steall Waterfall</div><div class="loc-desc">Hidden gem in Glen Nevis</div></div></div>
-            <div class="map-location-item"><span class="loc-icon">🌲</span><div class="loc-info"><div class="loc-name">Hidden Glen</div><div class="loc-desc">Our secret spot</div></div></div>
-            <div class="map-location-item"><span class="loc-icon">⛰️</span><div class="loc-info"><div class="loc-name">Ben Arthur (The Cobbler)</div><div class="loc-desc">One of Scotland's most iconic peaks</div></div></div>
-            <div class="map-location-item"><span class="loc-icon">🌊</span><div class="loc-info"><div class="loc-name">Loch Etive</div><div class="loc-desc">Stunning sea loch in Argyll</div></div></div>
+        <div class="panel-info" id="scotland-info">
+            <div class="info-prompt">Click a pin on the map to explore Scotland</div>
+        </div>
+        <div class="panel-photos" id="scotland-photos">
+            <div class="photo-prompt">Select a location to see photos</div>
         </div>
     </div>
 </section>
 
 <div class="tartan-ribbon"></div>
 
-<!-- ═══ POLAROID GALLERY ═══ -->
-<section class="gallery-section">
-    <h2 class="section-title">Our Wee Moments</h2>
-    <div class="polaroid-grid">
-        <div class="polaroid" data-reveal style="--rot: -3deg;"><div class="polaroid-img">📷</div><div class="polaroid-caption">Placeholder — add your photo!</div></div>
-        <div class="polaroid" data-reveal style="--rot: 2deg;"><div class="polaroid-img">📷</div><div class="polaroid-caption">Placeholder — add your photo!</div></div>
-        <div class="polaroid" data-reveal style="--rot: -1deg;"><div class="polaroid-img">📷</div><div class="polaroid-caption">Placeholder — add your photo!</div></div>
-        <div class="polaroid" data-reveal style="--rot: 3deg;"><div class="polaroid-img">📷</div><div class="polaroid-caption">Placeholder — add your photo!</div></div>
-        <div class="polaroid" data-reveal style="--rot: -2deg;"><div class="polaroid-img">📷</div><div class="polaroid-caption">Placeholder — add your photo!</div></div>
-        <div class="polaroid" data-reveal style="--rot: 1deg;"><div class="polaroid-img">📷</div><div class="polaroid-caption">Placeholder — add your photo!</div></div>
+<!-- ═══════════════ MALAGA ═══════════════ -->
+<section class="trip-section">
+    <div class="trip-header-bar">
+        <span class="trip-flag">🇪🇸</span>
+        <span class="trip-title">Malaga</span>
+        <span class="trip-status-badge status-upcoming">Upcoming</span>
+    </div>
+    <p class="trip-subtitle">Sun, tapas, and new adventures await</p>
+
+    <div class="upcoming-banner">
+        <p>Two puffins venture south for the first time... can they handle the heat?</p>
+        <div class="upcoming-countdown-timer" id="malagaCountdown">
+            <div class="uc-unit"><div class="uc-num" id="ml-days">--</div><div class="uc-label">Days</div></div>
+            <div class="uc-sep">:</div>
+            <div class="uc-unit"><div class="uc-num" id="ml-hours">--</div><div class="uc-label">Hours</div></div>
+            <div class="uc-sep">:</div>
+            <div class="uc-unit"><div class="uc-num" id="ml-mins">--</div><div class="uc-label">Mins</div></div>
+        </div>
+    </div>
+
+    <div class="explorer upcoming-explorer" data-reveal data-trip="malaga">
+        <div class="panel-map" id="malaga-map">
+            <svg class="country-outline" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Simplified Malaga/Costa del Sol coastline -->
+                <path d="M30,200 Q80,180 130,190 Q180,200 220,195 Q260,190 300,200 Q340,210 380,200
+                         L380,280 Q340,300 300,310 Q260,320 220,315 Q180,310 130,305 Q80,300 30,290 Z"
+                      fill="#2a3a1a" stroke="var(--gold)" stroke-width="1.5" opacity="0.6"/>
+                <!-- Mediterranean Sea -->
+                <path d="M0,290 Q100,310 200,305 Q300,300 400,310 L400,400 L0,400 Z"
+                      fill="#0d2040" opacity="0.35"/>
+                <!-- Mountains behind -->
+                <path d="M0,200 Q50,150 100,170 Q150,130 200,160 Q250,120 300,150 Q350,130 400,170 L400,200 Q340,210 300,200 Q260,190 220,195 Q180,200 130,190 Q80,180 30,200 Z"
+                      fill="#1a2a1a" opacity="0.5"/>
+            </svg>
+        </div>
+        <div class="panel-info" id="malaga-info">
+            <div class="info-prompt">Click a pin to preview what awaits in Malaga</div>
+        </div>
+        <div class="panel-photos" id="malaga-photos">
+            <div class="photo-prompt">Photos coming soon...</div>
+        </div>
     </div>
 </section>
 
+<div class="tartan-ribbon"></div>
+
 <footer>
-    <p>Made with ❤️ by one Scottish puffin — <a href="https://commons.wikimedia.org/wiki/File:Atlantic_Puffins,_Scotland.jpg" target="_blank">see the real ones</a></p>
+    <p>Made with love by one Scottish puffin — <a href="https://commons.wikimedia.org/wiki/File:Atlantic_Puffins,_Scotland.jpg" target="_blank">see the real ones</a></p>
 </footer>
 
 <script>
-    // ═══ SCROLL REVEAL ═══
-    const revealEls = document.querySelectorAll('[data-reveal]');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('visible');
-                observer.unobserve(e.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    revealEls.forEach(el => observer.observe(el));
+// ═══ TRIP DATA ═══
+// Each trip has an array of locations. Each location: { id, name, top, left (% on map), desc, facts[], photos[] }
+// photos are placeholder strings — replace with real image paths later.
 
-    // ═══ MALAGA COUNTDOWN ═══
-    // Set your Malaga trip date here
-    const malagaDate = new Date('2026-06-01T10:00:00');
-    function updateMalagaCountdown() {
-        const now = new Date();
-        const diff = malagaDate - now;
-        if (diff <= 0) {
-            document.getElementById('ml-days').textContent = '🎉';
-            document.getElementById('ml-hours').textContent = '🎉';
-            document.getElementById('ml-mins').textContent = '🎉';
-            return;
+const tripData = {
+    hamburg: [
+        {
+            id: 'speicherstadt', name: 'Speicherstadt', top: 52, left: 50,
+            desc: "The world's largest warehouse district, built on timber-pile foundations in the port of Hamburg. A UNESCO World Heritage Site since 2015.",
+            facts: [
+                "It contains the largest Oriental carpet store in the world",
+                "The red-brick warehouses were built between 1885 and 1927",
+                "It houses the Hamburg Dungeon, a miniature museum, and coffee roasters",
+                "The district sits on 1.1 million oak logs driven into the marshland"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'miniatur', name: 'Miniatur Wunderland', top: 50, left: 54,
+            desc: "The world's largest model railway exhibition, featuring over 1,000 trains across miniature landscapes from around the globe.",
+            facts: [
+                "It has over 16km of model railway track",
+                "More than 300,000 lights illuminate the tiny world",
+                "The airport section took 6 years to build and planes actually take off",
+                "Over 1.4 million visitors come every year, making it Germany's top attraction"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'elbphil', name: 'Elbphilharmonie', top: 55, left: 45,
+            desc: "Hamburg's stunning concert hall on the Elbe river, nicknamed 'Elphi'. Its wave-like glass roof is an architectural marvel.",
+            facts: [
+                "The building cost rose from 77 million to over 866 million euros",
+                "Its facade has 1,100 curved glass panels, each individually shaped",
+                "The main hall has 10,000 unique acoustic panels designed by algorithm",
+                "There's a 37-metre high viewing plaza open free to the public"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'harbour', name: 'Harbour Cruise', top: 60, left: 42,
+            desc: "Hamburg's port is the third-largest in Europe. A Barkasse boat ride through the harbour is a quintessential Hamburg experience.",
+            facts: [
+                "The Port of Hamburg handles around 130 million tonnes of cargo yearly",
+                "You can spot giant container ships from over 60 countries",
+                "The old Elbe Tunnel (1911) runs 24m under the river and you can walk through it",
+                "Hamburg has more bridges than Venice, Amsterdam, and London combined"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'reeperbahn', name: 'Reeperbahn', top: 56, left: 38,
+            desc: "Hamburg's famous entertainment district. Known as 'the sinful mile', it's where The Beatles played their early gigs.",
+            facts: [
+                "The Beatles performed here 281 times between 1960 and 1962",
+                "The street name comes from rope-makers (Reepers) who worked here",
+                "It transforms into a massive street party during the Reeperbahn Festival",
+                "Beatles-Platz square features steel silhouettes of the Fab Four"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'planten', name: 'Planten un Blomen', top: 40, left: 48,
+            desc: "A stunning urban park in the heart of Hamburg with Japanese gardens, themed areas, and free summer light shows.",
+            facts: [
+                "The water-light concerts in summer have run since 1930",
+                "It features the largest Japanese garden in Europe",
+                "The park covers 47 hectares of green space in the city centre",
+                "It was built on the site of Hamburg's old city fortifications"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'hamburg-p1', name: 'Placeholder 1', top: 35, left: 60,
+            desc: "Add your own Hamburg memory here! Click to update with your favourite spot.",
+            facts: ["Update this with your own fun facts", "What did you discover?", "Add your memories here"],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'hamburg-p2', name: 'Placeholder 2', top: 45, left: 65,
+            desc: "Another spot to fill with your Hamburg adventures.",
+            facts: ["Your memory goes here", "What was your favourite food?", "Add a fun fact you learned"],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'hamburg-p3', name: 'Placeholder 3', top: 38, left: 30,
+            desc: "One more space for a Hamburg highlight.",
+            facts: ["Waiting for your story", "Did you find any hidden gems?"],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'hamburg-p4', name: 'Placeholder 4', top: 48, left: 28,
+            desc: "Save this pin for a special Hamburg moment.",
+            facts: ["Your adventure awaits", "Fill this in later"],
+            photos: ['placeholder', 'placeholder']
         }
-        const d = Math.floor(diff / 86400000);
-        const h = Math.floor((diff % 86400000) / 3600000);
-        const m = Math.floor((diff % 3600000) / 60000);
-        document.getElementById('ml-days').textContent = String(d).padStart(2, '0');
-        document.getElementById('ml-hours').textContent = String(h).padStart(2, '0');
-        document.getElementById('ml-mins').textContent = String(m).padStart(2, '0');
+    ],
+    finland: [
+        {
+            id: 'helsinki', name: 'Helsinki', top: 82, left: 55,
+            desc: "Finland's vibrant capital on the Baltic Sea. A city of design, saunas, and fresh Nordic cuisine.",
+            facts: [
+                "Helsinki has over 80 public saunas — more per capita than anywhere else",
+                "The city was founded in 1550 by King Gustav I of Sweden",
+                "Helsinki Cathedral's green domes are one of the most photographed landmarks in Scandinavia",
+                "The city has more islands than almost any coastal capital in the world"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'rovaniemi', name: 'Rovaniemi', top: 28, left: 48,
+            desc: "The official hometown of Santa Claus, sitting right on the Arctic Circle. A gateway to Lapland's wilderness.",
+            facts: [
+                "You can cross the official Arctic Circle line at Santa Claus Village",
+                "The city was almost entirely destroyed in WWII and rebuilt by Alvar Aalto",
+                "Rovaniemi's street plan from above is shaped like a reindeer's antlers",
+                "The Northern Lights are visible about 150 nights per year here"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'aurora', name: 'Northern Lights Spot', top: 20, left: 42,
+            desc: "Finnish Lapland is one of the best places on Earth to witness the Aurora Borealis dancing across the sky.",
+            facts: [
+                "The Sami people believed the lights were sparks from a fox's tail sweeping the snow",
+                "In Finnish, the Northern Lights are called 'revontulet' — fox fires",
+                "Glass igloos let you watch the Aurora from the warmth of your bed",
+                "The auroral zone crosses Finnish Lapland perfectly for viewing"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'sauna', name: 'Finnish Sauna', top: 70, left: 50,
+            desc: "The sauna is sacred in Finland. There are 3.3 million saunas for 5.5 million people — more saunas than cars.",
+            facts: [
+                "The word 'sauna' is one of the few Finnish words used worldwide",
+                "Traditional saunas are heated by a wood-burning stove (kiuas)",
+                "It's common to jump into an icy lake right after a hot sauna session",
+                "Finnish parliament even has its own sauna for informal negotiations"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'frozen-lake', name: 'Frozen Lakes', top: 55, left: 58,
+            desc: "Finland has 187,888 lakes, and in winter many freeze solid enough to walk, ski, and even drive on.",
+            facts: [
+                "Lake Saimaa is Europe's fourth-largest lake and home to the rare Saimaa ringed seal",
+                "Finns ice-swim ('avanto') in holes cut in frozen lakes — it's said to boost happiness",
+                "Some lakes freeze to over 50cm thick, supporting cars and ice roads",
+                "Lake Inari in Lapland is so remote you can see the Milky Way reflected in its ice"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'reindeer', name: 'Reindeer Encounters', top: 35, left: 55,
+            desc: "In Finnish Lapland, reindeer outnumber people. There are about 200,000 semi-wild reindeer roaming the north.",
+            facts: [
+                "Reindeer herding has been practised by the Sami people for over 1,000 years",
+                "Every reindeer in Finland has an owner — they all wear ear markings",
+                "Reindeer can see ultraviolet light, helping them spot predators in the snow",
+                "Their hooves change shape with the seasons — spreading wide in summer, shrinking in winter"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'suomenlinna', name: 'Suomenlinna', top: 85, left: 58,
+            desc: "A UNESCO-listed sea fortress spread across six islands off Helsinki. Built in the 1700s to defend against Russia.",
+            facts: [
+                "It's one of the largest maritime fortresses in the world",
+                "Around 800 people still live on the island year-round",
+                "You reach it by a 15-minute ferry from Helsinki's Market Square",
+                "The fortress has been under Swedish, Russian, and Finnish control"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'finland-p1', name: 'Placeholder 1', top: 45, left: 38,
+            desc: "Add your own Finland memory here!",
+            facts: ["Your adventure goes here", "What did you love most?"],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'finland-p2', name: 'Placeholder 2', top: 60, left: 40,
+            desc: "Another Finland highlight to fill in.",
+            facts: ["Waiting for your story", "Did the cold surprise you?"],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'finland-p3', name: 'Placeholder 3', top: 50, left: 48,
+            desc: "Save this pin for a special Finland moment.",
+            facts: ["Your memory goes here"],
+            photos: ['placeholder', 'placeholder']
+        }
+    ],
+    scotland: [
+        {
+            id: 'lochlomond', name: 'Loch Lomond & The Trossachs', top: 72, left: 42,
+            desc: "Scotland's first national park. A breathtaking landscape of lochs, forests, and munros just north of Glasgow.",
+            facts: [
+                "Loch Lomond is the largest lake in Great Britain by surface area",
+                "The loch contains over 30 islands, some with ancient ruins",
+                "The West Highland Way runs along its eastern shore for 30km",
+                "Ben Lomond (974m) on its shore is one of the most-climbed Munros"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'edinburgh', name: 'Edinburgh', top: 65, left: 58,
+            desc: "Scotland's capital city. A stunning mix of medieval Old Town and Georgian New Town, both UNESCO World Heritage Sites.",
+            facts: [
+                "Edinburgh Castle sits atop an extinct volcano that's 350 million years old",
+                "The Royal Mile connecting the Castle to Holyrood is exactly one Scots mile long",
+                "Arthur's Seat is an 822-foot ancient volcano you can climb in the city centre",
+                "Edinburgh was the first city in the world to have its own fire brigade"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'steall', name: 'Steall Waterfall', top: 55, left: 38,
+            desc: "A stunning 120-metre waterfall hidden in Glen Nevis, reached by a gorge walk and a famous wire rope bridge.",
+            facts: [
+                "It's the second-highest waterfall in Scotland at 120 metres",
+                "The wire bridge crossing to it is one of Scotland's most thrilling walks",
+                "The gorge walk to reach it passes through ancient Caledonian forest",
+                "It was used as a filming location for Harry Potter and the Goblet of Fire"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'hiddenglen', name: 'Hidden Glen', top: 68, left: 35,
+            desc: "Your secret spot. A hidden glen tucked away from the tourist trails, known only to those who wander off the path.",
+            facts: [
+                "Scotland has a 'right to roam' law letting you explore almost anywhere",
+                "Hidden glens often shelter rare wildlife like red squirrels and golden eagles",
+                "Some glens have ruins of Highland crofts cleared in the 18th century",
+                "This is your special place — some secrets are best kept between two puffins"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'benarthur', name: 'Ben Arthur (The Cobbler)', top: 70, left: 30,
+            desc: "One of Scotland's most iconic and dramatic peaks at 884m. The rocky summit requires a scramble through a natural rock window.",
+            facts: [
+                "Its name 'The Cobbler' comes from the summit rock that looks like a cobbler bent over his last",
+                "You have to thread through a rock needle to reach the true summit",
+                "Despite being under Munro height, it's considered one of Scotland's finest hills",
+                "The Narnain Boulders at its base have a famous climber's howff (shelter) inside"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'lochetive', name: 'Loch Etive', top: 58, left: 30,
+            desc: "A stunning 30km sea loch in Argyll, surrounded by towering mountains. James Bond's Skyfall was filmed nearby.",
+            facts: [
+                "The loch stretches 30km from the Falls of Lora to Glen Etive",
+                "Glen Etive's single-track road is one of the most scenic drives in Scotland",
+                "The Falls of Lora at its mouth are tidal rapids — unusual for a loch",
+                "The Skyfall scenes with the iconic Highland road were filmed in Glen Etive"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'glencoe', name: 'Glencoe', top: 54, left: 33,
+            desc: "One of Scotland's most dramatic and haunting valleys. Scene of the infamous 1692 massacre of the MacDonald clan.",
+            facts: [
+                "The Massacre of Glencoe in 1692 saw 38 MacDonalds killed by government troops",
+                "The Three Sisters are three dramatic ridges that dominate the valley",
+                "Glencoe has been used in Harry Potter, James Bond, and Monty Python films",
+                "The valley was carved by glaciers during the last Ice Age"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'staffa', name: 'Isle of Staffa', top: 42, left: 18,
+            desc: "A tiny volcanic island famous for its hexagonal basalt columns and Fingal's Cave. Also a major puffin colony!",
+            facts: [
+                "The basalt columns formed 60 million years ago from cooling lava",
+                "Fingal's Cave inspired Mendelssohn's Hebrides Overture after his 1829 visit",
+                "Thousands of puffins nest on Staffa from April to August",
+                "The island is only 33 hectares — you can walk around it in an hour"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'scotland-p1', name: 'Placeholder 1', top: 45, left: 50,
+            desc: "Add your own Scottish adventure here!",
+            facts: ["Your Highland memory goes here", "What was the best view?"],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'scotland-p2', name: 'Placeholder 2', top: 78, left: 50,
+            desc: "Save this pin for another Scottish gem.",
+            facts: ["Your story awaits", "Did you find any wild haggis?"],
+            photos: ['placeholder', 'placeholder']
+        }
+    ],
+    malaga: [
+        {
+            id: 'alcazaba', name: 'Alcazaba', top: 45, left: 52,
+            desc: "A stunning Moorish fortress-palace from the 11th century, perched on a hillside with views over the city and sea.",
+            facts: [
+                "It was built in the 11th century by the Hammudid dynasty",
+                "The name comes from Arabic 'al-qasbah' meaning citadel",
+                "It has beautiful courtyards with fountains, arches, and orange trees",
+                "It's connected to the Gibralfaro Castle by a walled path up the hill"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'picasso', name: 'Picasso Museum', top: 48, left: 48,
+            desc: "Pablo Picasso was born in Malaga in 1881. The museum in his honour houses over 280 of his works.",
+            facts: [
+                "Picasso was born at Plaza de la Merced 15 — now a museum too",
+                "He completed his first painting aged 8: 'Le picador'",
+                "The museum building is a 16th-century palace (Buenavista Palace)",
+                "It opened in 2003, fulfilling Picasso's lifelong wish to exhibit in his hometown"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'beach', name: 'Malagueta Beach', top: 62, left: 55,
+            desc: "The most famous beach in Malaga, stretching 1.2km along the city centre with golden sand and chiringuitos.",
+            facts: [
+                "Chiringuitos are beach bars serving fresh espetos (grilled sardines on sticks)",
+                "The iconic Malagueta letters sign is one of the most photographed spots in the city",
+                "The beach was created artificially in the 1960s as part of tourism development",
+                "Water temperature reaches 24C in summer — warm even for puffins!"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'tapas', name: 'Tapas Quarter', top: 44, left: 44,
+            desc: "The old town streets around Calle Larios are packed with tapas bars serving Andalusian specialities.",
+            facts: [
+                "Malaga is famous for 'pescaito frito' — little fried fish served in paper cones",
+                "Calle Larios is one of the most elegant shopping streets in Spain",
+                "The Atarazanas Market is a beautiful 19th-century iron market selling fresh produce",
+                "Local sweet wine (Malaga Dulce) has been made here since Phoenician times"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'sunset', name: 'Sunset Point', top: 50, left: 65,
+            desc: "The Muelle Uno harbour promenade and Gibralfaro viewpoint offer spectacular Mediterranean sunsets.",
+            facts: [
+                "Gibralfaro Castle sits 130m above the city with 360-degree views",
+                "The Palmeral de las Sorpresas (Palm Grove of Surprises) is a waterfront walk with art installations",
+                "On clear evenings you can see the Rif Mountains of Morocco across the strait",
+                "Average sunset temperature in summer is still 28C — warm evening strolls guaranteed"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'caminito', name: 'Caminito del Rey', top: 30, left: 30,
+            desc: "A breathtaking walkway pinned to the walls of a narrow gorge, once called 'the most dangerous path in the world'.",
+            facts: [
+                "The original path was built in 1905 for workers at a hydroelectric plant",
+                "It clings to the walls of the El Chorro gorge, 100 metres above the river",
+                "After several fatalities the path was closed, then rebuilt and reopened in 2015",
+                "King Alfonso XIII walked it in 1921, giving it the name 'King's Little Path'"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'nerja', name: 'Nerja Caves', top: 42, left: 72,
+            desc: "A spectacular cave system just east of Malaga with stalactites, paintings, and the world's largest natural column.",
+            facts: [
+                "The caves contain the world's largest known stalagmite at 32 metres tall",
+                "Prehistoric paintings inside may be over 40,000 years old — possibly Neanderthal art",
+                "The caves were discovered by five teenagers chasing bats in 1959",
+                "A concert hall inside the caves hosts an annual music and dance festival"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'malaga-p1', name: 'Placeholder 1', top: 38, left: 55,
+            desc: "Save this pin for a Malaga discovery!",
+            facts: ["Adventure awaits", "What will you find?"],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'malaga-p2', name: 'Placeholder 2', top: 55, left: 40,
+            desc: "Another spot to fill when you explore Malaga.",
+            facts: ["Your story goes here", "Best tapas spot?"],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'malaga-p3', name: 'Placeholder 3', top: 35, left: 60,
+            desc: "One more pin for a Malaga highlight.",
+            facts: ["Waiting for your adventure"],
+            photos: ['placeholder', 'placeholder']
+        }
+    ]
+};
+
+const pinSVG = `<svg viewBox="0 0 24 24"><path d="M12 0C7 0 3 4 3 9c0 7 9 15 9 15s9-8 9-15c0-5-4-9-9-9z" fill="var(--tartan-red)"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg>`;
+
+// ═══ BUILD PINS & WIRE INTERACTIVITY ═══
+Object.keys(tripData).forEach(tripKey => {
+    const mapEl = document.getElementById(tripKey + '-map');
+    const infoEl = document.getElementById(tripKey + '-info');
+    const photosEl = document.getElementById(tripKey + '-photos');
+    const locations = tripData[tripKey];
+
+    locations.forEach((loc, i) => {
+        // Create pin
+        const pin = document.createElement('div');
+        pin.className = 'map-pin';
+        pin.style.top = loc.top + '%';
+        pin.style.left = loc.left + '%';
+        pin.innerHTML = pinSVG + `<span class="map-pin-label">${loc.name}</span>`;
+        pin.dataset.index = i;
+        mapEl.appendChild(pin);
+
+        // Create info content
+        const infoDiv = document.createElement('div');
+        infoDiv.className = 'info-content';
+        infoDiv.id = tripKey + '-info-' + i;
+        let factsHTML = loc.facts.map(f => `<li>${f}</li>`).join('');
+        infoDiv.innerHTML = `
+            <h3 class="info-name">${loc.name}</h3>
+            <p class="info-desc">${loc.desc}</p>
+            <ul class="info-facts">${factsHTML}</ul>
+        `;
+        infoEl.appendChild(infoDiv);
+
+        // Create photo slot
+        const photoDiv = document.createElement('div');
+        photoDiv.className = 'photo-slot';
+        photoDiv.id = tripKey + '-photo-' + i;
+        const isPlaceholder = loc.name.startsWith('Placeholder');
+        photoDiv.innerHTML = `
+            <div class="photo-frame">
+                ${isPlaceholder ? '📷' : '📷'}
+                <div class="photo-frame-label">${isPlaceholder ? 'Add photo' : loc.name + ' — Photo 1'}</div>
+            </div>
+            <div class="photo-frame">
+                ${isPlaceholder ? '📷' : '📷'}
+                <div class="photo-frame-label">${isPlaceholder ? 'Add photo' : loc.name + ' — Photo 2'}</div>
+            </div>
+        `;
+        photosEl.appendChild(photoDiv);
+
+        // Click handler
+        pin.addEventListener('click', () => {
+            // Deactivate all pins in this map
+            mapEl.querySelectorAll('.map-pin').forEach(p => p.classList.remove('active'));
+            pin.classList.add('active');
+
+            // Hide prompt, show selected info
+            const prompt = infoEl.querySelector('.info-prompt');
+            if (prompt) prompt.style.display = 'none';
+            infoEl.querySelectorAll('.info-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(tripKey + '-info-' + i).classList.add('active');
+
+            // Hide photo prompt, show selected photos
+            const photoPrompt = photosEl.querySelector('.photo-prompt');
+            if (photoPrompt) photoPrompt.style.display = 'none';
+            photosEl.querySelectorAll('.photo-slot').forEach(el => el.classList.remove('active'));
+            document.getElementById(tripKey + '-photo-' + i).classList.add('active');
+        });
+    });
+});
+
+// ═══ SCROLL REVEAL ═══
+const revealEls = document.querySelectorAll('[data-reveal]');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.1 });
+revealEls.forEach(el => observer.observe(el));
+
+// ═══ MALAGA COUNTDOWN ═══
+const malagaDate = new Date('2026-06-01T10:00:00');
+function updateMalagaCountdown() {
+    const now = new Date();
+    const diff = malagaDate - now;
+    if (diff <= 0) {
+        document.getElementById('ml-days').textContent = '!!';
+        document.getElementById('ml-hours').textContent = '!!';
+        document.getElementById('ml-mins').textContent = '!!';
+        return;
     }
-    updateMalagaCountdown();
-    setInterval(updateMalagaCountdown, 60000);
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    document.getElementById('ml-days').textContent = String(d).padStart(2, '0');
+    document.getElementById('ml-hours').textContent = String(h).padStart(2, '0');
+    document.getElementById('ml-mins').textContent = String(m).padStart(2, '0');
+}
+updateMalagaCountdown();
+setInterval(updateMalagaCountdown, 60000);
 </script>
 
 </body>
