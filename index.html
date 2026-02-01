@@ -990,36 +990,30 @@
             z-index: 3;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
             pointer-events: none;
-        }
-        .walking-puffin-1 {
-            animation: puffinWalk1 18s linear infinite;
+            transition: none;
         }
         .walking-puffin-2 {
-            animation: puffinWalk2 22s linear infinite;
-            animation-delay: -8s;
-            bottom: 20px;
+            bottom: 28px;
             font-size: 1.5rem;
         }
-        @keyframes puffinWalk1 {
-            0%   { left: -5%; opacity: 0; transform: scaleX(1); }
-            5%   { opacity: 1; }
-            35%  { left: 33%; opacity: 1; transform: scaleX(1) translateY(0); }
-            38%  { left: 35%; opacity: 1; transform: scaleX(1) translateY(-15px); }
-            41%  { left: 36%; opacity: 0; transform: scaleX(1) translateY(10px); }
-            42%  { left: 36%; opacity: 0; transform: scaleX(1) translateY(10px); }
-            50%  { left: 36%; opacity: 0; }
-            51%  { left: 36%; opacity: 1; transform: scaleX(1) translateY(-10px); }
-            54%  { left: 38%; opacity: 1; transform: scaleX(1) translateY(0); }
-            92%  { left: 102%; opacity: 1; }
-            95%  { opacity: 0; }
-            100% { left: 108%; opacity: 0; }
+
+        /* ── Reset Button ── */
+        .reset-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.3);
+            font-family: 'Caveat', cursive;
+            font-size: 0.9rem;
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        @keyframes puffinWalk2 {
-            0%   { left: -5%; opacity: 0; transform: scaleX(1); }
-            5%   { opacity: 1; }
-            90%  { left: 102%; opacity: 1; }
-            95%  { opacity: 0; }
-            100% { left: 108%; opacity: 0; }
+        .reset-btn:hover {
+            border-color: var(--puffin-orange);
+            color: var(--puffin-orange);
         }
 
         /* ── Easter Egg Counter ── */
@@ -1450,6 +1444,7 @@
     <p>Made with ❤️ by one Scottish puffin — <a
             href="https://commons.wikimedia.org/wiki/File:Atlantic_Puffins,_Scotland.jpg" target="_blank"
             style="color: var(--gold); text-decoration: none;">see the real ones</a></p>
+    <button class="reset-btn" onclick="resetEverything()">Reset everything</button>
 </footer>
 
 <script>
@@ -2230,6 +2225,118 @@
 
         rejectBtn.addEventListener('mouseenter', runAway);
         rejectBtn.addEventListener('touchstart', runAway);
+    })();
+
+    // ═══ RESET EVERYTHING ═══
+    function resetEverything() {
+        // Easter eggs
+        ['egg_puffin_click', 'egg_cave', 'egg_reject', 'egg_taskmaster', 'egg_adventure_secret'].forEach(k => localStorage.removeItem(k));
+        updateEggCounter();
+        // Spotify state
+        localStorage.removeItem('puffin_music');
+        musicBanner.classList.remove('hidden');
+        spotifyEmbed.innerHTML = '';
+        spotifyFloat.classList.add('minimized');
+        // Reject button
+        const rejectBtn = document.getElementById('rejectBtn');
+        rejectBtn.style.transform = '';
+        rejectBtn.textContent = 'Reject Task 💔';
+    }
+
+    // ═══ WALKING PUFFINS (JS-driven) ═══
+    (function() {
+        const p1 = document.querySelector('.walking-puffin-1');
+        const p2 = document.querySelector('.walking-puffin-2');
+        if (!p1 || !p2) return;
+
+        const holeX = 35; // % where the hole is (left:35% cave)
+        const speed = 0.06; // % per frame (~60fps)
+        let x = -5;
+        let phase = 'walking'; // walking, jumping, hidden, popping, resuming
+        let jumpTimer = 0;
+        let opacity1 = 0;
+        let offsetY1 = 0;
+        const gap = 3; // % gap between puffins
+
+        function frame() {
+            switch (phase) {
+                case 'walking':
+                    x += speed;
+                    if (opacity1 < 1) opacity1 = Math.min(1, opacity1 + 0.02);
+                    // When puffin1 reaches the hole
+                    if (x >= holeX && x < holeX + 0.2) {
+                        phase = 'jumping';
+                        jumpTimer = 0;
+                    }
+                    break;
+                case 'jumping':
+                    jumpTimer++;
+                    // Jump arc up
+                    if (jumpTimer < 15) {
+                        offsetY1 = -jumpTimer * 1.2;
+                    } else if (jumpTimer < 25) {
+                        // Dive down into hole
+                        offsetY1 = -(15 * 1.2) + (jumpTimer - 15) * 2.5;
+                    } else {
+                        // Hidden in hole
+                        opacity1 = 0;
+                        offsetY1 = 0;
+                        phase = 'hidden';
+                        jumpTimer = 0;
+                    }
+                    break;
+                case 'hidden':
+                    jumpTimer++;
+                    // Wait in hole for a bit
+                    if (jumpTimer > 90) {
+                        phase = 'popping';
+                        jumpTimer = 0;
+                    }
+                    break;
+                case 'popping':
+                    jumpTimer++;
+                    if (jumpTimer < 15) {
+                        opacity1 = jumpTimer / 15;
+                        offsetY1 = -(15 - jumpTimer) * 1;
+                    } else {
+                        opacity1 = 1;
+                        offsetY1 = 0;
+                        phase = 'resuming';
+                        jumpTimer = 0;
+                    }
+                    break;
+                case 'resuming':
+                    x += speed;
+                    break;
+            }
+
+            // Reset when off screen
+            if (x > 105) {
+                x = -5;
+                opacity1 = 0;
+                offsetY1 = 0;
+                phase = 'walking';
+            }
+
+            // Puffin 1 (leader)
+            p1.style.left = x + '%';
+            p1.style.opacity = opacity1;
+            p1.style.transform = 'translateY(' + offsetY1 + 'px)';
+
+            // Puffin 2 (follower) - walks behind, stops when p1 is in hole
+            let x2 = x - gap;
+            let opacity2 = x2 > -3 ? Math.min(1, (x2 + 3) * 0.5) : 0;
+            if (phase === 'hidden' || phase === 'jumping' || phase === 'popping') {
+                // Follower waits near the hole
+                x2 = Math.min(x2, holeX - gap);
+            }
+            if (x > 105) opacity2 = 0;
+            p2.style.left = x2 + '%';
+            p2.style.opacity = opacity2;
+
+            requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
     })();
 </script>
 
