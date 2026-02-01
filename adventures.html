@@ -795,7 +795,7 @@ const tripData = {
                 "The West Highland Way runs along its eastern shore for 30km",
                 "Ben Lomond (974m) on its shore is one of the most-climbed Munros"
             ],
-            photos: ['placeholder', 'placeholder']
+            photos: ['img/scotland/loch-lomond-1.jpg', 'img/scotland/loch-lomond-2.jpg']
         },
         {
             id: 'edinburgh', name: 'Edinburgh', top: 65, left: 58,
@@ -806,7 +806,7 @@ const tripData = {
                 "Arthur's Seat is an 822-foot ancient volcano you can climb in the city centre",
                 "Edinburgh was the first city in the world to have its own fire brigade"
             ],
-            photos: ['placeholder', 'placeholder']
+            photos: ['img/scotland/edinburgh-1.jpg', 'img/scotland/edinburgh-2.jpg']
         },
         {
             id: 'steall', name: 'Steall Waterfall', top: 55, left: 38,
@@ -817,7 +817,7 @@ const tripData = {
                 "The gorge walk to reach it passes through ancient Caledonian forest",
                 "It was used as a filming location for Harry Potter and the Goblet of Fire"
             ],
-            photos: ['placeholder', 'placeholder']
+            photos: ['img/scotland/steall-waterfall-1.jpg', 'img/scotland/steall-waterfall-2.jpg']
         },
         {
             id: 'hiddenglen', name: 'Hidden Glen', top: 68, left: 35,
@@ -828,7 +828,7 @@ const tripData = {
                 "Some glens have ruins of Highland crofts cleared in the 18th century",
                 "This is your special place — some secrets are best kept between two puffins"
             ],
-            photos: ['placeholder', 'placeholder']
+            photos: ['img/scotland/hidden-glen-1.jpg', 'img/scotland/hidden-glen-2.jpg']
         },
         {
             id: 'benarthur', name: 'Ben Arthur (The Cobbler)', top: 70, left: 30,
@@ -839,7 +839,7 @@ const tripData = {
                 "Despite being under Munro height, it's considered one of Scotland's finest hills",
                 "The Narnain Boulders at its base have a famous climber's howff (shelter) inside"
             ],
-            photos: ['placeholder', 'placeholder']
+            photos: ['img/scotland/ben-arthur-1.jpg', 'img/scotland/ben-arthur-2.jpg']
         },
         {
             id: 'lochetive', name: 'Loch Etive', top: 58, left: 30,
@@ -850,7 +850,7 @@ const tripData = {
                 "The Falls of Lora at its mouth are tidal rapids — unusual for a loch",
                 "The Skyfall scenes with the iconic Highland road were filmed in Glen Etive"
             ],
-            photos: ['placeholder', 'placeholder']
+            photos: ['img/scotland/loch-etive-1.jpg', 'img/scotland/loch-etive-2.jpg']
         },
         {
             id: 'glencoe', name: 'Glencoe', top: 54, left: 33,
@@ -861,7 +861,7 @@ const tripData = {
                 "Glencoe has been used in Harry Potter, James Bond, and Monty Python films",
                 "The valley was carved by glaciers during the last Ice Age"
             ],
-            photos: ['placeholder', 'placeholder']
+            photos: ['img/scotland/glencoe-1.jpg', 'img/scotland/glencoe-2.jpg']
         },
         {
             id: 'staffa', name: 'Isle of Staffa', top: 42, left: 18,
@@ -872,7 +872,7 @@ const tripData = {
                 "Thousands of puffins nest on Staffa from April to August",
                 "The island is only 33 hectares — you can walk around it in an hour"
             ],
-            photos: ['placeholder', 'placeholder']
+            photos: ['img/scotland/staffa-1.jpg', 'img/scotland/staffa-2.jpg']
         },
         {
             id: 'scotland-p1', name: 'Placeholder 1', top: 45, left: 50,
@@ -1021,17 +1021,20 @@ Object.keys(tripData).forEach(tripKey => {
         const photoDiv = document.createElement('div');
         photoDiv.className = 'photo-slot';
         photoDiv.id = tripKey + '-photo-' + i;
-        const isPlaceholder = loc.name.startsWith('Placeholder');
-        photoDiv.innerHTML = `
-            <div class="photo-frame">
-                ${isPlaceholder ? '📷' : '📷'}
-                <div class="photo-frame-label">${isPlaceholder ? 'Add photo' : loc.name + ' — Photo 1'}</div>
-            </div>
-            <div class="photo-frame">
-                ${isPlaceholder ? '📷' : '📷'}
-                <div class="photo-frame-label">${isPlaceholder ? 'Add photo' : loc.name + ' — Photo 2'}</div>
-            </div>
-        `;
+
+        function buildPhotoFrame(photoPath, label) {
+            if (photoPath && photoPath !== 'placeholder') {
+                return `<div class="photo-frame">
+                    <img src="${photoPath}" alt="${label}" loading="lazy">
+                    <div class="photo-frame-label">${label}</div>
+                </div>`;
+            }
+            return `<div class="photo-frame">📷<div class="photo-frame-label">${label}</div></div>`;
+        }
+
+        const lbl1 = loc.name.startsWith('Placeholder') ? 'Add photo' : loc.name + ' — Photo 1';
+        const lbl2 = loc.name.startsWith('Placeholder') ? 'Add photo' : loc.name + ' — Photo 2';
+        photoDiv.innerHTML = buildPhotoFrame(loc.photos[0], lbl1) + buildPhotoFrame(loc.photos[1], lbl2);
         photosEl.appendChild(photoDiv);
 
         // Click handler
