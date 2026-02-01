@@ -1,6 +1,6 @@
 # Valentine's Puffin Taskmaster Invite
 
-A Taskmaster-themed valentine's day invite website featuring puffins, Scottish highlands, marshmallows, and concert memories.
+A Taskmaster-themed valentine's day invite website featuring puffins, Scottish highlands, marshmallows, and a Spotify playlist.
 
 ## Before You Share: To-Do Checklist
 
