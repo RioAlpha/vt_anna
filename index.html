@@ -32,18 +32,26 @@
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 1002;
-            background: linear-gradient(135deg, rgba(26,26,62,0.97) 0%, rgba(42,26,62,0.97) 100%);
-            border-bottom: 1px solid rgba(212,168,67,0.3);
-            padding: 0.8rem 1.5rem;
+            background: linear-gradient(90deg, var(--tartan-red), var(--puffin-orange), var(--tartan-red));
+            background-size: 200% 100%;
+            animation: bannerShimmer 3s ease-in-out infinite;
+            border-bottom: 2px solid var(--gold);
+            padding: 1rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem;
+            gap: 1rem;
             cursor: pointer;
             transition: transform 0.4s ease, opacity 0.4s ease;
+            box-shadow: 0 4px 20px rgba(200,16,46,0.5);
+        }
+        @keyframes bannerShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50%      { background-position: 100% 50%; }
         }
         .music-banner:hover {
-            background: linear-gradient(135deg, rgba(36,26,62,0.97) 0%, rgba(52,26,62,0.97) 100%);
+            box-shadow: 0 6px 30px rgba(200,16,46,0.7);
+            transform: scale(1.01);
         }
         .music-banner.hidden {
             transform: translateY(-100%);
@@ -52,12 +60,17 @@
         }
         .music-banner-text {
             font-family: 'Caveat', cursive;
-            font-size: 1.2rem;
-            color: var(--gold);
+            font-size: 1.4rem;
+            color: #fff;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
         }
         .music-banner-icon {
-            font-size: 1.3rem;
-            animation: pulse 1.5s ease-in-out infinite;
+            font-size: 1.5rem;
+            animation: bannerBounce 1s ease-in-out infinite;
+        }
+        @keyframes bannerBounce {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-4px); }
         }
 
         /* ── Falling Marshmallows ── */
