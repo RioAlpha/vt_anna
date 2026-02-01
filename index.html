@@ -34,14 +34,14 @@
         /* ── Music Banner ── */
         .music-banner {
             position: fixed;
-            top: 0;
+            bottom: 0;
             left: 0;
             right: 0;
             z-index: 1002;
             background: linear-gradient(90deg, var(--tartan-red), var(--puffin-orange), var(--tartan-red));
             background-size: 200% 100%;
             animation: bannerShimmer 3s ease-in-out infinite;
-            border-bottom: 2px solid var(--gold);
+            border-top: 2px solid var(--gold);
             padding: 1rem 1.5rem;
             display: flex;
             align-items: center;
@@ -49,7 +49,7 @@
             gap: 1rem;
             cursor: pointer;
             transition: transform 0.4s ease, opacity 0.4s ease;
-            box-shadow: 0 4px 20px rgba(200, 16, 46, 0.5);
+            box-shadow: 0 -4px 20px rgba(200, 16, 46, 0.5);
         }
 
         @keyframes bannerShimmer {
@@ -67,7 +67,7 @@
         }
 
         .music-banner.hidden {
-            transform: translateY(-100%);
+            transform: translateY(100%);
             opacity: 0;
             pointer-events: none;
         }
@@ -703,6 +703,40 @@
             margin: 0 auto;
         }
 
+        /* ── Photo Carousel ── */
+        .carousel-section {
+            padding: 3rem 0;
+            overflow: hidden;
+        }
+        .carousel-track {
+            display: flex;
+            width: max-content;
+            animation: carouselScroll 40s linear infinite;
+        }
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+        .carousel-item {
+            flex-shrink: 0;
+            width: 300px;
+            height: 200px;
+            margin: 0 0.75rem;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(212,168,67,0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        @keyframes carouselScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         /* ── Random Facts Toast ── */
         .fact-toast {
             position: fixed;
@@ -948,6 +982,85 @@
             }
         }
 
+        /* ── Walking Puffins ── */
+        .walking-puffin {
+            position: absolute;
+            bottom: 30px;
+            font-size: 1.8rem;
+            z-index: 3;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            pointer-events: none;
+        }
+        .walking-puffin-1 {
+            animation: puffinWalk1 18s linear infinite;
+        }
+        .walking-puffin-2 {
+            animation: puffinWalk2 22s linear infinite;
+            animation-delay: -8s;
+            bottom: 20px;
+            font-size: 1.5rem;
+        }
+        @keyframes puffinWalk1 {
+            0%   { left: -5%; opacity: 0; transform: scaleX(1); }
+            5%   { opacity: 1; }
+            35%  { left: 33%; opacity: 1; transform: scaleX(1) translateY(0); }
+            38%  { left: 35%; opacity: 1; transform: scaleX(1) translateY(-15px); }
+            41%  { left: 36%; opacity: 0; transform: scaleX(1) translateY(10px); }
+            42%  { left: 36%; opacity: 0; transform: scaleX(1) translateY(10px); }
+            50%  { left: 36%; opacity: 0; }
+            51%  { left: 36%; opacity: 1; transform: scaleX(1) translateY(-10px); }
+            54%  { left: 38%; opacity: 1; transform: scaleX(1) translateY(0); }
+            92%  { left: 102%; opacity: 1; }
+            95%  { opacity: 0; }
+            100% { left: 108%; opacity: 0; }
+        }
+        @keyframes puffinWalk2 {
+            0%   { left: -5%; opacity: 0; transform: scaleX(1); }
+            5%   { opacity: 1; }
+            90%  { left: 102%; opacity: 1; }
+            95%  { opacity: 0; }
+            100% { left: 108%; opacity: 0; }
+        }
+
+        /* ── Easter Egg Counter ── */
+        .egg-counter {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            z-index: 996;
+            background: linear-gradient(135deg, rgba(26,26,62,0.95), rgba(42,26,62,0.95));
+            border: 1px solid rgba(212,168,67,0.3);
+            border-radius: 30px;
+            padding: 0.4rem 1rem;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 1px;
+            cursor: default;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .egg-counter .egg-found {
+            color: var(--puffin-orange);
+            font-weight: bold;
+        }
+
+        /* ── Reject Button Easter Egg ── */
+        .reject-btn {
+            margin-top: 0.8rem;
+            display: inline-block;
+            background: #666;
+            color: #fff;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            position: relative;
+        }
+
         /* ── Responsive ── */
         @media (max-width: 600px) {
             .task-card {
@@ -1045,6 +1158,10 @@
             <path d="M0,220 L0,180 Q240,130 480,170 Q650,190 800,160 Q950,130 1100,165 Q1250,190 1440,155 L1440,220 Z"
                   fill="#1a2a1a"/>
         </svg>
+
+        <!-- Walking Puffins -->
+        <div class="walking-puffin walking-puffin-1">🐧</div>
+        <div class="walking-puffin walking-puffin-2">🐧</div>
 
         <!-- Hidden Caves -->
         <div class="cave" style="bottom: 12px; left: 8%; width: 40px; height: 30px;" onclick="revealCave(this)">
@@ -1216,6 +1333,48 @@
 
 <div class="tartan-ribbon"></div>
 
+<!-- ═══ PHOTO CAROUSEL ═══ -->
+<section class="carousel-section">
+    <h2 class="section-title" style="padding: 0 1.5rem; margin-bottom: 1.5rem;">Memories</h2>
+    <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-item"><img src="img/scotland/beauty.jpg" alt="Edinburgh" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/scotland/Cobbler.jpg" alt="The Cobbler" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/helsinki/FerrisWheel.jpg" alt="Helsinki" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/hamburg/BoatGo.jpg" alt="Hamburg" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/scotland/DeanVillage.jpg" alt="Dean Village" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/helsinki/Sunkissed.jpg" alt="Sunkissed" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/scotland/Hike.jpg" alt="Hiking" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/hamburg/German.jpg" alt="Germany" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/helsinki/Hill.jpg" alt="Helsinki Cathedral" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/scotland/GoodNight.jpg" alt="Sunset" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/scotland/MePuff.jpg" alt="Puffin" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/hamburg/LightShine.jpg" alt="Lighthouse" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/helsinki/PANAroma.jpg" alt="Panorama" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/scotland/UpAndAbove.jpg" alt="Views" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/scotland/Waterrr.jpg" alt="Waterfall" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/helsinki/Waterrr.jpg" alt="Helsinki Water" loading="lazy"></div>
+        <!-- Duplicate for seamless loop -->
+        <div class="carousel-item"><img src="img/scotland/beauty.jpg" alt="Edinburgh" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/scotland/Cobbler.jpg" alt="The Cobbler" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/helsinki/FerrisWheel.jpg" alt="Helsinki" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/hamburg/BoatGo.jpg" alt="Hamburg" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/scotland/DeanVillage.jpg" alt="Dean Village" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/helsinki/Sunkissed.jpg" alt="Sunkissed" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/scotland/Hike.jpg" alt="Hiking" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/hamburg/German.jpg" alt="Germany" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/helsinki/Hill.jpg" alt="Helsinki Cathedral" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/scotland/GoodNight.jpg" alt="Sunset" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/scotland/MePuff.jpg" alt="Puffin" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/hamburg/LightShine.jpg" alt="Lighthouse" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/helsinki/PANAroma.jpg" alt="Panorama" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/scotland/UpAndAbove.jpg" alt="Views" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/scotland/Waterrr.jpg" alt="Waterfall" loading="lazy"></div>
+        <div class="carousel-item"><img src="img/helsinki/Waterrr.jpg" alt="Helsinki Water" loading="lazy"></div>
+    </div>
+</section>
+
+<div class="tartan-ribbon"></div>
+
 <!-- ═══ ADVENTURES LINK ═══ -->
 <section class="gallery-section" style="text-align: center; padding: 3rem 1.5rem;">
     <h2 class="section-title">Our Adventures</h2>
@@ -1251,6 +1410,8 @@
         </div>
         <hr class="divider">
         <button class="rsvp-btn" onclick="acceptValentine()">Accept Task ❤️</button>
+        <br>
+        <button class="reject-btn" id="rejectBtn">Reject Task 💔</button>
     </div>
 </section>
 
@@ -1281,6 +1442,9 @@
     <div class="fact-toast-label" id="factToastLabel">🐧 Puffin Fact</div>
     <div class="fact-toast-text" id="factToastText"></div>
 </div>
+
+<!-- ═══ EASTER EGG COUNTER ═══ -->
+<div class="egg-counter" id="eggCounter" title="Hidden easter eggs found!">🥚 <span class="egg-found" id="eggFound">0</span> / 5</div>
 
 <footer>
     <p>Made with ❤️ by one Scottish puffin — <a
@@ -1417,10 +1581,17 @@
         musicBanner.classList.add('hidden');
         // Expand the player
         spotifyFloat.classList.remove('minimized');
+        // Remember music was started
+        try { localStorage.setItem('puffin_music', '1'); } catch(e) {}
     }
 
     // Start minimized until banner is clicked
     spotifyFloat.classList.add('minimized');
+
+    // Auto-start if music was previously started
+    if (localStorage.getItem('puffin_music') === '1') {
+        startMusic();
+    }
 
     // ═══ FALLING MARSHMALLOWS ═══
     const marshmallowEmojis = ['☁️', '🤍', '⬜'];
@@ -1966,6 +2137,30 @@
         setInterval(spawnSeasonal, 800);
     })();
 
+    // ═══ EASTER EGG COUNTER ═══
+    const eggKeys = ['egg_puffin_click', 'egg_cave', 'egg_reject', 'egg_taskmaster', 'egg_adventure_secret'];
+    function getEggCount() {
+        let count = 0;
+        eggKeys.forEach(k => { if (localStorage.getItem(k)) count++; });
+        return count;
+    }
+    function updateEggCounter() {
+        const el = document.getElementById('eggFound');
+        if (el) el.textContent = getEggCount();
+    }
+    function discoverEgg(key) {
+        if (!localStorage.getItem(key)) {
+            localStorage.setItem(key, '1');
+            updateEggCounter();
+            // Flash the counter
+            const counter = document.getElementById('eggCounter');
+            counter.style.transform = 'scale(1.3)';
+            counter.style.transition = 'transform 0.3s ease';
+            setTimeout(() => { counter.style.transform = ''; }, 400);
+        }
+    }
+    updateEggCounter();
+
     // ═══ PUFFIN EASTER EGG ═══
     (function() {
         const puffinHero = document.querySelector('.puffin-hero');
@@ -1976,23 +2171,65 @@
         puffinHero.addEventListener('click', function() {
             clickCount++;
             clearTimeout(clickTimer);
-            // Reset count if user stops clicking for 3 seconds
             clickTimer = setTimeout(() => { clickCount = 0; }, 3000);
 
-            // Wiggle on each click
             puffinHero.style.transition = 'transform 0.15s ease';
             puffinHero.style.transform = 'rotate(' + (Math.random() > 0.5 ? 20 : -20) + 'deg) scale(1.2)';
             setTimeout(() => { puffinHero.style.transition = ''; puffinHero.style.transform = ''; }, 200);
 
             if (clickCount >= 7) {
                 clickCount = 0;
-                // Big burst animation then redirect
+                discoverEgg('egg_puffin_click');
                 burstHeartsAt(window.innerWidth / 2, window.innerHeight / 2);
                 setTimeout(() => {
                     window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
                 }, 600);
             }
         });
+    })();
+
+    // ═══ CAVE EASTER EGG DISCOVERY ═══
+    document.querySelectorAll('.cave').forEach(cave => {
+        cave.addEventListener('click', () => discoverEgg('egg_cave'));
+    });
+
+    // ═══ REJECT BUTTON EASTER EGG ═══
+    (function() {
+        const rejectBtn = document.getElementById('rejectBtn');
+        const ticket = rejectBtn.closest('.ticket');
+        let rejectAttempts = 0;
+
+        function runAway(e) {
+            e.preventDefault();
+            rejectAttempts++;
+
+            // Get ticket bounds to keep button inside
+            const ticketRect = ticket.getBoundingClientRect();
+            const btnRect = rejectBtn.getBoundingClientRect();
+
+            // Random position within ticket
+            const maxX = ticketRect.width - btnRect.width - 40;
+            const maxY = ticketRect.height - btnRect.height - 20;
+            const newX = Math.random() * maxX - maxX / 2;
+            const newY = Math.random() * maxY - maxY / 2;
+
+            rejectBtn.style.transform = `translate(${newX}px, ${newY}px)`;
+
+            // Change text after attempts
+            const texts = [
+                'Reject Task 💔', 'Nice try! 😏', 'Nope! 🐧',
+                'You cant! 😂', 'Impossible! 💕', 'Give up! ❤️',
+                'NEVER! 🐧❤️', 'Haha! 😘', 'Just accept it! 💗'
+            ];
+            rejectBtn.textContent = texts[Math.min(rejectAttempts, texts.length - 1)];
+
+            if (rejectAttempts >= 5) {
+                discoverEgg('egg_reject');
+            }
+        }
+
+        rejectBtn.addEventListener('mouseenter', runAway);
+        rejectBtn.addEventListener('touchstart', runAway);
     })();
 </script>
 
