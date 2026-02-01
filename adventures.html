@@ -490,33 +490,38 @@
 <section class="trip-section">
     <div class="trip-header-bar">
         <span class="trip-flag">🇫🇮</span>
-        <span class="trip-title">Finland</span>
+        <span class="trip-title">Helsinki</span>
         <span class="trip-status-badge status-visited">Visited</span>
     </div>
-    <p class="trip-subtitle">Northern lights and cosy vibes</p>
+    <p class="trip-subtitle">Design, saunas, and Nordic vibes</p>
 
-    <div class="trip-layout" data-reveal data-trip="finland">
-        <div class="side-photo" id="finland-photo-left">
+    <div class="trip-layout" data-reveal data-trip="helsinki">
+        <div class="side-photo" id="helsinki-photo-left">
             <div class="photo-prompt">Select a pin</div>
         </div>
         <div class="explorer">
-            <div class="panel-map" id="finland-map">
-                <svg class="country-outline" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M120,30 L155,25 L180,35 L210,30 L230,50 L245,80 L255,120 L260,160
-                             L265,200 L260,240 L255,280 L245,320 L230,350 L210,370 L195,400
-                             L175,420 L155,440 L130,450 L110,440 L90,420 L75,390 L65,360
-                             L55,320 L50,280 L48,240 L50,200 L55,160 L60,120 L70,80 L85,50 Z"
+            <div class="panel-map" id="helsinki-map">
+                <svg class="country-outline" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Simplified Helsinki peninsula/coastline -->
+                    <path d="M40,180 L80,160 L120,170 L160,155 L200,160 L230,150 L260,155 L290,148
+                             L320,155 L350,150 L370,165 L375,200 L370,240 L360,270 L340,290
+                             L310,300 L280,305 L250,310 L220,315 L190,310 L160,305 L130,295
+                             L100,285 L70,270 L50,245 L40,220 Z"
                           fill="#1a3a3a" stroke="var(--gold)" stroke-width="1.5" opacity="0.6"/>
-                    <ellipse cx="150" cy="340" rx="20" ry="15" fill="#0d2040" opacity="0.5"/>
-                    <ellipse cx="180" cy="290" rx="12" ry="18" fill="#0d2040" opacity="0.4"/>
-                    <ellipse cx="120" cy="380" rx="15" ry="10" fill="#0d2040" opacity="0.4"/>
+                    <!-- Baltic Sea -->
+                    <path d="M0,290 Q100,310 200,320 Q300,310 400,320 L400,400 L0,400 Z"
+                          fill="#0d2040" opacity="0.35"/>
+                    <!-- Harbour area -->
+                    <ellipse cx="280" cy="280" rx="25" ry="10" fill="#0d2040" opacity="0.4"/>
+                    <!-- Töölönlahti bay -->
+                    <ellipse cx="200" cy="190" rx="20" ry="15" fill="#0d2040" opacity="0.4"/>
                 </svg>
             </div>
-            <div class="panel-info" id="finland-info">
-                <div class="info-prompt">Click a pin on the map to explore Finland</div>
+            <div class="panel-info" id="helsinki-info">
+                <div class="info-prompt">Click a pin on the map to explore Helsinki</div>
             </div>
         </div>
-        <div class="side-photo" id="finland-photo-right">
+        <div class="side-photo" id="helsinki-photo-right">
             <div class="photo-prompt">Select a pin</div>
         </div>
     </div>
@@ -529,7 +534,7 @@
     <div class="trip-header-bar">
         <span class="trip-flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span>
         <span class="trip-title">Scotland</span>
-        <span class="trip-status-badge status-current">Currently Here</span>
+        <span class="trip-status-badge status-visited">Visited</span>
     </div>
     <p class="trip-subtitle">Lochs, hills, and where the puffins live</p>
 
@@ -583,6 +588,7 @@
         </div>
     </div>
 
+    <!-- Explorer will be added after the trip
     <div class="trip-layout upcoming-explorer" data-reveal data-trip="malaga">
         <div class="side-photo" id="malaga-photo-left">
             <div class="photo-prompt">Photos coming soon...</div>
@@ -607,12 +613,14 @@
             <div class="photo-prompt">Photos coming soon...</div>
         </div>
     </div>
+    -->
 </section>
 
 <div class="tartan-ribbon"></div>
 
 <footer>
     <p>Made with love by one Scottish puffin — <a href="https://commons.wikimedia.org/wiki/File:Atlantic_Puffins,_Scotland.jpg" target="_blank">see the real ones</a></p>
+    <p style="margin-top: 0.8rem;"><a href="contribute.html" style="color: var(--puffin-orange); font-size: 1rem;">Contribute</a></p>
 </footer>
 
 <script>
@@ -623,30 +631,41 @@
 const tripData = {
     hamburg: [
         {
-            id: 'speicherstadt', name: 'Speicherstadt', top: 52, left: 50,
-            desc: "The world's largest warehouse district, built on timber-pile foundations in the port of Hamburg. A UNESCO World Heritage Site since 2015.",
+            id: 'elbstrand', name: 'Elbstrand Wittenbergen', top: 48, left: 25,
+            desc: "A beautiful sandy beach on the Elbe river in the west of Hamburg. Watch massive container ships glide past while you relax on the sand.",
             facts: [
-                "It contains the largest Oriental carpet store in the world",
-                "The red-brick warehouses were built between 1885 and 1927",
-                "It houses the Hamburg Dungeon, a miniature museum, and coffee roasters",
-                "The district sits on 1.1 million oak logs driven into the marshland"
+                "One of the few spots where you can sunbathe while watching ocean-going ships pass by",
+                "The beach stretches along the Elbe with views of the opposite shore",
+                "Popular for evening bonfires and summer barbecues",
+                "The lighthouse nearby marks the entrance to Hamburg's port"
             ],
             photos: ['placeholder', 'placeholder']
         },
         {
-            id: 'miniatur', name: 'Miniatur Wunderland', top: 50, left: 54,
-            desc: "The world's largest model railway exhibition, featuring over 1,000 trains across miniature landscapes from around the globe.",
+            id: 'annas-mom', name: "Anna's Mom's Home", top: 42, left: 22,
+            desc: "Rissener Dorfstraße 48 — the cosiest place in Hamburg. Nothing beats a warm welcome, home-cooked food, and feeling like family.",
             facts: [
-                "It has over 16km of model railway track",
-                "More than 300,000 lights illuminate the tiny world",
-                "The airport section took 6 years to build and planes actually take off",
-                "Over 1.4 million visitors come every year, making it Germany's top attraction"
+                "The most important address in all of Hamburg",
+                "Where the best coffee and cake in Germany is served",
+                "Cosy vibes guaranteed, no matter the weather outside",
+                "A home away from home for two wandering puffins"
             ],
             photos: ['placeholder', 'placeholder']
         },
         {
-            id: 'elbphil', name: 'Elbphilharmonie', top: 55, left: 45,
-            desc: "Hamburg's stunning concert hall on the Elbe river, nicknamed 'Elphi'. Its wave-like glass roof is an architectural marvel.",
+            id: 'wittenbergener', name: 'Wittenbergener Heide', top: 38, left: 20,
+            desc: "A wild, heathland nature reserve near the Elbe. Purple heather blooms in late summer across sandy dunes and ancient oaks.",
+            facts: [
+                "It's one of Hamburg's last remaining heathland areas",
+                "The sandy paths through the heather feel like a mini Scottish moor",
+                "Protected birds nest here including nightjars and woodlarks",
+                "In August the heather turns the landscape purple — stunning for walks"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'elbphil', name: 'Elbphilharmonie Hamburg', top: 55, left: 52,
+            desc: "Hamburg's iconic concert hall on the Elbe river, nicknamed 'Elphi'. Its wave-like glass roof is an architectural marvel.",
             facts: [
                 "The building cost rose from 77 million to over 866 million euros",
                 "Its facade has 1,100 curved glass panels, each individually shaped",
@@ -656,132 +675,75 @@ const tripData = {
             photos: ['placeholder', 'placeholder']
         },
         {
-            id: 'harbour', name: 'Harbour Cruise', top: 60, left: 42,
-            desc: "Hamburg's port is the third-largest in Europe. A Barkasse boat ride through the harbour is a quintessential Hamburg experience.",
+            id: 'baaken', name: 'Baaken Park', top: 52, left: 58,
+            desc: "A modern waterfront park in Hamburg's HafenCity. Built on reclaimed harbour land with playgrounds, green hills, and canal views.",
             facts: [
-                "The Port of Hamburg handles around 130 million tonnes of cargo yearly",
-                "You can spot giant container ships from over 60 countries",
-                "The old Elbe Tunnel (1911) runs 24m under the river and you can walk through it",
-                "Hamburg has more bridges than Venice, Amsterdam, and London combined"
+                "It's the green heart of Europe's largest inner-city development project",
+                "The park opened in 2018 on what used to be industrial dockland",
+                "Artificial hills give panoramic views of the surrounding HafenCity",
+                "A floating pontoon garden sits on the Baakenhafen canal"
             ],
             photos: ['placeholder', 'placeholder']
         },
         {
-            id: 'reeperbahn', name: 'Reeperbahn', top: 56, left: 38,
-            desc: "Hamburg's famous entertainment district. Known as 'the sinful mile', it's where The Beatles played their early gigs.",
+            id: 'rathaus', name: 'Hamburg Townhall', top: 48, left: 50,
+            desc: "The Hamburg Rathaus is one of Germany's most impressive city halls, with its Neo-Renaissance architecture dominating the city centre.",
             facts: [
-                "The Beatles performed here 281 times between 1960 and 1962",
-                "The street name comes from rope-makers (Reepers) who worked here",
-                "It transforms into a massive street party during the Reeperbahn Festival",
-                "Beatles-Platz square features steel silhouettes of the Fab Four"
+                "It has 647 rooms — more than Buckingham Palace",
+                "Built between 1886 and 1897 after the Great Fire of 1842",
+                "The tower stands 112 metres tall and dominates the Hamburg skyline",
+                "The Rathausmarkt square in front hosts Christmas markets and festivals"
             ],
             photos: ['placeholder', 'placeholder']
         },
         {
-            id: 'planten', name: 'Planten un Blomen', top: 40, left: 48,
-            desc: "A stunning urban park in the heart of Hamburg with Japanese gardens, themed areas, and free summer light shows.",
+            id: 'alsterfontaene', name: 'Alsterfontäne', top: 40, left: 52,
+            desc: "The famous fountain in the middle of the Inner Alster lake. A Hamburg landmark that shoots water 60 metres into the air.",
             facts: [
-                "The water-light concerts in summer have run since 1930",
-                "It features the largest Japanese garden in Europe",
-                "The park covers 47 hectares of green space in the city centre",
-                "It was built on the site of Hamburg's old city fortifications"
+                "The fountain has been operating since 1987",
+                "It shoots water up to 60 metres high, visible across the city centre",
+                "The Inner Alster is surrounded by some of Hamburg's most elegant buildings",
+                "In winter the Alster sometimes freezes and becomes a giant ice rink"
             ],
             photos: ['placeholder', 'placeholder']
         },
         {
-            id: 'hamburg-p1', name: 'Placeholder 1', top: 35, left: 60,
-            desc: "Add your own Hamburg memory here! Click to update with your favourite spot.",
-            facts: ["Update this with your own fun facts", "What did you discover?", "Add your memories here"],
+            id: 'leuchtturm', name: 'Leuchtturm Rissen', top: 45, left: 18,
+            desc: "The Rissen Lighthouse — a charming navigational light on the banks of the Elbe, marking the river's edge near Wittenbergen.",
+            facts: [
+                "It guides ships navigating the Elbe into Hamburg's port",
+                "The area around it is perfect for sunset walks along the river",
+                "Elbe lighthouses are painted in distinctive red and white stripes",
+                "You can watch ships from all over the world pass within metres"
+            ],
             photos: ['placeholder', 'placeholder']
         },
         {
-            id: 'hamburg-p2', name: 'Placeholder 2', top: 45, left: 65,
-            desc: "Another spot to fill with your Hamburg adventures.",
-            facts: ["Your memory goes here", "What was your favourite food?", "Add a fun fact you learned"],
-            photos: ['placeholder', 'placeholder']
-        },
-        {
-            id: 'hamburg-p3', name: 'Placeholder 3', top: 38, left: 30,
-            desc: "One more space for a Hamburg highlight.",
-            facts: ["Waiting for your story", "Did you find any hidden gems?"],
-            photos: ['placeholder', 'placeholder']
-        },
-        {
-            id: 'hamburg-p4', name: 'Placeholder 4', top: 48, left: 28,
-            desc: "Save this pin for a special Hamburg moment.",
-            facts: ["Your adventure awaits", "Fill this in later"],
+            id: 'unterfeuer', name: 'Unterfeuer', top: 50, left: 15,
+            desc: "The lower range light (Unterfeuer) near Wittenbergen beach. Together with the upper light, it guides ships safely up the Elbe.",
+            facts: [
+                "Range lights work in pairs — when aligned, ships know they're in the safe channel",
+                "The Wittenbergen Unterfeuer is a favourite photo spot at sunset",
+                "It sits right on the beach path, a landmark for local walkers",
+                "Hamburg has several Unterfeuer lights along the Elbe's course"
+            ],
             photos: ['placeholder', 'placeholder']
         }
     ],
-    finland: [
+    helsinki: [
         {
-            id: 'helsinki', name: 'Helsinki', top: 82, left: 55,
-            desc: "Finland's vibrant capital on the Baltic Sea. A city of design, saunas, and fresh Nordic cuisine.",
+            id: 'cathedral', name: 'Helsinki Cathedral', top: 52, left: 52,
+            desc: "The iconic white cathedral dominating Senate Square. Its green domes are one of the most recognisable landmarks in all of Scandinavia.",
             facts: [
-                "Helsinki has over 80 public saunas — more per capita than anywhere else",
-                "The city was founded in 1550 by King Gustav I of Sweden",
-                "Helsinki Cathedral's green domes are one of the most photographed landmarks in Scandinavia",
-                "The city has more islands than almost any coastal capital in the world"
+                "Built between 1830 and 1852, designed by Carl Ludvig Engel",
+                "Its white neoclassical facade was inspired by St Petersburg's architecture",
+                "The cathedral sits atop a grand staircase of 62 steps",
+                "Over 350,000 people visit it every year"
             ],
             photos: ['placeholder', 'placeholder']
         },
         {
-            id: 'rovaniemi', name: 'Rovaniemi', top: 28, left: 48,
-            desc: "The official hometown of Santa Claus, sitting right on the Arctic Circle. A gateway to Lapland's wilderness.",
-            facts: [
-                "You can cross the official Arctic Circle line at Santa Claus Village",
-                "The city was almost entirely destroyed in WWII and rebuilt by Alvar Aalto",
-                "Rovaniemi's street plan from above is shaped like a reindeer's antlers",
-                "The Northern Lights are visible about 150 nights per year here"
-            ],
-            photos: ['placeholder', 'placeholder']
-        },
-        {
-            id: 'aurora', name: 'Northern Lights Spot', top: 20, left: 42,
-            desc: "Finnish Lapland is one of the best places on Earth to witness the Aurora Borealis dancing across the sky.",
-            facts: [
-                "The Sami people believed the lights were sparks from a fox's tail sweeping the snow",
-                "In Finnish, the Northern Lights are called 'revontulet' — fox fires",
-                "Glass igloos let you watch the Aurora from the warmth of your bed",
-                "The auroral zone crosses Finnish Lapland perfectly for viewing"
-            ],
-            photos: ['placeholder', 'placeholder']
-        },
-        {
-            id: 'sauna', name: 'Finnish Sauna', top: 70, left: 50,
-            desc: "The sauna is sacred in Finland. There are 3.3 million saunas for 5.5 million people — more saunas than cars.",
-            facts: [
-                "The word 'sauna' is one of the few Finnish words used worldwide",
-                "Traditional saunas are heated by a wood-burning stove (kiuas)",
-                "It's common to jump into an icy lake right after a hot sauna session",
-                "Finnish parliament even has its own sauna for informal negotiations"
-            ],
-            photos: ['placeholder', 'placeholder']
-        },
-        {
-            id: 'frozen-lake', name: 'Frozen Lakes', top: 55, left: 58,
-            desc: "Finland has 187,888 lakes, and in winter many freeze solid enough to walk, ski, and even drive on.",
-            facts: [
-                "Lake Saimaa is Europe's fourth-largest lake and home to the rare Saimaa ringed seal",
-                "Finns ice-swim ('avanto') in holes cut in frozen lakes — it's said to boost happiness",
-                "Some lakes freeze to over 50cm thick, supporting cars and ice roads",
-                "Lake Inari in Lapland is so remote you can see the Milky Way reflected in its ice"
-            ],
-            photos: ['placeholder', 'placeholder']
-        },
-        {
-            id: 'reindeer', name: 'Reindeer Encounters', top: 35, left: 55,
-            desc: "In Finnish Lapland, reindeer outnumber people. There are about 200,000 semi-wild reindeer roaming the north.",
-            facts: [
-                "Reindeer herding has been practised by the Sami people for over 1,000 years",
-                "Every reindeer in Finland has an owner — they all wear ear markings",
-                "Reindeer can see ultraviolet light, helping them spot predators in the snow",
-                "Their hooves change shape with the seasons — spreading wide in summer, shrinking in winter"
-            ],
-            photos: ['placeholder', 'placeholder']
-        },
-        {
-            id: 'suomenlinna', name: 'Suomenlinna', top: 85, left: 58,
+            id: 'suomenlinna', name: 'Suomenlinna', top: 72, left: 60,
             desc: "A UNESCO-listed sea fortress spread across six islands off Helsinki. Built in the 1700s to defend against Russia.",
             facts: [
                 "It's one of the largest maritime fortresses in the world",
@@ -792,21 +754,91 @@ const tripData = {
             photos: ['placeholder', 'placeholder']
         },
         {
-            id: 'finland-p1', name: 'Placeholder 1', top: 45, left: 38,
-            desc: "Add your own Finland memory here!",
-            facts: ["Your adventure goes here", "What did you love most?"],
+            id: 'market-square', name: 'Market Square', top: 55, left: 56,
+            desc: "Kauppatori — Helsinki's vibrant harbourside market. Fresh fish, berries, coffee, and handicrafts right on the waterfront.",
+            facts: [
+                "The market has operated here since the early 1800s",
+                "Try the famous mustikkapiirakka (blueberry pie) from a market stall",
+                "Ferries to Suomenlinna and Tallinn depart from right next to the square",
+                "The Havis Amanda fountain statue nearby is a symbol of Helsinki"
+            ],
             photos: ['placeholder', 'placeholder']
         },
         {
-            id: 'finland-p2', name: 'Placeholder 2', top: 60, left: 40,
-            desc: "Another Finland highlight to fill in.",
-            facts: ["Waiting for your story", "Did the cold surprise you?"],
+            id: 'sauna', name: 'Löyly Sauna', top: 60, left: 48,
+            desc: "Helsinki's famous public sauna on the waterfront. A stunning wooden building where you sauna, then plunge into the Baltic Sea.",
+            facts: [
+                "The word 'sauna' is one of the few Finnish words used worldwide",
+                "Finland has 3.3 million saunas for 5.5 million people — more saunas than cars",
+                "Löyly's architecture features a sculptural wooden lattice facade",
+                "Finnish parliament even has its own sauna for informal negotiations"
+            ],
             photos: ['placeholder', 'placeholder']
         },
         {
-            id: 'finland-p3', name: 'Placeholder 3', top: 50, left: 48,
-            desc: "Save this pin for a special Finland moment.",
-            facts: ["Your memory goes here"],
+            id: 'temppeliaukio', name: 'Rock Church', top: 45, left: 44,
+            desc: "Temppeliaukion kirkko — a church carved directly into solid rock. The copper dome and raw stone walls create incredible acoustics.",
+            facts: [
+                "Excavated into natural bedrock and completed in 1969",
+                "The interior walls are natural uncut rock face",
+                "Its copper dome lets in natural light through 180 skylights",
+                "It doubles as a concert venue because of its amazing acoustics"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'design-district', name: 'Design District', top: 50, left: 46,
+            desc: "A neighbourhood of over 200 design shops, galleries, studios, and museums. Helsinki is a UNESCO City of Design.",
+            facts: [
+                "Helsinki was designated a UNESCO City of Design in 2012",
+                "The district spans 25 streets in the city centre",
+                "Finnish design icons like Marimekko and Iittala have flagship stores here",
+                "Arabia Factory is one of the world's largest ceramics factories"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'oodi', name: 'Oodi Library', top: 48, left: 50,
+            desc: "Helsinki's stunning central library, a temple to free access to knowledge. It has 3D printers, recording studios, and a rooftop terrace.",
+            facts: [
+                "Opened in 2018 to celebrate Finland's 100 years of independence",
+                "It has 3D printers, sewing machines, gaming consoles — all free to use",
+                "The building cost 98 million euros and won the Public Library of the Year award",
+                "The undulating wooden roof terrace offers city views"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'ice-swim', name: 'Ice Swimming', top: 65, left: 52,
+            desc: "Avanto — the Finnish art of plunging into icy water through a hole in frozen sea ice. It's said to boost mood and health.",
+            facts: [
+                "Allas Sea Pool in Helsinki offers year-round sea swimming",
+                "The Baltic Sea drops to around 0-2°C in winter near Helsinki",
+                "Finns combine ice swimming with sauna — hot, cold, hot, cold, repeat",
+                "Studies show regular cold water immersion boosts endorphins and reduces stress"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'sibelius', name: 'Sibelius Monument', top: 42, left: 40,
+            desc: "A striking sculpture of over 600 steel pipes in Sibelius Park, dedicated to the composer Jean Sibelius.",
+            facts: [
+                "Created by sculptor Eila Hiltunen and unveiled in 1967",
+                "It consists of over 600 hollow steel pipes welded together",
+                "Jean Sibelius is Finland's most famous composer, known for Finlandia",
+                "The monument was controversial when unveiled — many expected a traditional statue"
+            ],
+            photos: ['placeholder', 'placeholder']
+        },
+        {
+            id: 'senaatintori', name: 'Senate Square', top: 50, left: 54,
+            desc: "The grand neoclassical heart of Helsinki, surrounded by the Cathedral, Government Palace, and University of Helsinki.",
+            facts: [
+                "Designed by Carl Ludvig Engel to resemble St Petersburg's grand squares",
+                "The statue of Tsar Alexander II stands in the centre",
+                "The square hosts events, markets, and Christmas celebrations",
+                "All four surrounding buildings were designed by the same architect"
+            ],
             photos: ['placeholder', 'placeholder']
         }
     ],
@@ -919,8 +951,9 @@ const tripData = {
             ],
             photos: ['img/scotland/puf.jpg', 'img/scotland/Legoooo.jpg']
         }
-    ],
-    malaga: [
+    ]
+    /* malaga explorer is commented out — will be added after the trip
+    ,malaga: [
         {
             id: 'alcazaba', name: 'Alcazaba', top: 45, left: 52,
             desc: "A stunning Moorish fortress-palace from the 11th century, perched on a hillside with views over the city and sea.",
@@ -1017,6 +1050,7 @@ const tripData = {
             photos: ['placeholder', 'placeholder']
         }
     ]
+    */
 };
 
 const pinSVG = `<svg viewBox="0 0 24 24"><path d="M12 0C7 0 3 4 3 9c0 7 9 15 9 15s9-8 9-15c0-5-4-9-9-9z" fill="var(--tartan-red)"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg>`;
@@ -1119,7 +1153,7 @@ const observer = new IntersectionObserver((entries) => {
 revealEls.forEach(el => observer.observe(el));
 
 // ═══ MALAGA COUNTDOWN ═══
-const malagaDate = new Date('2026-06-01T10:00:00');
+const malagaDate = new Date('2026-04-19T10:00:00');
 function updateMalagaCountdown() {
     const now = new Date();
     const diff = malagaDate - now;
