@@ -6,18 +6,9 @@ A Taskmaster-themed valentine's day invite website featuring puffins, Scottish h
 
 Update these placeholder items in `index.html` before sharing the final site:
 
-### Music Player (line ~1044-1055)
-- [ ] Update the `memory` field for **"Weightless" - All Time Low** (currently: "Our first gig together")
-- [ ] Update the `memory` field for **"Dear Maria, Count Me In" - All Time Low** (currently: "We screamed every word")
-- [ ] Update the `memory` field for **"Monsters" - All Time Low** (currently: "That chorus hit different live")
-- [ ] Update the `memory` field for **"Blood // Water" - Grandson** (currently: "The energy was unreal")
-- [ ] Update the `memory` field for **"Oh No!!!" - Grandson** (currently: "The crowd went wild")
-- [ ] Update the `memory` field for **"Escapism." - RAYE** (currently: "Goosebumps the entire time")
-- [ ] Update the `memory` field for **"Bed" - RAYE** (currently: "Her vocals were something else")
-- [ ] Update the `memory` field for **"A-Punk" - Vampire Weekend** (currently: "Instant happiness")
-- [ ] Update the `memory` field for **"Unbelievers" - Vampire Weekend** (currently: "Dancing like nobody's watching")
-- [ ] Update the `memory` field for **"Harmony Hall" - Vampire Weekend** (currently: "The sunset, the music, us")
-- [ ] Add or remove songs to match your actual concert setlist memories
+### Spotify Playlist
+- [x] ~~Spotify playlist is embedded and linked~~ (done!)
+- [ ] Update the Spotify playlist link if you want to use a different playlist (search for the `<iframe>` in `index.html`)
 
 ### Venue & Date Details (line ~911-916)
 - [ ] Update venue from **"TBD (Somewhere Special)"** to actual location
