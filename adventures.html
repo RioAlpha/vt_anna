@@ -148,7 +148,7 @@
             display: grid;
             grid-template-columns: 300px 1fr 280px;
             gap: 1.5rem;
-            min-height: 420px;
+            height: 450px;
             background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
             border: 1px solid rgba(212,168,67,0.2);
             border-radius: 16px;
@@ -168,6 +168,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
         .panel-map svg.country-outline {
             width: 100%;
@@ -213,6 +214,7 @@
             display: flex;
             flex-direction: column;
             overflow-y: auto;
+            min-height: 0;
         }
         .panel-info .info-prompt {
             flex: 1;
@@ -289,8 +291,8 @@
         }
         .panel-photos .photo-slot {
             display: none;
-            flex-direction: column;
-            gap: 1rem;
+            flex-direction: row;
+            gap: 0.75rem;
             animation: fadeSlideIn 0.4s ease;
         }
         .panel-photos .photo-slot.active {
@@ -299,7 +301,7 @@
         }
         .photo-frame {
             flex: 1;
-            min-height: 160px;
+            height: 100%;
             background: #222;
             border-radius: 10px;
             border: 2px solid rgba(255,255,255,0.08);
@@ -403,14 +405,12 @@
             .explorer {
                 grid-template-columns: 1fr;
                 grid-template-rows: auto auto auto;
+                height: auto;
             }
             .panel-map {
                 max-height: 350px;
             }
-            .panel-photos .photo-slot.active {
-                flex-direction: row;
-            }
-            .photo-frame { min-height: 140px; }
+            .photo-frame { min-height: 140px; height: auto; }
         }
         @media (max-width: 500px) {
             .panel-photos .photo-slot.active {
