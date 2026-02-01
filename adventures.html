@@ -543,6 +543,25 @@
             transform: scale(2);
         }
 
+        /* ── Reset Button ── */
+        .reset-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.3);
+            font-family: 'Caveat', cursive;
+            font-size: 0.9rem;
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .reset-btn:hover {
+            border-color: var(--puffin-orange);
+            color: var(--puffin-orange);
+        }
+
         /* ── Footer ── */
         footer {
             text-align: center;
@@ -781,6 +800,7 @@
 
 <footer>
     <p>Made with love by one Scottish puffin — <a href="https://commons.wikimedia.org/wiki/File:Atlantic_Puffins,_Scotland.jpg" target="_blank">see the real ones</a></p>
+    <button class="reset-btn" onclick="resetEverything()">Reset everything</button>
 </footer>
 
 <script>
@@ -1400,6 +1420,18 @@ function discoverEgg(key) {
     }
 }
 updateEggCounter();
+
+// ═══ RESET EVERYTHING ═══
+function resetEverything() {
+    // Easter eggs
+    eggKeys.forEach(k => localStorage.removeItem(k));
+    updateEggCounter();
+    // Spotify state
+    localStorage.removeItem('puffin_music');
+    musicBanner.classList.remove('hidden');
+    spotifyEmbed.innerHTML = '';
+    spotifyFloat.classList.add('minimized');
+}
 
 // ═══ ADVENTURE EASTER EGG 1: Triple-click page title → Taskmaster Store ═══
 (function() {
