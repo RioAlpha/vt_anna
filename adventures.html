@@ -146,7 +146,7 @@
         /* ── Three-Panel Layout ── */
         .explorer {
             display: grid;
-            grid-template-columns: 300px 1fr 280px;
+            grid-template-columns: 280px 1fr 400px;
             gap: 1.5rem;
             height: 450px;
             background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
@@ -315,7 +315,7 @@
         }
         .photo-frame img {
             width: 100%; height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
         .photo-frame-label {
             position: absolute;
@@ -875,15 +875,23 @@ const tripData = {
             photos: ['img/scotland/SadFace.jpg', 'img/scotland/Swampp.jpg']
         },
         {
-            id: 'scotland-p1', name: 'Placeholder 1', top: 45, left: 50,
-            desc: "Add your own Scottish adventure here!",
-            facts: ["Your Highland memory goes here", "What was the best view?"],
+            id: 'our-casa', name: 'Our Casa', top: 45, left: 50,
+            desc: "Our cosy little casa — the place where every adventure starts and ends. Home is wherever we're together.",
+            facts: [
+                "The best cups of tea are made right here",
+                "No matter where we travel, this is always the best place to come back to",
+                "Official puffin nest headquarters"
+            ],
             photos: ['img/scotland/Legoooo.jpg', 'img/scotland/MePuff.jpg']
         },
         {
-            id: 'scotland-p2', name: 'Placeholder 2', top: 78, left: 50,
-            desc: "Save this pin for another Scottish gem.",
-            facts: ["Your story awaits", "Did you find any wild haggis?"],
+            id: 'lego-lets-go', name: 'LegoLetsGo', top: 78, left: 50,
+            desc: "Can you see the similarity? One is us and the other is the Lego version. Honestly hard to tell the difference.",
+            facts: [
+                "Lego puffins are just as cute as real ones",
+                "Everything is awesome when you have a mini-me",
+                "The resemblance is uncanny, don't you think?"
+            ],
             photos: ['img/scotland/puf.jpg', 'img/scotland/Legoooo.jpg']
         }
     ],
@@ -1024,16 +1032,18 @@ Object.keys(tripData).forEach(tripKey => {
 
         function buildPhotoFrame(photoPath, label) {
             if (photoPath && photoPath !== 'placeholder') {
+                // Extract filename without extension as label
+                const fileName = photoPath.split('/').pop().replace(/\.[^.]+$/, '');
                 return `<div class="photo-frame">
-                    <img src="${photoPath}" alt="${label}" loading="lazy">
-                    <div class="photo-frame-label">${label}</div>
+                    <img src="${photoPath}" alt="${fileName}" loading="lazy">
+                    <div class="photo-frame-label">${fileName}</div>
                 </div>`;
             }
             return `<div class="photo-frame">📷<div class="photo-frame-label">${label}</div></div>`;
         }
 
-        const lbl1 = loc.name.startsWith('Placeholder') ? 'Add photo' : loc.name + ' — Photo 1';
-        const lbl2 = loc.name.startsWith('Placeholder') ? 'Add photo' : loc.name + ' — Photo 2';
+        const lbl1 = 'Add photo';
+        const lbl2 = 'Add photo';
         photoDiv.innerHTML = buildPhotoFrame(loc.photos[0], lbl1) + buildPhotoFrame(loc.photos[1], lbl2);
         photosEl.appendChild(photoDiv);
 
