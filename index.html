@@ -562,150 +562,6 @@
             max-width: 900px;
             margin: 0 auto;
         }
-        .polaroid-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 2rem;
-            justify-items: center;
-        }
-        .polaroid {
-            background: #fff;
-            padding: 12px 12px 40px 12px;
-            border-radius: 4px;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.35);
-            transform: rotate(var(--rot, -2deg));
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            opacity: 0;
-            max-width: 260px;
-        }
-        .polaroid.visible {
-            opacity: 1;
-            transition: opacity 0.6s ease, transform 0.3s ease;
-        }
-        .polaroid:hover {
-            transform: rotate(0deg) scale(1.05);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-            z-index: 5;
-        }
-        .polaroid-img {
-            width: 100%;
-            aspect-ratio: 4/3;
-            background: #ddd;
-            border-radius: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: #aaa;
-            overflow: hidden;
-        }
-        .polaroid-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .polaroid-caption {
-            font-family: 'Caveat', cursive;
-            font-size: 1rem;
-            color: #333;
-            text-align: center;
-            margin-top: 8px;
-        }
-
-        /* ── Scotland Map ── */
-        .map-section {
-            padding: 4rem 1.5rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .map-container {
-            display: flex;
-            gap: 2rem;
-            align-items: flex-start;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        .map-container.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .scotland-map {
-            flex-shrink: 0;
-            width: 320px;
-            position: relative;
-        }
-        .scotland-map svg {
-            width: 100%;
-            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-        }
-        .map-pin {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            transform: translate(-50%, -100%);
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            z-index: 3;
-        }
-        .map-pin:hover {
-            transform: translate(-50%, -100%) scale(1.3);
-        }
-        .map-pin svg { width: 100%; height: 100%; }
-        .map-pin-tooltip {
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--tartan-red);
-            color: #fff;
-            font-family: 'Caveat', cursive;
-            font-size: 0.95rem;
-            padding: 0.3rem 0.8rem;
-            border-radius: 12px;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease;
-            margin-bottom: 4px;
-        }
-        .map-pin:hover .map-pin-tooltip {
-            opacity: 1;
-        }
-        .map-locations {
-            flex: 1;
-        }
-        .map-location-item {
-            background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%);
-            border: 1px solid rgba(212,168,67,0.2);
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: border-color 0.2s ease;
-        }
-        .map-location-item:hover {
-            border-color: var(--gold);
-        }
-        .loc-icon {
-            font-size: 1.5rem;
-        }
-        .loc-info {
-            flex: 1;
-        }
-        .loc-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            color: var(--marshmallow);
-        }
-        .loc-desc {
-            font-family: 'Caveat', cursive;
-            font-size: 0.95rem;
-            color: rgba(255,255,255,0.5);
-        }
-
         /* ── Random Facts Toast ── */
         .fact-toast {
             position: fixed;
@@ -919,9 +775,6 @@
             .countdown-num { font-size: 1.5rem; }
             .spotify-float { width: calc(100% - 20px); right: 10px; top: 10px; }
             .quiz-float { width: calc(100% - 20px); left: 10px; top: auto; bottom: 10px; }
-            .map-container { flex-direction: column; align-items: center; }
-            .scotland-map { width: 100%; max-width: 320px; }
-            .polaroid-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
         }
     </style>
 </head>
@@ -1114,128 +967,11 @@
 
 <div class="tartan-ribbon"></div>
 
-<!-- ═══ POLAROID GALLERY ═══ -->
-<section class="gallery-section">
-    <h2 class="section-title">Our Wee Moments</h2>
-    <div class="polaroid-grid">
-        <div class="polaroid" data-reveal style="--rot: -3deg;">
-            <div class="polaroid-img" id="photo-1">📷</div>
-            <div class="polaroid-caption">Placeholder — add your photo!</div>
-        </div>
-        <div class="polaroid" data-reveal style="--rot: 2deg;">
-            <div class="polaroid-img" id="photo-2">📷</div>
-            <div class="polaroid-caption">Placeholder — add your photo!</div>
-        </div>
-        <div class="polaroid" data-reveal style="--rot: -1deg;">
-            <div class="polaroid-img" id="photo-3">📷</div>
-            <div class="polaroid-caption">Placeholder — add your photo!</div>
-        </div>
-        <div class="polaroid" data-reveal style="--rot: 3deg;">
-            <div class="polaroid-img" id="photo-4">📷</div>
-            <div class="polaroid-caption">Placeholder — add your photo!</div>
-        </div>
-        <div class="polaroid" data-reveal style="--rot: -2deg;">
-            <div class="polaroid-img" id="photo-5">📷</div>
-            <div class="polaroid-caption">Placeholder — add your photo!</div>
-        </div>
-        <div class="polaroid" data-reveal style="--rot: 1deg;">
-            <div class="polaroid-img" id="photo-6">📷</div>
-            <div class="polaroid-caption">Placeholder — add your photo!</div>
-        </div>
-    </div>
-</section>
-
-<div class="tartan-ribbon"></div>
-
-<!-- ═══ SCOTLAND MAP ═══ -->
-<section class="map-section">
-    <h2 class="section-title">Our Scottish Adventures</h2>
-    <div class="map-container" data-reveal>
-        <div class="scotland-map">
-            <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
-                <!-- Simplified Scotland outline -->
-                <path d="M200,20 L240,40 L280,30 L300,50 L320,45 L340,70 L330,100 L350,120 L340,150
-                         L360,170 L350,200 L330,210 L340,240 L320,260 L300,250 L280,270 L290,300
-                         L270,320 L280,350 L260,370 L240,360 L220,380 L200,390 L180,400 L160,420
-                         L140,410 L130,430 L150,450 L140,470 L120,460 L100,470 L90,450 L80,430
-                         L90,400 L70,380 L80,350 L60,330 L70,300 L50,280 L60,250 L80,240 L70,210
-                         L90,190 L80,160 L100,140 L90,110 L110,90 L100,60 L120,50 L140,30 L170,25 Z"
-                      fill="#1a4a2a" stroke="var(--gold)" stroke-width="1.5" opacity="0.7"/>
-                <!-- Loch shapes for detail -->
-                <ellipse cx="160" cy="320" rx="15" ry="40" fill="#0d2040" opacity="0.5" transform="rotate(-10,160,320)"/>
-                <ellipse cx="200" cy="200" rx="8" ry="20" fill="#0d2040" opacity="0.4"/>
-            </svg>
-            <!-- Map Pins -->
-            <div class="map-pin" style="top: 72%; left: 42%;">
-                <svg viewBox="0 0 24 24"><path d="M12 0C7 0 3 4 3 9c0 7 9 15 9 15s9-8 9-15c0-5-4-9-9-9z" fill="var(--tartan-red)"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg>
-                <div class="map-pin-tooltip">Loch Lomond & The Trossachs</div>
-            </div>
-            <div class="map-pin" style="top: 65%; left: 58%;">
-                <svg viewBox="0 0 24 24"><path d="M12 0C7 0 3 4 3 9c0 7 9 15 9 15s9-8 9-15c0-5-4-9-9-9z" fill="var(--tartan-red)"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg>
-                <div class="map-pin-tooltip">Edinburgh</div>
-            </div>
-            <div class="map-pin" style="top: 55%; left: 38%;">
-                <svg viewBox="0 0 24 24"><path d="M12 0C7 0 3 4 3 9c0 7 9 15 9 15s9-8 9-15c0-5-4-9-9-9z" fill="var(--tartan-red)"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg>
-                <div class="map-pin-tooltip">Steall Waterfall</div>
-            </div>
-            <div class="map-pin" style="top: 68%; left: 35%;">
-                <svg viewBox="0 0 24 24"><path d="M12 0C7 0 3 4 3 9c0 7 9 15 9 15s9-8 9-15c0-5-4-9-9-9z" fill="var(--tartan-red)"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg>
-                <div class="map-pin-tooltip">Hidden Glen</div>
-            </div>
-            <div class="map-pin" style="top: 70%; left: 30%;">
-                <svg viewBox="0 0 24 24"><path d="M12 0C7 0 3 4 3 9c0 7 9 15 9 15s9-8 9-15c0-5-4-9-9-9z" fill="var(--tartan-red)"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg>
-                <div class="map-pin-tooltip">Ben Arthur (The Cobbler)</div>
-            </div>
-            <div class="map-pin" style="top: 58%; left: 30%;">
-                <svg viewBox="0 0 24 24"><path d="M12 0C7 0 3 4 3 9c0 7 9 15 9 15s9-8 9-15c0-5-4-9-9-9z" fill="var(--tartan-red)"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg>
-                <div class="map-pin-tooltip">Loch Etive</div>
-            </div>
-        </div>
-        <div class="map-locations">
-            <div class="map-location-item">
-                <span class="loc-icon">🏔️</span>
-                <div class="loc-info">
-                    <div class="loc-name">Loch Lomond & The Trossachs</div>
-                    <div class="loc-desc">Scotland's first national park</div>
-                </div>
-            </div>
-            <div class="map-location-item">
-                <span class="loc-icon">🏰</span>
-                <div class="loc-info">
-                    <div class="loc-name">Edinburgh</div>
-                    <div class="loc-desc">The capital city</div>
-                </div>
-            </div>
-            <div class="map-location-item">
-                <span class="loc-icon">💧</span>
-                <div class="loc-info">
-                    <div class="loc-name">Steall Waterfall</div>
-                    <div class="loc-desc">Hidden gem in Glen Nevis</div>
-                </div>
-            </div>
-            <div class="map-location-item">
-                <span class="loc-icon">🌲</span>
-                <div class="loc-info">
-                    <div class="loc-name">Hidden Glen</div>
-                    <div class="loc-desc">Our secret spot</div>
-                </div>
-            </div>
-            <div class="map-location-item">
-                <span class="loc-icon">⛰️</span>
-                <div class="loc-info">
-                    <div class="loc-name">Ben Arthur (The Cobbler)</div>
-                    <div class="loc-desc">One of Scotland's most iconic peaks</div>
-                </div>
-            </div>
-            <div class="map-location-item">
-                <span class="loc-icon">🌊</span>
-                <div class="loc-info">
-                    <div class="loc-name">Loch Etive</div>
-                    <div class="loc-desc">Stunning sea loch in Argyll</div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- ═══ ADVENTURES LINK ═══ -->
+<section class="gallery-section" style="text-align: center; padding: 3rem 1.5rem;">
+    <h2 class="section-title">Our Adventures</h2>
+    <p style="font-family: 'Caveat', cursive; font-size: 1.3rem; color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">Photos, trips, maps & more...</p>
+    <a href="adventures.html" class="rsvp-btn" style="text-decoration: none; background: var(--tartan-green);">Explore Our Adventures 🗺️</a>
 </section>
 
 <div class="tartan-ribbon"></div>
@@ -1489,7 +1225,14 @@
     }
 
     // ═══ PUFFIN QUIZ ═══
-    const quizQuestions = [
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+    }
+
+    const allQuizQuestions = [
         { q: "How long can puffins live?", opts: ["5-10 years", "10-15 years", "20+ years", "50+ years"], ans: 2, fact: "Puffins can live over 30 years! The oldest recorded was 36." },
         { q: "What is a group of puffins called?", opts: ["A flock", "A colony", "A parliament", "A waddle"], ans: 1, fact: "A group of puffins is called a colony (or sometimes a circus!)." },
         { q: "How many eggs does a puffin lay per year?", opts: ["1", "2-3", "4-5", "6+"], ans: 0, fact: "Puffins lay just one egg per year and both parents share incubation duties." },
@@ -1500,18 +1243,30 @@
         { q: "Where do puffins nest?", opts: ["In trees", "On cliff edges", "In underground burrows", "On the water"], ans: 2, fact: "Puffins dig burrows in the ground using their beaks and feet, sometimes reusing the same burrow for years." },
         { q: "How many fish can a puffin carry in its beak at once?", opts: ["1-2", "5-6", "10-12", "20+"], ans: 2, fact: "Puffins can carry 10-12 fish at once thanks to special spines on their tongue and upper beak." },
         { q: "Do puffins mate for life?", opts: ["Yes, always", "No, never", "Usually yes", "Only in Scotland"], ans: 2, fact: "Puffins usually mate for life, returning to the same partner and burrow each year. Just like us!" },
+        { q: "What species is the Atlantic puffin?", opts: ["Fratercula arctica", "Puffinus puffinus", "Alca torda", "Uria aalge"], ans: 0, fact: "The Atlantic puffin's scientific name is Fratercula arctica, meaning 'little brother of the north'." },
+        { q: "How many times per minute do puffins flap their wings?", opts: ["50", "150", "400", "600"], ans: 2, fact: "Puffins flap their wings around 400 times per minute to stay airborne!" },
+        { q: "Which Scottish island is famous for its puffin colony?", opts: ["Skye", "Staffa", "Arran", "Mull"], ans: 1, fact: "The Isle of Staffa is famous for its puffin colony, as well as Fingal's Cave." },
+        { q: "What do puffins mainly eat?", opts: ["Seaweed", "Shrimp", "Sand eels", "Plankton"], ans: 2, fact: "Sand eels are the puffin's favourite food, though they also eat herring and capelin." },
+        { q: "How do puffins drink water?", opts: ["They don't need to", "From rock pools", "They can drink seawater", "Only from rain"], ans: 2, fact: "Puffins have special glands above their eyes that filter salt from seawater!" },
+        { q: "What is the puffin's closest relative?", opts: ["Penguin", "Razorbill", "Seagull", "Albatross"], ans: 1, fact: "The razorbill is the puffin's closest living relative. Both are members of the auk family." },
+        { q: "How long does a puffin egg take to hatch?", opts: ["2 weeks", "4 weeks", "6 weeks", "8 weeks"], ans: 2, fact: "Puffin eggs take about 36-45 days (roughly 6 weeks) to hatch." },
+        { q: "Where do puffins spend most of the winter?", opts: ["On land", "At sea", "In their burrows", "Migrating south"], ans: 1, fact: "Puffins spend autumn and winter out at sea, bobbing on the waves far from land." },
+        { q: "What is special about a puffin's feet?", opts: ["They're webbed", "They glow in the dark", "They change colour", "Both A and C"], ans: 3, fact: "Puffin feet are webbed for swimming AND change colour — bright orange in summer, pale in winter!" },
+        { q: "How do pufflings leave the nest?", opts: ["Parents carry them", "They walk", "They go at night alone", "They fly immediately"], ans: 2, fact: "Pufflings leave the burrow alone at night, guided by moonlight to the sea. So brave!" },
+        { q: "What is a puffin's main predator?", opts: ["Sharks", "Great skuas", "Eagles", "Foxes"], ans: 1, fact: "Great skuas (bonxies) are the puffin's main predator, often stealing their fish mid-flight." },
+        { q: "How much does an adult puffin weigh?", opts: ["100g", "300-500g", "1-2 kg", "3+ kg"], ans: 1, fact: "Adult puffins weigh around 300-500g — about the same as a tin of beans!" },
+        { q: "Can puffins swim underwater?", opts: ["No", "Yes, using wings", "Yes, using feet only", "Only in shallow water"], ans: 1, fact: "Puffins 'fly' underwater using their wings for propulsion and feet for steering." },
+        { q: "What makes puffin beaks glow?", opts: ["Bioluminescence", "UV fluorescence", "Bacteria", "Nothing, they don't glow"], ans: 1, fact: "Puffin beaks are UV fluorescent! They glow under ultraviolet light, possibly to attract mates." },
+        { q: "How many puffin species exist worldwide?", opts: ["1", "2", "3", "4"], ans: 3, fact: "There are 4 puffin species: Atlantic, Horned, Tufted, and Rhinoceros Auklet (honorary puffin)." },
+        { q: "What is Scotland's national animal?", opts: ["Puffin", "Red deer", "Unicorn", "Highland cow"], ans: 2, fact: "Scotland's national animal is the unicorn! It has been a Scottish symbol since the 12th century." },
+        { q: "Which is the highest mountain in Scotland?", opts: ["Ben Nevis", "Ben Arthur", "Cairn Gorm", "Ben Lomond"], ans: 0, fact: "Ben Nevis is the highest at 1,345m. It's also the highest peak in the British Isles!" },
+        { q: "What is a 'Munro' in Scotland?", opts: ["A type of whisky", "A mountain over 3,000ft", "A Scottish dance", "A loch monster"], ans: 1, fact: "A Munro is any Scottish mountain over 3,000ft (914m). There are 282 of them to bag!" },
     ];
+    shuffleArray(allQuizQuestions);
+    const quizQuestions = allQuizQuestions.slice(0, 10);
 
     let quizIndex = 0;
     let quizCorrect = 0;
-
-    function shuffleArray(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-    }
-    shuffleArray(quizQuestions);
 
     function loadQuestion() {
         if (quizIndex >= quizQuestions.length) {
